@@ -79,3 +79,19 @@ form input {
 .default-link:hover {
     opacity: 0.8;
 }
+
+:root {
+    --primary:#048243;
+    --secondary: #32BF84;
+    --dark-primary: #32BF84; /* change */
+    --search: #202327; /* change */
+    --white: #D9D9D9;
+    --gray: #7A7A7A;
+    --background: #f6f6f6;
+    --outline: #2F3336;
+    --retweet: #00C06B;
+    --favorite: #E8265E;
+    --dark-hover: #011017;
+    --light-hover: #3ebb7d;
+    --link: #2C8ED6;
+  }
