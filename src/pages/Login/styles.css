@@ -1,0 +1,103 @@
+@import '../../global.css';
+
+@media (max-width: 500px) {
+    .banner {
+        display: none;
+    }
+
+    .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo-container img + img {
+        display: none;
+    }
+
+    .register{
+        display: none;
+    }
+
+    .register-mobile {
+        font-weight: Roboto;
+        font-size: 16px;
+        font-weight: 500;
+
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        margin-top: 32px;
+    }
+
+    .register-mobile a {
+        color: var(--link);
+        text-decoration: none;
+    }
+
+    .facebook-login {
+        font-weight: Roboto;
+        font-size: 16px;
+        font-weight: 500;
+
+        width: 85%;
+        position: absolute;
+        bottom: 24px;
+        left: 24px;
+    }
+    .facebook-login div {
+        border-top: 2px solid var(--outline);
+        margin-bottom: 4px;
+    }
+    .facebook-login a {
+        color: var(--link);
+        text-decoration: none;
+    }
+
+    .container section  {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 350px;
+    }
+    
+    .container section form h1 {
+        font-size: 24px;
+        color: var(--primary);
+        margin: 32px;
+    }
+
+    .container section form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+@media(max-height: 600px) {
+    .facebook-login {
+        position: absolute;
+        bottom: 12px;
+        left: 12px;
+    }
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;        
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+

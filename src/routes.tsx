@@ -6,7 +6,7 @@ import Login from './pages/Login';
 const Routes = () => (
     <BrowserRouter> 
         <Switch>
-            <Route path="/Login" component={Login} />
+            <Route path="/login" component={Login} />
         </Switch>
     </BrowserRouter>
 );
