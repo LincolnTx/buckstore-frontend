@@ -16,15 +16,15 @@ const Login: React.FC = () => {
     <div className="container">
       <img className="banner"src={ShoppingBanner} alt="web shopping banner"/>
 
-      <section>
+      <section className="form">
+
         <div className="logo-container">
           <img src={Logo} alt="Buckstore logo"/>
           <img src={Letter} alt="Letreiro Buckstore"/>
         </div>
 
+        <h1>Acesse sua conta</h1>
         <form>
-          <h1>Acesse sua conta</h1>
-
           <input placeholder="Email"
           type="email" 
           required={true}
@@ -47,7 +47,7 @@ const Login: React.FC = () => {
 
             <Link to="" className="default-link">
               <FaFacebook size={16} color="#3B5998"/>
-              Criar uma conta
+              Entrar com facebook
             </Link>
          </div>
 
