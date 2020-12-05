@@ -9,6 +9,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        max-width: 500px;
     }
 
     .logo-container img + img {
@@ -63,7 +64,7 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        max-width: 350px;
+        max-width: 300px;
     }
     
     /* .container section form h1 {
@@ -131,7 +132,7 @@
 
 .container section h1 {
     font-size: 24px;
-    color: var(--primary);
+    color: var(--dark);
     margin: 24px;
 }
 

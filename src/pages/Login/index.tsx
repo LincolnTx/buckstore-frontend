@@ -55,14 +55,12 @@ const Login: React.FC = () => {
             <Link to="">Esquece sua senha?</Link> 
             <Link to="">Criar uma conta</Link> 
           </div>
+        </form>
 
-          <div className="facebook-login">
+        <div className="facebook-login">
             <div></div>
             <Link to="">Entrar com o facebook</Link> 
           </div>
-          
-
-        </form>
       </section>
     </div>
   );
