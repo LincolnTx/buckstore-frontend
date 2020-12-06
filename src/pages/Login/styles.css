@@ -31,7 +31,7 @@
         justify-content: space-around;
         align-items: center;
 
-        margin-top: 32px;
+        margin-top: 16px;
     }
 
     .register-mobile a {
@@ -66,12 +66,6 @@
         width: 100%;
         max-width: 300px;
     }
-    
-    /* .container section form h1 {
-        font-size: 24px;
-        color: var(--primary);
-        margin: 32px;
-    } */
 
     .container section form {
         display: flex;
@@ -97,7 +91,11 @@
         width: 100%;
         max-width: 450px;
     
-        margin-left: 100px;
+        margin-left: 60px;
+    }
+
+    .register-mobile {
+        margin-top: 12px;
     }
 }
 
@@ -112,6 +110,22 @@
 @media(max-width: 800px) {
     .container {
         flex-direction: column;
+    }
+}
+
+@media(min-height: 1000px) {
+    .banner {
+        width: 450px;
+    }
+   
+}
+
+@media(min-height: 1000px)  and (min-width: 800) {
+    .banner {
+        height: 250px;
+    }
+    .container section.form form {
+        margin-bottom: 12px;
     }
 }
 
@@ -130,10 +144,10 @@
     margin-top: 40px;
 }
 
-.container section h1 {
+.login-title {
     font-size: 24px;
     color: var(--dark);
-    margin: 24px;
+    margin-top: 12px;
 }
 
 

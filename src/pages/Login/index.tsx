@@ -23,7 +23,7 @@ const Login: React.FC = () => {
           <img src={Letter} alt="Letreiro Buckstore"/>
         </div>
 
-        <h1>Acesse sua conta</h1>
+        <h1 className="login-title">Acesse sua conta</h1>
         <form>
           <input placeholder="Email"
           type="email" 
