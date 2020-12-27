@@ -1,23 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory }from 'react-router-dom';
 
 import './styles.css';
 import { FaSignInAlt, FaFacebook } from 'react-icons/fa';
 import FacebookLogin from 'react-facebook-login';
 import { Api } from '../../helpers/api';
+import { AuthFacebookLoginRequest, AuthLoginResponse, FacebookLoginResponse } from './interfaces';
 
 import Logo from '../../assets/logo_color.svg';
 import Letter from '../../assets/letter_logo.svg';
 import ShoppingBanner from '../../assets/shopping_01.svg';
 
 const Login: React.FC = () => {
+  const fbAppId = process.env.REACT_APP_FB_APPID;
+  const history = useHistory();
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
 
-  function responseFacebook(response:any) {
-    console.log(response);
+  async function responseFacebook(response:any) {
+    let sanitizeResponse: FacebookLoginResponse = response;
+
+    const body:AuthFacebookLoginRequest = {
+      accessToken: sanitizeResponse.accessToken
+    };
+    
+    const resp = await Api.apiAuth.post('/identity/facebook-login', body);
+    const apiResponse:AuthLoginResponse = resp.data;
+    
+    if (apiResponse.success !== true) {
+      alert("Erro ao logar com o facebbok!");
+      return;
+    }
+
+    if (apiResponse.data) {
+      localStorage.setItem("userToken", apiResponse.data.token);
+      localStorage.setItem("refreshToken", apiResponse.data.refreshToken);
+      history.push("/dashboard");
+    }
   }
-  
 
   return (
     <div className="container">
@@ -51,17 +71,13 @@ const Login: React.FC = () => {
               <FaSignInAlt size={16} color="#048243"/>
               Criar uma conta
             </Link>
-
-            {/* <Link to="" className="default-link">
-              <FaFacebook size={16} color="#3B5998"/>
-              Entrar com facebook
-            </Link> */}
              <FacebookLogin
-              appId="1088597931155576"
-              autoLoad
+              appId={`${fbAppId}`}
+              autoLoad={false}
               callback={responseFacebook}
               textButton="Entrar com facebook"
               cssClass="facebook-button"
+              version="9.0"
               icon={<FaFacebook size={16} color="#3B5998"/>}
             />
          </div>
@@ -71,11 +87,17 @@ const Login: React.FC = () => {
             <Link to="">Criar uma conta</Link> 
           </div>
         </form>
-
        
         <div className="facebook-login">
-            <div></div>
-            <Link to="">Entrar com o facebook</Link> 
+          <div></div>
+            <FacebookLogin
+              appId={`${fbAppId}`}
+              autoLoad={false}
+              callback={responseFacebook}
+              textButton="Entrar com facebook"
+              cssClass="facebook-mobile"
+              version="9.0"
+            /> 
         </div>
       </section>
     </div>

@@ -19,6 +19,9 @@
     .container section.form form .register a{
         display: none;
     }
+    .container section.form form .register .facebook-button {
+        display: none;
+    }
 
     .register-mobile {
         font-weight: Roboto;
@@ -53,9 +56,22 @@
         border-top: 2px solid var(--outline);
         margin-bottom: 4px;
     }
-    .facebook-login a {
+    .facebook-login .facebook-mobile {
         color: var(--link);
         text-decoration: none;
+        border: none;
+        display: flex;
+    
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: 700;
+        margin-top: 8px;
+        text-decoration: none ;
+        transition: opacity 0.2s;
+    }
+    .facebook-login .facebook-mobile svg {
+        margin-right: 8px;
     }
 
     .container section  {
@@ -102,7 +118,7 @@
 @media(max-height: 600px) {
     .facebook-login {
         position: absolute;
-        bottom: 12px;
+        bottom: 8px;
         left: 12px;
     }
 }
