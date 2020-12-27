@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory }from 'react-router-dom';
 
 import './styles.css';
 import { FaSignInAlt, FaFacebook } from 'react-icons/fa';
+import FacebookLogin from 'react-facebook-login';
+import { Api } from '../../helpers/api';
 
 import Logo from '../../assets/logo_color.svg';
 import Letter from '../../assets/letter_logo.svg';
@@ -11,6 +13,11 @@ import ShoppingBanner from '../../assets/shopping_01.svg';
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
+
+  function responseFacebook(response:any) {
+    console.log(response);
+  }
+  
 
   return (
     <div className="container">
@@ -45,10 +52,18 @@ const Login: React.FC = () => {
               Criar uma conta
             </Link>
 
-            <Link to="" className="default-link">
+            {/* <Link to="" className="default-link">
               <FaFacebook size={16} color="#3B5998"/>
               Entrar com facebook
-            </Link>
+            </Link> */}
+             <FacebookLogin
+              appId="1088597931155576"
+              autoLoad
+              callback={responseFacebook}
+              textButton="Entrar com facebook"
+              cssClass="facebook-button"
+              icon={<FaFacebook size={16} color="#3B5998"/>}
+            />
          </div>
 
           <div className="register-mobile">
@@ -57,10 +72,11 @@ const Login: React.FC = () => {
           </div>
         </form>
 
+       
         <div className="facebook-login">
             <div></div>
             <Link to="">Entrar com o facebook</Link> 
-          </div>
+        </div>
       </section>
     </div>
   );

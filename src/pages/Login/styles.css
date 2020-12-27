@@ -177,3 +177,19 @@
 .container section.form form .register a + a {
     margin-top: 8px;
 }
+
+.container section.form form .facebook-button {
+    border: none;
+    display: flex;
+   
+    align-items: center;
+    color: #41414d;
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 8px;
+    text-decoration: none ;
+    transition: opacity 0.2s;
+}
+.container section.form form .facebook-button svg {
+    margin-right: 8px;
+}
