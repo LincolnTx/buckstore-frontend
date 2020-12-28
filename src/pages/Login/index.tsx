@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Link, useHistory }from 'react-router-dom';
 
 import './styles.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';  
+
 import { FaSignInAlt, FaFacebook } from 'react-icons/fa';
 import FacebookLogin from 'react-facebook-login';
 import { Api } from '../../helpers/api';
@@ -17,6 +20,8 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
 
+  toast.configure();
+
   async function responseFacebook(response:any) {
     let sanitizeResponse: FacebookLoginResponse = response;
 
@@ -24,11 +29,12 @@ const Login: React.FC = () => {
       accessToken: sanitizeResponse.accessToken
     };
     
+   try {
     const resp = await Api.apiAuth.post('/identity/facebook-login', body);
     const apiResponse:AuthLoginResponse = resp.data;
     
     if (apiResponse.success !== true) {
-      alert("Erro ao logar com o facebbok!");
+      toast.error("Erro ao tentar fazer login com o facebook!");
       return;
     }
 
@@ -37,6 +43,9 @@ const Login: React.FC = () => {
       localStorage.setItem("refreshToken", apiResponse.data.refreshToken);
       history.push("/dashboard");
     }
+   } catch (error) {
+      toast.error("Erro ao tentar fazer login com o facebook!");
+   }
   }
 
   return (
@@ -70,16 +79,17 @@ const Login: React.FC = () => {
           <Link to="" className="default-link">
               <FaSignInAlt size={16} color="#048243"/>
               Criar uma conta
-            </Link>
-             <FacebookLogin
-              appId={`${fbAppId}`}
-              autoLoad={false}
-              callback={responseFacebook}
-              textButton="Entrar com facebook"
-              cssClass="facebook-button"
-              version="9.0"
-              icon={<FaFacebook size={16} color="#3B5998"/>}
-            />
+          </Link>
+
+          <FacebookLogin
+          appId={`${fbAppId}`}
+          autoLoad={false}
+          callback={responseFacebook}
+          textButton="Entrar com facebook"
+          cssClass="facebook-button"
+          version="9.0"
+          icon={<FaFacebook size={16} color="#3B5998"/>}
+          />
          </div>
 
           <div className="register-mobile">
