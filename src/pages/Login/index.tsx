@@ -14,11 +14,15 @@ import Logo from '../../assets/logo_color.svg';
 import Letter from '../../assets/letter_logo.svg';
 import ShoppingBanner from '../../assets/shopping_01.svg';
 
+// exemplo de uso do toastfy, remover dps
+// toast.error('Runtime error', { 
+//   // Set to 15sec 
+//   position: toast.POSITION.BOTTOM_LEFT, autoClose:15000}) 
 const Login: React.FC = () => {
   const fbAppId = process.env.REACT_APP_FB_APPID;
   const history = useHistory();
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   toast.configure();
 
@@ -48,6 +52,31 @@ const Login: React.FC = () => {
    }
   }
 
+  async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const body = { email, password };
+
+    try {
+      const response = await Api.apiAuth.post<AuthLoginResponse>('/identity/login', body);
+      const loginResponse: AuthLoginResponse = response.data;
+
+      if (!loginResponse.success) {
+        toast.error("Erro ao logar! Email ou Senha incorretos.");
+        return;
+      }
+
+      if (loginResponse.data) {
+        localStorage.setItem("userToken", loginResponse.data.token);
+        localStorage.setItem("refreshToken", loginResponse.data.refreshToken);
+        history.push("/dashboard");
+      }
+
+      
+    } catch(error) {
+      toast.error("Erro ao logar! Email ou Senha incorretos.");
+    }
+  }
+
   return (
     <div className="container">
       <img className="banner"src={ShoppingBanner} alt="web shopping banner"/>
@@ -60,7 +89,7 @@ const Login: React.FC = () => {
         </div>
 
         <h1 className="login-title">Acesse sua conta</h1>
-        <form>
+        <form onSubmit={handleLogin}>
           <input placeholder="Email"
           type="email" 
           required={true}
@@ -76,7 +105,7 @@ const Login: React.FC = () => {
           <button className="button" type="submit">Entrar</button>
 
          <div className="register">
-          <Link to="" className="default-link">
+          <Link to="/register" className="default-link">
               <FaSignInAlt size={16} color="#048243"/>
               Criar uma conta
           </Link>
@@ -94,7 +123,7 @@ const Login: React.FC = () => {
 
           <div className="register-mobile">
             <Link to="">Esquece sua senha?</Link> 
-            <Link to="">Criar uma conta</Link> 
+            <Link to="/register">Criar uma conta</Link> 
           </div>
         </form>
        
