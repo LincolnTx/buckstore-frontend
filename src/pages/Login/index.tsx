@@ -14,7 +14,7 @@ import Logo from '../../assets/logo_color.svg';
 import Letter from '../../assets/letter_logo.svg';
 import ShoppingBanner from '../../assets/shopping_01.svg';
 
-// exemplo de uso do toastfy, remover dps
+// TODO exemplo de uso do toastfy, remover dps
 // toast.error('Runtime error', { 
 //   // Set to 15sec 
 //   position: toast.POSITION.BOTTOM_LEFT, autoClose:15000}) 
