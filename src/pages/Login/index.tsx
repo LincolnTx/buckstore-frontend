@@ -61,7 +61,7 @@ const Login: React.FC = () => {
       const loginResponse: AuthLoginResponse = response.data;
 
       if (!loginResponse.success) {
-        toast.error("Erro ao logar! Email ou Senha incorretos.");
+        toast.error(`Erro ao logar! ${loginResponse.errors[0].message}`);
         return;
       }
 
@@ -73,7 +73,10 @@ const Login: React.FC = () => {
 
       
     } catch(error) {
-      toast.error("Erro ao logar! Email ou Senha incorretos.");
+      const { response } = error;
+      const responseData:AuthLoginResponse = response.data;
+
+      toast.error(`Erro ao logar! ${responseData.errors[0].message}`);
     }
   }
 

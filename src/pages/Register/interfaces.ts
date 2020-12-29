@@ -7,12 +7,12 @@ export interface RegisterUserRequest {
 
 export interface RegisterUserResponse {
     success: boolean;
-    data?: {
+    data: {
         name: string;
         surname: string;
         email: string;
     };
-    errors?: RequestErrors[];
+    errors: RequestErrors[];
 }
 
 export interface RequestErrors {

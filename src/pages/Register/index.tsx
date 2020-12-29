@@ -41,7 +41,11 @@ const Register: React.FC = () => {
         history.push('login');
       }
     } catch(error) {
-      toast.error("Erro ao realizar cadastro, verifique as informações ou tente mais tarde");
+      const { response } = error;
+      const responseData:RegisterUserResponse = response.data;
+      console.log('response', responseData);
+
+      toast.error(`Erro ao realizar cadastro, verifique as informações ${responseData.errors.map(e => e.paramName)}`);
     }
   }
 

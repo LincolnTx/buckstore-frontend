@@ -22,7 +22,7 @@ export interface AuthLoginResponse {
         token:string;
         refreshToken: string;
     };
-    errors?: RequestErrors[];
+    errors: RequestErrors[];
 }
 
 export interface RequestErrors {
