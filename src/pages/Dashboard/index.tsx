@@ -10,14 +10,17 @@ import {
   FaHandshake,
   FaTags
   } from 'react-icons/fa';
-
-
 import './styles.css';
 
-const Dashboard: React.FC = () => {
+import { useHistory } from 'react-router-dom';
 
+const Dashboard: React.FC = () => {
+  const history = useHistory();
+  
+  
   function handleLogout() {
-    // deslogar usuario
+    localStorage.clear();
+    history.push('/login');
   }
   return (
     <div className="dashboard-container">
@@ -42,12 +45,12 @@ const Dashboard: React.FC = () => {
           <span>Lista de Desejos</span>
         </li>
         <li>
-          <FaHandshake size={56} color="#048243" />
-          <span>Quem Somos</span>
-        </li>
-        <li>
           <FaTags size={56} color="#048243" />
           <span>Promoções</span>
+        </li>
+        <li>
+          <FaHandshake size={56} color="#048243" />
+          <span>Quem Somos</span>
         </li>
       </ul>
     </div>
