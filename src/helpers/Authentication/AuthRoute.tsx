@@ -1,23 +1,27 @@
-import React from 'react';
+import React, { useContext }from 'react';
 import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
 
-import { AuthRoutes, NonAuthRoutes } from './authenticationRoutes'
+import { NonAuthRoutes } from './authenticationRoutes'
+import AuthContext,{ AuthContextType } from '../../contexts/auth';
 
 interface Props {
     Component: React.FC<RouteComponentProps>
     path: string,
-    exact?: boolean
+    exact?: boolean,
+    requiredRoles: string[];
 };
 
 const AuthRoute = ({ Component, path, exact = false }: Props): JSX.Element => {
-    const isAuthenticated = !!localStorage.getItem("userToken");
+    console.log('teste')
+    const { userRole, signed } = useContext<AuthContextType>(AuthContext);
+    console.log(userRole);
 
     return(
         <Route
             exact={exact}
             path={path}
             render={(props: RouteComponentProps) => 
-                isAuthenticated ? (
+                signed ? (
                     <Component {...props} />
                 ) : (
                     <Redirect

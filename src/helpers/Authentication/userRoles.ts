@@ -1,13 +1,13 @@
-enum UserRoles  {
+enum userRoles  {
     admin = 'Admin',
     employee = 'Employee',
     customer = 'Customer' 
 };
 
-const userRoles = {
-    admin: [String(UserRoles.admin)],
-    employee: [String(UserRoles.admin), String(UserRoles.employee)],
-    customer: [String(UserRoles.customer)]
+const UserRoles = {
+    admin: [String(userRoles.admin)],
+    employee: [String(userRoles.admin), String(userRoles.employee)],
+    customer: [String(userRoles.customer)]
 };
 
-export {userRoles}
+export default UserRoles;

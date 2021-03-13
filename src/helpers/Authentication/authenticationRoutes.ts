@@ -1,6 +1,6 @@
-enum AuthRoutes {
-    dashboard = 'dashboard',
-    produt = 'product/{id}'
+enum AuthenticationRoutes {
+    dashboard = '/dashboard',
+    produt = '/product/{id}'
 }
 
 enum NonAuthRoutes {
@@ -10,4 +10,4 @@ enum NonAuthRoutes {
     notFounded = '/not-founded'
 }
 
-export {AuthRoutes, NonAuthRoutes}
+export {AuthenticationRoutes, NonAuthRoutes}
