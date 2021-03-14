@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useHistory }from 'react-router-dom';
 
 import './styles.css';
@@ -7,8 +7,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { FaSignInAlt, FaFacebook } from 'react-icons/fa';
 import FacebookLogin from 'react-facebook-login';
-import { Api } from '../../helpers/api';
-import { AuthFacebookLoginRequest, AuthLoginResponse, FacebookLoginResponse } from './interfaces';
+import { AuthLoginResponse, FacebookLoginResponse } from '../../helpers/Responses/interfaces';
+import UserRoles from '../../helpers/Authentication/userRoles';
+import AuthContext from '../../contexts/auth';
+import { AuthenticationRoutes } from '../../helpers/Authentication/authenticationRoutes';
 
 import Logo from '../../assets/logo_color.svg';
 import Letter from '../../assets/letter_logo.svg';
@@ -23,30 +25,29 @@ const Login: React.FC = () => {
   const history = useHistory();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const {login, facebookLogin, userRole} = useContext(AuthContext);
+  const role = userRole ? userRole : '';
 
   toast.configure();
 
+
   async function responseFacebook(response:any) {
     let sanitizeResponse: FacebookLoginResponse = response;
-
-    const body:AuthFacebookLoginRequest = {
-      accessToken: sanitizeResponse.accessToken
-    };
     
    try {
-    const resp = await Api.apiAuth.post('/identity/facebook-login', body);
-    const apiResponse:AuthLoginResponse = resp.data;
+    const apiResponse:AuthLoginResponse = await facebookLogin(sanitizeResponse.accessToken);
     
-    if (apiResponse.success !== true) {
+    if (!apiResponse.success) {
       toast.error("Erro ao tentar fazer login com o facebook!");
       return;
     }
-
-    if (apiResponse.data) {
-      localStorage.setItem("userToken", apiResponse.data.token);
-      localStorage.setItem("refreshToken", apiResponse.data.refreshToken);
-      history.push("/dashboard");
+    
+    if (UserRoles.customer.includes(role)) {
+      history.push(AuthenticationRoutes.dashboard);
+      return;
     }
+    history.push(AuthenticationRoutes.employeeDashboard);
+    
    } catch (error) {
       toast.error("Erro ao tentar fazer login com o facebook!");
    }
@@ -54,24 +55,20 @@ const Login: React.FC = () => {
 
   async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const body = { email, password };
 
     try {
-      const response = await Api.apiAuth.post<AuthLoginResponse>('/identity/login', body);
-      const loginResponse: AuthLoginResponse = response.data;
+      const loginResponse: AuthLoginResponse = await login(email, password);
 
       if (!loginResponse.success) {
         toast.error(`Erro ao logar! ${loginResponse.errors[0].message}`);
         return;
       }
 
-      if (loginResponse.data) {
-        localStorage.setItem("userToken", loginResponse.data.token);
-        localStorage.setItem("refreshToken", loginResponse.data.refreshToken);
-        history.push("/dashboard");
+      if (UserRoles.customer.includes(role)) {
+        history.push(AuthenticationRoutes.dashboard);
+        return;
       }
-
-      
+      history.push(AuthenticationRoutes.employeeDashboard);
     } catch(error) {
       const { response } = error;
       const responseData:AuthLoginResponse = response.data;

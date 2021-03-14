@@ -7,6 +7,7 @@ import AuthRoute from './helpers/Authentication/AuthRoute';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import AdminDashboard from './pages/AdminDashboard';
 import NotFound from './pages/NotFound';
 
 const Routes = () => (
@@ -18,7 +19,12 @@ const Routes = () => (
             <AuthRoute 
                 path= {AuthenticationRoutes.dashboard} 
                 Component={Dashboard} 
-                requiredRoles ={[String(UserRoles.customer)]}
+                requiredRoles ={UserRoles.customer}
+            />
+            <AuthRoute 
+                path= {AuthenticationRoutes.employeeDashboard} 
+                Component={AdminDashboard} 
+                requiredRoles ={UserRoles.employee}
             />
         </Switch>
     </BrowserRouter>

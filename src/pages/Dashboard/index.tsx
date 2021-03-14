@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import './styles.css';
 import Letter from '../../assets/letter_logo.svg';
@@ -13,14 +13,16 @@ import {
 import './styles.css';
 
 import { useHistory } from 'react-router-dom';
+import AuthContext from '../../contexts/auth';
+import { AuthenticationRoutes, NonAuthRoutes } from '../../helpers/Authentication/authenticationRoutes';
 
 const Dashboard: React.FC = () => {
   const history = useHistory();
-  
+  const { logout } = useContext(AuthContext);
   
   function handleLogout() {
-    localStorage.clear();
-    history.push('/login');
+    logout();
+    history.push(NonAuthRoutes.login);
   }
   return (
     <div className="dashboard-container">

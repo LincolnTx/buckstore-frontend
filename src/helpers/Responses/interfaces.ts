@@ -15,7 +15,7 @@ export interface AuthLoginRequest {
 
 export interface AuthLoginResponse {
     success: boolean;
-    data?: {
+    data: {
         email: string;
         name: string;
         surname: string;
