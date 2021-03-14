@@ -1,8 +1,8 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
 import { AuthLoginResponse, AuthFacebookLoginRequest } from '../helpers/Responses/interfaces'
 import * as jwtService from '../helpers/Jwt/jwtService';
-import { Api } from '../helpers/api';
+import { Api, apiSetTokenDefault } from '../helpers/api';
 export interface AuthContextType {
     signed: boolean;
     userRole: string | null;
@@ -15,6 +15,12 @@ const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export const AuthProvider: React.FC = ({children}) => {
     const [userRole, setUserRole] = useState<string | null>(localStorage.getItem('userRole'));
+
+    useEffect(() => {
+      const token = localStorage.getItem("userToken") as string;
+      apiSetTokenDefault(token);
+      
+    });
    
     async function login(email: string, password: string): Promise<AuthLoginResponse>{
         const body = { email, password };
@@ -63,6 +69,8 @@ const  handleLoginStorage = (userToken:string, refreshToken: string, userRole: s
   localStorage.setItem("userToken", userToken);
   localStorage.setItem("refreshToken", refreshToken);
   localStorage.setItem("userRole", userRole);
+
+  apiSetTokenDefault(userToken);
 }
 
 export default AuthContext;

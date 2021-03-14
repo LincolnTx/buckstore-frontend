@@ -26,7 +26,6 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const {login, facebookLogin, userRole} = useContext(AuthContext);
-  const role = userRole ? userRole : '';
 
   toast.configure();
 
@@ -42,7 +41,7 @@ const Login: React.FC = () => {
       return;
     }
     
-    if (UserRoles.customer.includes(role)) {
+    if (UserRoles.customer.includes(userRole as string)) {
       history.push(AuthenticationRoutes.dashboard);
       return;
     }
@@ -64,7 +63,7 @@ const Login: React.FC = () => {
         return;
       }
 
-      if (UserRoles.customer.includes(role)) {
+      if (UserRoles.customer.includes(userRole as string)) {
         history.push(AuthenticationRoutes.dashboard);
         return;
       }

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Token } from 'typescript';
 
 let  headers: any = {};
 const userToken = localStorage.getItem('userToken');
@@ -13,3 +14,8 @@ export const Api = {
         headers
     })
 };
+
+export const apiSetTokenDefault = (token: string) => {
+    // repetir isso para todas as apis
+    Api.apiAuth.defaults.headers['Authorization'] = `Bearer ${token}`;
+}
