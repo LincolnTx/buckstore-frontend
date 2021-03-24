@@ -15,6 +15,7 @@ import './styles.css';
 import { useHistory } from 'react-router-dom';
 import AuthContext from '../../contexts/auth';
 import { AuthenticationRoutes, NonAuthRoutes } from '../../helpers/Authentication/authenticationRoutes';
+import PageHeader from '../../components/PageHeader';
 
 const Dashboard: React.FC = () => {
   const history = useHistory();
@@ -26,12 +27,7 @@ const Dashboard: React.FC = () => {
   }
   return (
     <div className="dashboard-container">
-      <header>
-        <img src={ Letter } alt="buckstore logo"/>
-        <button type="button" onClick={() => handleLogout()}>
-          <FaPowerOff size={18} color="#D9D9D9" />
-        </button>
-      </header>
+      <PageHeader />
 
       <ul>
         <li>
