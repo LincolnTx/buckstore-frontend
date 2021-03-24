@@ -9,6 +9,7 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import NotFound from './pages/NotFound';
+import ProductsList from './pages/ProductsList';
 
 const Routes = () => (
     <BrowserRouter> 
@@ -16,6 +17,7 @@ const Routes = () => (
             <Route exact path = {NonAuthRoutes.login} component={Login} />
             <Route exact path = {NonAuthRoutes.register} component={Register} />
             <Route exact path = {NonAuthRoutes.notFounded} component={NotFound}/>
+            <Route exact path= {NonAuthRoutes.produtcs} component={ProductsList}/>
             <AuthRoute 
                 path= {AuthenticationRoutes.dashboard} 
                 Component={Dashboard} 
