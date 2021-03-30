@@ -12,7 +12,7 @@ import { NonAuthRoutes } from '../../helpers/Authentication/authenticationRoutes
 
 function PageHeader() {
   const history = useHistory();
-  const { logout } = useContext(AuthContext);
+  const { logout, signed } = useContext(AuthContext);
 
   function handleLogout() {
     logout();
@@ -22,9 +22,15 @@ function PageHeader() {
   return (
     <header>
     <img src={ Letter } alt="buckstore logo"/>
-    <button type="button" onClick={() => handleLogout()}>
-      <FaPowerOff size={18} color="#D9D9D9" />
-    </button>
+    {signed ?  
+      <button type="button" onClick={() => handleLogout()}>
+        <FaPowerOff size={18} color="#D9D9D9" />
+      </button>
+      :
+      <button className="login-button" type="button" onClick={() => history.push('/login')}>
+        Entrar
+      </button>
+    }
   </header>
   );
 }

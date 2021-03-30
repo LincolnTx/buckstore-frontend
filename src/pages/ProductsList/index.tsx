@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import './styles.css';
 
 import PageHeader from '../../components/PageHeader';
-import DefaultImage from '../../assets/logo_uncolor.svg'
+import DefaultImage from '../../assets/logo_uncolor.svg';
 
 interface ProductsListProps {
   children: ReactNode;
