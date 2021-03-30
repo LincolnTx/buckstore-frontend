@@ -59,6 +59,16 @@
     max-width: 450px;
 }
 
+.list-products-container .page-counter {
+    cursor: pointer;
+}
+.list-products-container .page-counter span{
+    font-size: 20px;
+    font-weight: 500;
+    color: #048243;
+    
+}
+
 @media(max-width: 600px) {
     
     .list-products-container {
