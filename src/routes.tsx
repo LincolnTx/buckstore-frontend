@@ -1,15 +1,16 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-
 import { AuthenticationRoutes, NonAuthRoutes } from './helpers/Authentication/authenticationRoutes';
-import  UserRoles  from './helpers/Authentication/userRoles';
-import AuthRoute from './helpers/Authentication/AuthRoute';
+
+import { Product } from "./pages/Product";
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
-import AdminDashboard from './pages/AdminDashboard';
 import NotFound from './pages/NotFound';
+import Dashboard from './pages/Dashboard';
 import ProductsList from './pages/ProductsList';
+import AdminDashboard from './pages/AdminDashboard';
+import AuthRoute from './helpers/Authentication/AuthRoute';
+import  UserRoles  from './helpers/Authentication/userRoles';
 
 const Routes = () => (
     <BrowserRouter> 
@@ -18,6 +19,7 @@ const Routes = () => (
             <Route exact path = {NonAuthRoutes.register} component={Register} />
             <Route exact path = {NonAuthRoutes.notFounded} component={NotFound}/>
             <Route exact path= {NonAuthRoutes.produtcs} component={ProductsList}/>
+            <Route exact path={NonAuthRoutes.produt} component={Product}/>
             <AuthRoute 
                 path= {AuthenticationRoutes.dashboard} 
                 Component={Dashboard} 

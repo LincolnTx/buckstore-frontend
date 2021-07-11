@@ -1,20 +1,23 @@
-import { ReactNode, useContext, useEffect, useRef, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import './styles.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';  
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
 
 import PageHeader from '../../components/PageHeader';
 import DefaultImage from '../../assets/logo_uncolor.svg';
 
 import { Api } from '../../helpers/api';
-import { AuthenticationRoutes } from '../../helpers/Authentication/authenticationRoutes';
+import { NonAuthRoutes } from '../../helpers/Authentication/authenticationRoutes';
 import { ProductsListResponse, Products } from '../../helpers/Responses/products/productsResponses';
 
 function ProductsList() {
   const history = useHistory();
   const [products, setProducts] = useState<Products[]>([]);
   const [pageNumber, setPageNumber] = useState(1);
+  toast.configure();
   
 
   async function handleProductListRequest() {
@@ -23,7 +26,13 @@ function ProductsList() {
       const response = await Api.apiProducts.get(`/products`);
       const productList:ProductsListResponse = await response.data;
 
-      setProducts(productList.data.products);
+      if (productList.success) {
+        setProducts(productList.data.products);
+      } else {
+        // tentar exibir alguma coisa na página alem do toast
+        toast.error("Estamos enfrentando um problema para recuperar a lista de produtos. " +
+                      "Por favor tente novamente mais tarde");
+      }
   }
   async function handlePageNumberCalculation(arrowSelected: string) {
     let page = 1;
@@ -37,7 +46,7 @@ function ProductsList() {
   }
 
   function handleProductSelection(productId: string) {
-    history.push(AuthenticationRoutes.produt.replace("{id}",productId))
+    history.push(NonAuthRoutes.produt.replace(":id",productId))
   }
 
   useEffect(() => {
