@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { FaSignInAlt, FaFacebook } from 'react-icons/fa';
 import FacebookLogin from 'react-facebook-login';
-import { AuthLoginResponse, FacebookLoginResponse } from '../../helpers/Responses/interfaces';
+import { AuthLoginResponse, FacebookLoginResponse } from '../../helpers/Responses/auth/authResponses';
 import UserRoles from '../../helpers/Authentication/userRoles';
 import AuthContext from '../../contexts/auth';
 import { AuthenticationRoutes } from '../../helpers/Authentication/authenticationRoutes';

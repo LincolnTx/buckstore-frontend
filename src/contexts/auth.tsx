@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 
-import { AuthLoginResponse, AuthFacebookLoginRequest } from '../helpers/Responses/interfaces'
+import { AuthLoginResponse, AuthFacebookLoginRequest } from '../helpers/Responses/auth/authResponses';
 import * as jwtService from '../helpers/Jwt/jwtService';
 import { Api, apiSetTokenDefault } from '../helpers/api';
 export interface AuthContextType {

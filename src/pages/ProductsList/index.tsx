@@ -10,7 +10,7 @@ import DefaultImage from '../../assets/logo_uncolor.svg';
 import AuthContext from '../../contexts/auth';
 import { Api } from '../../helpers/api';
 import { AuthenticationRoutes } from '../../helpers/Authentication/authenticationRoutes';
-import { ProductsListResponse, Products } from '../../helpers/Responses/interfaces'
+import { ProductsListResponse, Products } from '../../helpers/Responses/products/productsResponses';
 
 interface ProductsListProps {
   children: ReactNode;
