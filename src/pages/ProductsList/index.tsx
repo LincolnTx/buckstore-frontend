@@ -7,23 +7,25 @@ import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
 import PageHeader from '../../components/PageHeader';
 import DefaultImage from '../../assets/logo_uncolor.svg';
 
-import AuthContext from '../../contexts/auth';
 import { Api } from '../../helpers/api';
 import { AuthenticationRoutes } from '../../helpers/Authentication/authenticationRoutes';
 import { ProductsListResponse, Products } from '../../helpers/Responses/products/productsResponses';
 
-interface ProductsListProps {
-  children: ReactNode;
-}
-
-function ProductsList({ children }: ProductsListProps) {
+function ProductsList() {
   const history = useHistory();
-  const { signed } = useContext(AuthContext);
   const [products, setProducts] = useState<Products[]>([]);
   const [pageNumber, setPageNumber] = useState(1);
   
-  function handlePageNumberCalculation(arrowSelected: string) {
-    console.log('clicou!!!!')
+
+  async function handleProductListRequest() {
+      // chamda real, no momento estou utilizando o json server
+      //const response = await Api.apiProducts.get(`/product/list?pagenumber=${pageNumber}&pagesize=10`);
+      const response = await Api.apiProducts.get(`/products`);
+      const productList:ProductsListResponse = await response.data;
+
+      setProducts(productList.data.products);
+  }
+  async function handlePageNumberCalculation(arrowSelected: string) {
     let page = 1;
     if (arrowSelected === 'left') {
       page = pageNumber > 1 ? pageNumber - 1 : 1;
@@ -31,18 +33,16 @@ function ProductsList({ children }: ProductsListProps) {
     if (arrowSelected === 'right') {
       page = pageNumber + 1;
     }
-
     setPageNumber(page);
+  }
 
-    console.log(pageNumber);
+  function handleProductSelection(productId: string) {
+    history.push(AuthenticationRoutes.produt.replace("{id}",productId))
   }
 
   useEffect(() => {
     async function requestProductsList() {
-      const response = await Api.apiProducts.get(`/product/list?pagenumber=${pageNumber}&pagesize=10`);
-      const productList:ProductsListResponse = await response.data;
-
-      setProducts(productList.data.products);
+      await handleProductListRequest();
     }
 
     requestProductsList();
@@ -52,9 +52,9 @@ function ProductsList({ children }: ProductsListProps) {
     <div className="list-products-container">
       <PageHeader />
 
-      <ul>
+      <ul >
         {products.map(product => (
-          <li key={product.id}>
+          <li key={product.id} onClick={() => handleProductSelection(product.id)}>
         
             <img src={DefaultImage} alt="imagem do produto"/>
             <span>Placa de video Nvidia GTX 1650, 4GB</span>
@@ -65,7 +65,6 @@ function ProductsList({ children }: ProductsListProps) {
         ))}
       </ul>
 
-{/* trocar Anterior e proximo por icones */}
       <div className="page-counter">
         <FaAngleLeft  color="#048243" size={24} onClick={() => handlePageNumberCalculation('left')}/>
         <span>{pageNumber}</span>

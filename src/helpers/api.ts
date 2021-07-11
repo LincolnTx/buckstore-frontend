@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Token } from 'typescript';
 
 let  headers: any = {};
 const userToken = localStorage.getItem('userToken');

@@ -1,0 +1,110 @@
+{
+    "products":{
+        "succces": true,
+        "data":{
+            "products":[
+                {
+                    "id": "ac270d8a-891f-4fdf-9baa-35ce10e4e53a",
+                    "name": "Placa de Viídeo Gtx 1080",
+                    "price": 2500.60,
+                    "description": "Uma ótima placa de vídeo de ultima geração da Nvidia para rodar todos os jogos da atualidade",
+                    "stockQuantity": 10,
+                    "categoryId": 5,
+                    "category": "Hardware "
+                },
+                {
+                    "id": "610a8fa4-dbb8-4499-ab30-fc3bb971a0e0",
+                    "name": "Placa de Viídeo Gtx 1080",
+                    "price": 2500.60,
+                    "description": "Uma ótima placa de vídeo de ultima geração da Nvidia para rodar todos os jogos da atualidade",
+                    "stockQuantity": 10,
+                    "categoryId": 5,
+                    "category": "Hardware "
+                },
+                {
+                    "id": "c6ffd306-259c-45f5-b0bc-ceb74dc25197",
+                    "name": "Placa de Viídeo Gtx 1080",
+                    "price": 2500.60,
+                    "description": "Uma ótima placa de vídeo de ultima geração da Nvidia para rodar todos os jogos da atualidade",
+                    "stockQuantity": 10,
+                    "categoryId": 5,
+                    "category": "Hardware "
+                },
+                {
+                    "id": "7466b6f5-7c74-45bf-ab3a-d7a994a53fe2",
+                    "name": "Placa de Viídeo Gtx 1080",
+                    "price": 2500.60,
+                    "description": "Uma ótima placa de vídeo de ultima geração da Nvidia para rodar todos os jogos da atualidade",
+                    "stockQuantity": 10,
+                    "categoryId": 5,
+                    "category": "Hardware "
+                },
+                {
+                    "id": "04ee5382-ff4d-4d5e-80aa-8d4dba011ebc",
+                    "name": "Placa de Viídeo Gtx 1080",
+                    "price": 2500.60,
+                    "description": "Uma ótima placa de vídeo de ultima geração da Nvidia para rodar todos os jogos da atualidade",
+                    "stockQuantity": 10,
+                    "categoryId": 5,
+                    "category": "Hardware "
+                },
+                {
+                    "id": "d0575e4e-d6b5-46bd-9173-e9b39467eafe",
+                    "name": "Placa de Viídeo Gtx 1080",
+                    "price": 2500.60,
+                    "description": "Uma ótima placa de vídeo de ultima geração da Nvidia para rodar todos os jogos da atualidade",
+                    "stockQuantity": 10,
+                    "categoryId": 5,
+                    "category": "Hardware "
+                },
+                {
+                    "id": "8cb27d3b-1253-46ac-b838-a442fa9ce403",
+                    "name": "Placa de Viídeo Gtx 1080",
+                    "price": 2500.60,
+                    "description": "Uma ótima placa de vídeo de ultima geração da Nvidia para rodar todos os jogos da atualidade",
+                    "stockQuantity": 10,
+                    "categoryId": 5,
+                    "category": "Hardware "
+                },
+                {
+                    "id": "97cb0ac1-599c-43d6-9d9f-4cdf40552d28",
+                    "name": "Placa de Viídeo Gtx 1080",
+                    "price": 2500.60,
+                    "description": "Uma ótima placa de vídeo de ultima geração da Nvidia para rodar todos os jogos da atualidade",
+                    "stockQuantity": 10,
+                    "categoryId": 5,
+                    "category": "Hardware "
+                },
+                {
+                    "id": "0598fc31-0a2e-4d94-bd75-212b8a09f6ad",
+                    "name": "Placa de Viídeo Gtx 1080",
+                    "price": 2500.60,
+                    "description": "Uma ótima placa de vídeo de ultima geração da Nvidia para rodar todos os jogos da atualidade",
+                    "stockQuantity": 10,
+                    "categoryId": 5,
+                    "category": "Hardware "
+                },
+                {
+                    "id": "ff766369-5465-4059-a07e-615a4b8224cb",
+                    "name": "Placa de Viídeo Gtx 1080",
+                    "price": 2500.60,
+                    "description": "Uma ótima placa de vídeo de ultima geração da Nvidia para rodar todos os jogos da atualidade",
+                    "stockQuantity": 10,
+                    "categoryId": 5,
+                    "category": "Hardware "
+                },
+                {
+                    "id": "0cd9a483-c8fc-4bf4-9bd7-326779697dcd",
+                    "name": "Placa de Viídeo Gtx 1080",
+                    "price": 2500.60,
+                    "description": "Uma ótima placa de vídeo de ultima geração da Nvidia para rodar todos os jogos da atualidade",
+                    "stockQuantity": 10,
+                    "categoryId": 5,
+                    "category": "Hardware "
+                }
+               
+            ]
+        }
+        
+    }
+}

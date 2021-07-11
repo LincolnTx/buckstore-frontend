@@ -1,4 +1,4 @@
-import { ReactNode, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import { FaPowerOff } from 'react-icons/fa';
 import Letter from '../../assets/letter_logo.svg';
