@@ -34,9 +34,9 @@ function PageHeader() {
      
       :
       <>
+        {/* <span>Funcionalidade 1</span>
         <span>Funcionalidade 1</span>
-        <span>Funcionalidade 1</span>
-        <span>Funcionalidade 1</span>
+        <span>Funcionalidade 1</span> */}
         <button className="login-button" type="button" onClick={() => history.push('/login')}>
           Entrar
         </button>
