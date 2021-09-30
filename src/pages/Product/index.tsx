@@ -4,12 +4,15 @@ import { useParams } from 'react-router-dom';
 import './styles.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';  
+import { FaShoppingCart } from 'react-icons/fa';
+import Logo from '../../assets/logo_color.svg';
 
 import { Api } from '../../helpers/api';
 import { ProductResponse } from '../../helpers/Responses/products/productsResponses';
 import  { ErrorContainer } from '../../components/ErrorContainer';
 import ImageSlider from '../../components/ImageSlider';
 import CommentArea from '../../components/CommentArea';
+import PageHeader from '../../components/PageHeader';
 
 
 interface RouteParams  {
@@ -59,31 +62,48 @@ export function Product() {
             {errorCatcher ?
                 <ErrorContainer />
                 :
-               <>
-                    <div>
+               <div className="product-main-container">
+                    <PageHeader />
+
+                    
+                    
+                    <div className="product-container">
                         <h2>{product?.data.name}</h2>
-                        <div className="visual-container">
-                            <span>barirnha vertical</span>
-                            <span>Estrelas de rate {product?.data.averageRate}</span>
-                            <span>barrinha vertical</span>
-                            <ImageSlider/>
-                        </div>
+                        <div className="product-info-container">
+                            <div className="visual-container">
+                                {/* add barrinhas veriticais com css e nao essa | */}
+                                <div>
+                                    <div className="vertical-separator"></div>
+                                    <span>Estrelas de rate {product?.data.averageRate}</span>
+                                    <div className="vertical-separator"></div>
+                                </div>
+                                <ImageSlider/>
+                            </div>
 
-                        <div className="info-container">
-                            <span>
-                                Vendido e entregue por <b>Buckstore | </b>   
-                                { handlerStockInformation() }  
-                            </span>
+                            <div className="info-container">
+                                <div>
+                                    <div className="image-div">
+                                        <img src={Logo} alt="" />
+                                    </div>
+                                    <span>
+                                        Vendido e entregue por <b>Buckstore | </b>   
+                                        { handlerStockInformation() }  
+                                    </span>
 
-                            <span className="price">R$ {product?.data.price}</span>
-                            <span>À vista</span>
+                                    <p className="price">R$ {product?.data.price.toLocaleString()}</p>
+                                    <span>À vista</span>
+                                </div>
 
-                            <button> icode de carrinho COMPRAR</button>
+                                <button className="button">
+                                    <FaShoppingCart />
+                                    COMPRAR
+                                </button>
+                            </div>
                         </div>
                     </div>
 
                     <CommentArea />
-               </>
+               </div>
             }
         </>
     );

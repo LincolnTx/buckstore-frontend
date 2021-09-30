@@ -1,0 +1,94 @@
+@import '../../global.css';
+
+.product-main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    max-width: 1024px;
+    padding: 0 24px;
+    margin: 12px auto;
+    height: 100vh;
+}
+
+.product-container {
+    border: 3px solid  red;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 450px;
+    width: 900px;
+    padding: 16px;
+}
+
+.vertical-separator {
+    height: 100%;
+    width: 1.5px;
+    background-color:  var(--outline);
+}
+
+.product-container h2 {
+    margin: 8px 0 16px 0;
+}
+
+.product-info-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.visual-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.visual-container div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.visual-container div span {
+    margin: 0 12px;
+}
+
+.info-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+    height: 100%;
+    font-size: 16px;
+}
+
+.info-container  div {
+    height: 60%;
+    width: 100%;
+    margin: 0 8px;
+}
+.info-container button svg {
+    text-align: center;
+    padding-right: 8px;
+}
+
+.image-div {
+    width: 100%;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+}
+

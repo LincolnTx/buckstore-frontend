@@ -23,13 +23,25 @@ function PageHeader() {
     <header>
     <img src={ Letter } alt="buckstore logo"/>
     {signed ?  
-      <button type="button" onClick={() => handleLogout()}>
-        <FaPowerOff size={18} color="#D9D9D9" />
-      </button>
+      <>
+        <span>Funcionalidade 1</span>
+        <span>Funcionalidade 1</span>
+        <span>Funcionalidade 1</span>
+        <button type="button" onClick={() => handleLogout()}>
+          <FaPowerOff size={18} color="#D9D9D9" />
+        </button>
+      </>
+     
       :
-      <button className="login-button" type="button" onClick={() => history.push('/login')}>
-        Entrar
-      </button>
+      <>
+        <span>Funcionalidade 1</span>
+        <span>Funcionalidade 1</span>
+        <span>Funcionalidade 1</span>
+        <button className="login-button" type="button" onClick={() => history.push('/login')}>
+          Entrar
+        </button>
+      </>
+      
     }
   </header>
   );
