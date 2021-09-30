@@ -22,8 +22,8 @@ function ProductsList() {
 
   async function handleProductListRequest() {
       // chamda real, no momento estou utilizando o json server
-      //const response = await Api.apiProducts.get(`/product/list?pagenumber=${pageNumber}&pagesize=10`);
-      const response = await Api.apiProducts.get(`/products`);
+      const response = await Api.apiProducts.get(`/commodities/Product/list?pagenumber=${pageNumber}&pagesize=10`);
+      //const response = await Api.apiProducts.get(`/commodities/Product/list`);
       const productList:ProductsListResponse = await response.data;
 
       if (productList.success) {
@@ -64,12 +64,10 @@ function ProductsList() {
       <ul >
         {products.map(product => (
           <li key={product.id} onClick={() => handleProductSelection(product.id)}>
-        
-            <img src={DefaultImage} alt="imagem do produto"/>
-            <span>Placa de video Nvidia GTX 1650, 4GB</span>
-            <span>Estrelas de avaliação geral do produto</span>
-            <span className="price-span"><b>R$1.799,90</b> à vista</span>
-            <span>Categoria do produto</span>
+            <img src={product.imagesUrl[0]} alt="imagem do produto" height='100'/>
+            <span>{product.name}</span>
+            <span className="price-span"><b>R${product.price}</b> à vista</span>
+            <span>{product.category}</span>
            </li>
         ))}
       </ul>

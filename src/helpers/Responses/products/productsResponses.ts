@@ -14,7 +14,17 @@ export interface ProductResponse {
         stockQuantity: number;
         categoryId: number;
         category: string;
+        images: string[];
+        averageRate: number;
+        productsEvaluations: ProductEvaluation[];
     }
+}
+
+export interface ProductEvaluation {
+    rateId: string;
+    rateValue: number;
+    comment: string;
+    userName: string;
 }
 
 export interface Products {
@@ -25,4 +35,5 @@ export interface Products {
     stockQuantity: number;
     categoryId: number;
     category: string;
+    imagesUrl: string[];
 }
