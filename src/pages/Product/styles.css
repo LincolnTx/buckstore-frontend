@@ -17,7 +17,7 @@
     /* border: 3px solid  red; */
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: start;
     height: 450px;
     width: 100%;
     padding: 8px;
@@ -123,3 +123,20 @@
     color: var(--favorite);
 }
 
+.description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    max-height: 75px;
+}
+
+.description span {
+    font-size: 21px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.description p {
+    font-size: 14px;
+    color: var(--gray);
+}
