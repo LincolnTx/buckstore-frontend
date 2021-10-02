@@ -7,8 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
 
 import PageHeader from '../../components/PageHeader';
-import DefaultImage from '../../assets/logo_uncolor.svg';
-
 import { Api } from '../../helpers/api';
 import { NonAuthRoutes } from '../../helpers/Authentication/authenticationRoutes';
 import { ProductsListResponse, Products } from '../../helpers/Responses/products/productsResponses';

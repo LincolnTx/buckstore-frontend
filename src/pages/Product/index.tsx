@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
 import './styles.css';
@@ -14,6 +14,8 @@ import  { ErrorContainer } from '../../components/ErrorContainer';
 import ImageSlider from '../../components/ImageSlider';
 import CommentArea from '../../components/CommentArea';
 import PageHeader from '../../components/PageHeader';
+import AuthContext from '../../contexts/auth';
+import { useHistory } from 'react-router-dom';
 
 
 interface RouteParams  {
@@ -27,7 +29,9 @@ export function Product() {
     toast.configure();
     const [product, setProduct] = useState<ProductResponse>();
     const [errorCatcher, setErrorCatcher] = useState(false);
-
+    const {signed } = useContext(AuthContext);
+    const history = useHistory();
+    toast.configure();
 
     useEffect(() => {
         async function requestProductInfo() {
@@ -68,6 +72,18 @@ export function Product() {
         return [defaultImage]
     }
     
+    function handleBuy() {
+        if (!signed) {
+            toast.warn("Você será redirecionado para a página de login");
+            setTimeout(() => {
+                history.push('/login');
+            }, 800);
+            return ;
+        }
+
+        // senao adicionar item ao carrinho
+        // deixar o usuario escolher a quantidade
+    }
 
 
     return (
@@ -122,7 +138,7 @@ export function Product() {
                                 </div>
 
                                 <div className="button-container">
-                                    <button className="button">
+                                    <button className="button" onClick={handleBuy}>
                                         <FaShoppingCart />
                                         COMPRAR
                                     </button>

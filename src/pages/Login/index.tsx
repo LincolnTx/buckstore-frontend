@@ -69,6 +69,7 @@ const Login: React.FC = () => {
       }
       history.push(AuthenticationRoutes.employeeDashboard);
     } catch(error) {
+      // @ts-ignore: Unreachable code error
       const { response } = error;
       const responseData:AuthLoginResponse = response.data;
 
