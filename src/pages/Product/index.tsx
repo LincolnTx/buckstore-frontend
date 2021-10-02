@@ -97,8 +97,8 @@ export function Product() {
                                 </div>
                                 <ImageSlider 
                                     images={getProductImages()}
-                                    height={90}
-                                    width={90}
+                                    height={100}
+                                    width={100}
                                 />
                             </div>
 
@@ -117,7 +117,7 @@ export function Product() {
                                         </span> 
                                     </span>
 
-                                    <p className="price">R$ {product?.data.price.toLocaleString()}</p>
+                                    <p className="price">R$ {product?.data.price.toLocaleString('pt-br')}</p>
                                     <span>À vista</span>
                                 </div>
 

@@ -14,10 +14,9 @@
 }
 
 .product-container {
-    /* border: 3px solid  red; */
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     height: 450px;
     width: 100%;
     padding: 8px;
