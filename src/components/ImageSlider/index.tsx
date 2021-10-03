@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './styles.css';
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
@@ -12,6 +12,7 @@ interface Props {
 function ImageSlider({images, height, width, ...rest}: Props) {
  
   const [current, setCurrent] = useState(0);
+  const [invisibleArrow, setInvisibleArrow] = useState('');
   const length = images.length;
 
   function nextSlide() {
@@ -21,11 +22,15 @@ function ImageSlider({images, height, width, ...rest}: Props) {
   function prevSlide() {
     setCurrent(current === 0 ? length -1 : current -1);
   }
+
+  useEffect(() => {
+    setInvisibleArrow(images.length <= 1 ? "invisible-arrow" : "")  ;
+  }, [images]);
   
   return (
     <section className="slider">
-      <FaAngleLeft  className="left-arrow" onClick={prevSlide} size={32} color="#048243"/>
-      <FaAngleRight className="right-arrow" onClick={nextSlide} size={32} color="#048243"/>
+      <FaAngleLeft  className={`left-arrow ${invisibleArrow}`} onClick={prevSlide} size={32} color="#048243"/>
+      <FaAngleRight className={`right-arrow ${invisibleArrow}`} onClick={nextSlide} size={32} color="#048243"/>
 
       {images.map((image, index) => (
         <div className={index === current ? 'slide active' : 'slide'} key={index}>
