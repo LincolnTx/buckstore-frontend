@@ -119,7 +119,7 @@ export function Product() {
                                     <p className="price">R$ {product?.data.price.toLocaleString('pt-br')}</p>
                                     <span>À vista</span>
                                 </div>
-                                <BuyButton />
+                                <BuyButton productId={product?.data.id} productName={product?.data.name} price={product?.data.price} quantity={1}/>
                             </div>
                         </div>
                     </div>

@@ -22,9 +22,8 @@ function ProductsList() {
   
 
   async function handleProductListRequest() {
-      // chamda real, no momento estou utilizando o json server
       const response = await Api.apiProducts.get(`/commodities/Product/list?pagenumber=${pageNumber}&pagesize=10`);
-      //const response = await Api.apiProducts.get(`/commodities/Product/list`);
+      
       const productList:ProductsListResponse = await response.data;
 
       if (productList.success) {
@@ -86,8 +85,7 @@ function ProductsList() {
               <p>à vista</p>
             </div>
 
-            <BuyButton />
-            
+            <BuyButton productId={product.id} productName={product.name} price={product.price} quantity={1}/>
            </li>
         ))}
       </ul>

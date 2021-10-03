@@ -1,0 +1,7 @@
+.button-container {
+    width: 100%;
+}
+
+.button-container svg {
+    margin-right: 4px;
+}
