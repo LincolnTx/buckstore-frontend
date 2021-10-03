@@ -2,6 +2,7 @@ export interface ProductsListResponse {
     success: boolean;
     data: {
         products: Products[];
+        totalPages: number;
     };
 }
 export interface ProductResponse {

@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import './styles.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';  
-import { FaShoppingCart, FaFileAlt } from 'react-icons/fa';
+import { FaFileAlt } from 'react-icons/fa';
 import Logo from '../../assets/logo_uncolor.svg';
 import StarRatings from 'react-star-ratings';
 
@@ -14,8 +14,7 @@ import  { ErrorContainer } from '../../components/ErrorContainer';
 import ImageSlider from '../../components/ImageSlider';
 import CommentArea from '../../components/CommentArea';
 import PageHeader from '../../components/PageHeader';
-import AuthContext from '../../contexts/auth';
-import { useHistory } from 'react-router-dom';
+import BuyButton from '../../components/BuyButton';
 
 
 interface RouteParams  {
@@ -29,8 +28,6 @@ export function Product() {
     toast.configure();
     const [product, setProduct] = useState<ProductResponse>();
     const [errorCatcher, setErrorCatcher] = useState(false);
-    const {signed } = useContext(AuthContext);
-    const history = useHistory();
     toast.configure();
 
     useEffect(() => {
@@ -65,26 +62,12 @@ export function Product() {
     }
 
     function getProductImages() {
-        if (product?.data.images) {
-            return product.data.images;
+        if (product?.data.images && product?.data.images.length > 0) {
+            return product?.data.images;
         }
 
         return [defaultImage]
     }
-    
-    function handleBuy() {
-        if (!signed) {
-            toast.warn("Você será redirecionado para a página de login");
-            setTimeout(() => {
-                history.push('/login');
-            }, 800);
-            return ;
-        }
-
-        // senao adicionar item ao carrinho
-        // deixar o usuario escolher a quantidade
-    }
-
 
     return (
         <>
@@ -136,13 +119,7 @@ export function Product() {
                                     <p className="price">R$ {product?.data.price.toLocaleString('pt-br')}</p>
                                     <span>À vista</span>
                                 </div>
-
-                                <div className="button-container">
-                                    <button className="button" onClick={handleBuy}>
-                                        <FaShoppingCart />
-                                        COMPRAR
-                                    </button>
-                                </div>
+                                <BuyButton />
                             </div>
                         </div>
                     </div>
