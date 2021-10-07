@@ -85,7 +85,7 @@ function ProductsList() {
               <p>à vista</p>
             </div>
 
-            <BuyButton productId={product.id} productName={product.name} price={product.price} quantity={1}/>
+            <BuyButton productId={product.id} productName={product.name} price={product.price} quantity={1} image={product.imagesUrl[0]}/>
            </li>
         ))}
       </ul>

@@ -11,21 +11,19 @@ import { AuthLoginResponse, FacebookLoginResponse } from '../../helpers/Response
 import UserRoles from '../../helpers/Authentication/userRoles';
 import AuthContext from '../../contexts/auth';
 import { AuthenticationRoutes } from '../../helpers/Authentication/authenticationRoutes';
+import * as jwtService from '../../helpers/Jwt/jwtService';
 
 import Logo from '../../assets/logo_color.svg';
 import Letter from '../../assets/letter_logo.svg';
 import ShoppingBanner from '../../assets/shopping_01.svg';
 
-// TODO exemplo de uso do toastfy, remover dps
-// toast.error('Runtime error', { 
-//   // Set to 15sec 
-//   position: toast.POSITION.BOTTOM_LEFT, autoClose:15000}) 
+
 const Login: React.FC = () => {
   const fbAppId = process.env.REACT_APP_FB_APPID;
   const history = useHistory();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const {login, facebookLogin, userRole} = useContext(AuthContext);
+  const {login, facebookLogin } = useContext(AuthContext);
 
   toast.configure();
 
@@ -41,11 +39,7 @@ const Login: React.FC = () => {
       return;
     }
     
-    if (UserRoles.customer.includes(userRole as string)) {
-      history.push(AuthenticationRoutes.dashboard);
-      return;
-    }
-    history.push(AuthenticationRoutes.employeeDashboard);
+    handleLoginRedirection(apiResponse.data.token);
     
    } catch (error) {
       toast.error("Erro ao tentar fazer login com o facebook!");
@@ -63,17 +57,23 @@ const Login: React.FC = () => {
         return;
       }
 
-      if (UserRoles.customer.includes(userRole as string)) {
-        history.push(AuthenticationRoutes.dashboard);
-        return;
-      }
-      history.push(AuthenticationRoutes.employeeDashboard);
+     handleLoginRedirection(loginResponse.data.token);
     } catch(error) {
       // @ts-ignore: Unreachable code error
       const { response } = error;
       const responseData:AuthLoginResponse = response.data;
 
       toast.error(`Erro ao logar! ${responseData.errors[0].message}`);
+    }
+  }
+  
+  function handleLoginRedirection(token: string) {
+    const userRole = jwtService.getTokenProperty("Role", token);
+
+    if (UserRoles.customer.includes(userRole)) {
+      history.push(AuthenticationRoutes.dashboard);
+    } else {
+      history.push(AuthenticationRoutes.employeeDashboard);
     }
   }
 

@@ -15,9 +15,10 @@ interface Props {
     productName: string | undefined;
     price: number | undefined;
     quantity: number | undefined;
+    image: string | undefined;
 }
 
-function BuyButton({productId, productName, price, quantity}: Props) {
+function BuyButton({productId, productName, price, quantity, image}: Props) {
 
     
     const history = useHistory();
@@ -35,7 +36,7 @@ function BuyButton({productId, productName, price, quantity}: Props) {
             return ;
         }
         
-        const shopCartItem = {productId, productName, price, quantity} as ShoppingItem
+        const shopCartItem = {productId, productName, price, quantity, image} as ShoppingItem
         await addItem(shopCartItem);
        // redirecionar para o carrinho ? 
        // ou deixar na pagina de compra

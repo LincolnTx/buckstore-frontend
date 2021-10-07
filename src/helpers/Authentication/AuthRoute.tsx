@@ -14,10 +14,7 @@ interface Props {
 const AuthRoute = ({ Component, path, exact = false, requiredRoles }: Props): JSX.Element => {
     const {userRole, signed} = useContext(AuthContext);
     const role = userRole as string;
-    console.log('role', role, 'path', path)
     const hasRequiredRole = requiredRoles.includes(role);
-    console.log('d', requiredRoles[0], requiredRoles[1])
-    console.log('hasRequiredRole', hasRequiredRole)
 
     return(
         <Route

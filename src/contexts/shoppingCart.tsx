@@ -14,12 +14,13 @@ export interface ShoppingItem {
     productName: string;
     price: number;
     quantity: number;
+    image: string;
 }
 
 const ShoppingCartContext = createContext<ShoppingCartContextType>({} as ShoppingCartContextType);
 
 export const ShoppingCartProvider: React.FC = ({children}) => {
-    const [shoppingCart, setShoppingCart] = useState<ShoppingItem[]>([{productId: "item de merda", productName: "merda", price: 18, quantity: 1}]);
+    const [shoppingCart, setShoppingCart] = useState<ShoppingItem[]>([]);
 
     function addItem(item: ShoppingItem): Promise<void> {
         console.log('adding an item')
