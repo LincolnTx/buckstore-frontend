@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaShoppingCart } from 'react-icons/fa';
 import AuthContext from '../../contexts/auth';
 import ShoppingCartContext, { ShoppingItem } from '../../contexts/shoppingCart';
-import { NonAuthRoutes } from '../../helpers/Authentication/authenticationRoutes';
+import { AuthenticationRoutes, NonAuthRoutes } from '../../helpers/Authentication/authenticationRoutes';
 import { useHistory } from 'react-router-dom';
 
 interface Props {
@@ -38,8 +38,7 @@ function BuyButton({productId, productName, price, quantity, image}: Props) {
         
         const shopCartItem = {productId, productName, price, quantity, image} as ShoppingItem
         await addItem(shopCartItem);
-       // redirecionar para o carrinho ? 
-       // ou deixar na pagina de compra
+        history.push(AuthenticationRoutes.preCheckout.replace(":id", productId as string))
     }
 
     return (

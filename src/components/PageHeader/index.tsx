@@ -19,14 +19,18 @@ function PageHeader() {
     history.push(NonAuthRoutes.login);
   }
 
+  function homeRedirection() {
+    history.push(NonAuthRoutes.produtcs);
+  }
+
   return (
     <header>
-    <img src={ Letter } alt="buckstore logo"/>
+    <img src={ Letter } alt="buckstore logo" onClick={homeRedirection}/>
     {signed ?  
       <>
         <span>Funcionalidade 1</span>
         <span>Funcionalidade 1</span>
-        <span>Funcionalidade 1</span>
+        <span>Carrinho de compra</span>
         <button type="button" onClick={() => handleLogout()}>
           <FaPowerOff size={18} color="#D9D9D9" />
         </button>
