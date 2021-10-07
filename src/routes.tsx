@@ -11,6 +11,8 @@ import ProductsList from './pages/ProductsList';
 import AdminDashboard from './pages/AdminDashboard';
 import AuthRoute from './helpers/Authentication/AuthRoute';
 import  UserRoles  from './helpers/Authentication/userRoles';
+import PreCheckout from "./pages/PreCheckout";
+import OrderCheckout from "./pages/OrderCheckout";
 
 const Routes = () => (
     <BrowserRouter> 
@@ -29,6 +31,20 @@ const Routes = () => (
                 path= {AuthenticationRoutes.employeeDashboard} 
                 Component={AdminDashboard} 
                 requiredRoles ={UserRoles.employee}
+            />
+
+            <AuthRoute 
+                path={AuthenticationRoutes.preCheckout}
+                exact
+                Component={PreCheckout}
+                requiredRoles={UserRoles.customer}
+            />
+            
+            <AuthRoute 
+                path={AuthenticationRoutes.checkout}
+                exact
+                Component={OrderCheckout}
+                requiredRoles={UserRoles.customer}
             />
         </Switch>
     </BrowserRouter>
