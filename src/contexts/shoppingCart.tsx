@@ -25,7 +25,6 @@ export const ShoppingCartProvider: React.FC = ({children}) => {
 
     useEffect(() => {
         const cartItens = JSON.parse(localStorage.getItem("cartItens") as string)
-        console.log('saved itens ', cartItens)
         if (cartItens) {
 
             setShoppingCart(cartItens as ShoppingItem[])
@@ -47,8 +46,6 @@ export const ShoppingCartProvider: React.FC = ({children}) => {
         if(shoppingCart.length === 0) {
             storeCart([item]);
         } else {
-            
-            console.log('else')
             const currentCart = shoppingCart;
             currentCart.push(item);
             storeCart(currentCart);
@@ -83,7 +80,7 @@ export const ShoppingCartProvider: React.FC = ({children}) => {
 
     }
 
-    
+
     function aggregateSumItem(item: ShoppingItem) {
         const index = shoppingCart.findIndex(f => f.productId === item.productId);
         const currentCart = shoppingCart;

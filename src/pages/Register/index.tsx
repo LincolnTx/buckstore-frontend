@@ -41,9 +41,9 @@ const Register: React.FC = () => {
         history.push('login');
       }
     } catch(error) {
+       // @ts-ignore: Unreachable code error
       const { response } = error;
       const responseData:RegisterUserResponse = response.data;
-      console.log('response', responseData);
 
       toast.error(`Erro ao realizar cadastro, verifique as informações ${responseData.errors.map(e => e.paramName)}`);
     }
