@@ -1,3 +1,5 @@
+@import '../../global.css';
+
 header {
     display: flex;
     align-items: center;
@@ -35,6 +37,106 @@ header .login-button {
     font-size: 16px;
 }
 
-header button:hover {
-    background-color:#1d8e55;
+.icons-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 300px;
+    width: 100%;
+}
+
+
+header .menu-burguer {
+    display: none;
+}
+
+.dropdown-content  {
+    display: none;
+}
+  
+
+@media screen and (max-width: 600px) {
+
+    header {
+        display: block;
+        padding: 0;
+    }
+    header img{
+       position: absolute;
+       right: 32px;
+    }
+    header .icons-container {
+        display: none;
+    }
+    header .icons-container a {
+        display: none;
+    }
+    header button {
+        display: none;
+    }
+
+    header .menu-burguer {
+        display: block;
+        position: relative;
+    }
+    header .menu-burguer svg {
+        color: var(--primary);
+    }
+    
+    .dropdown-content {
+        position: absolute;
+        z-index: 3;
+        padding-top: 8px;
+        transform: translate(-110%);
+        transition: transform 0.5s ease-in-out;
+        padding-left: 15px;
+        background:var(--secondary);
+        padding-bottom: 8px;
+        max-width: 400px;
+        width: 90%;
+        overflow: scroll;
+        border-radius: 8px;
+    }
+    
+    .menu-burguer.responsive svg {
+        color:var(--secondary);
+    }
+    .menu-burguer.responsive .dropdown-content {
+        display: block;
+        transform: translate(-4%);
+    }
+    
+    .dropdown-content .mobile-options {
+        display: block;
+        color: var(--search);
+        padding: 5px;
+        text-decoration: none;
+        color: #fff;
+        font-weight: 500;
+        border-bottom: 2px dotted;
+        border-color: var(--primary);
+        margin-bottom: 8px;
+    }
+    .mobile-options:last-child {
+        border-bottom: none;
+        margin: 0;
+      }
+
+    .dropdown-content .mobile-options:hover {
+        background-color: var(--primary);
+    }
+   
+    
+    .dropdown-content a:hover {
+        color: var(--white);
+        background-color: var(--secondary);
+    }
+
+    header .login-button {
+        display: block;
+        position: relative;
+        height: 42px;
+        margin: 0;
+    }
+
 }

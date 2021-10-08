@@ -127,8 +127,8 @@
 @media(max-width: 600px) {
     
     .list-products-container {
-        width: 100%;
-         padding: 4px 4px 12px 4px;
+        width: 95%;
+        padding: 4px 4px 12px 4px;
         margin: auto;
     }
 
