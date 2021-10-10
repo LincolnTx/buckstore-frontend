@@ -17,7 +17,7 @@ export interface ProductResponse {
         category: string;
         images: string[];
         averageRate: number;
-        productsEvaluations: ProductEvaluation[];
+        productEvaluations: ProductEvaluation[];
     }
 }
 
