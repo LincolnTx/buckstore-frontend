@@ -57,7 +57,7 @@ function PageHeader() {
             <FaHeart size={32} color="#048243"/>
           </Link>
         
-          <Link to="#" title="Carrinho de compras"  className="icon-link">
+          <Link to={AuthenticationRoutes.checkout} title="Carrinho de compras"  className="icon-link">
             <FaShoppingCart  size={32} color="#048243"/>
           </Link>
         </div>
