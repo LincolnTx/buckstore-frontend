@@ -12,6 +12,7 @@ header {
 
 header img {
     width: 128px;
+    cursor: pointer;
 }
 
 header button {
@@ -63,7 +64,8 @@ header .menu-burguer {
     }
     header img{
        position: absolute;
-       right: 32px;
+       right: 20px;
+       z-index: 1;
     }
     header .icons-container {
         display: none;

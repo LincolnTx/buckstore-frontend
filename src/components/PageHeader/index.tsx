@@ -6,7 +6,7 @@ import './styles.css';
 
 import AuthContext from '../../contexts/auth';
 import { useHistory, Link} from 'react-router-dom';
-import { NonAuthRoutes } from '../../helpers/Authentication/authenticationRoutes';
+import { NonAuthRoutes, AuthenticationRoutes } from '../../helpers/Authentication/authenticationRoutes';
 
 
 
@@ -20,6 +20,11 @@ function PageHeader() {
   }
 
   function homeRedirection() {
+    if (signed) {
+      history.push(AuthenticationRoutes.dashboard);
+      return;
+    }
+
     history.push(NonAuthRoutes.produtcs);
   }
 
@@ -60,8 +65,8 @@ function PageHeader() {
           <FaPowerOff size={18} color="#D9D9D9" />
         </button>
 
-        <div className="menu-burguer" onClick={handleBurguerDropDown} id="dropMenu">
-          <FaBars  size={32} />
+        <div className="menu-burguer"  id="dropMenu">
+          <FaBars  size={32}  onClick={handleBurguerDropDown}/>
           <div className="dropdown-content">
             <Link to="#" className="mobile-options">Quem Somos</Link>
             <Link to="#" className="mobile-options">Lista de Desejos</Link>

@@ -2,7 +2,10 @@ enum AuthenticationRoutes {
     dashboard = '/dashboard',
     employeeDashboard = '/emp-dashboard',
     preCheckout = '/precheck/:id',
-    checkout = '/checkout'
+    checkout = '/checkout',
+    orders = 'me/orders',
+    favorites = 'me/favorites',
+    sales = 'sales'
 }
 
 enum NonAuthRoutes {
@@ -10,7 +13,8 @@ enum NonAuthRoutes {
     register = '/register',
     produtcs = '/',
     produt = '/product/:id',
-    notFounded = '/not-found'
+    notFounded = '/not-found',
+    about = 'about'
 }
 
 export {AuthenticationRoutes, NonAuthRoutes}
