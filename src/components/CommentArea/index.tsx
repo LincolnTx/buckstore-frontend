@@ -1,4 +1,6 @@
 import { ProductEvaluation } from '../../helpers/Responses/products/productsResponses';
+import StarRatings from 'react-star-ratings';
+
 import './styles.css';
 
 interface Props {
@@ -9,28 +11,55 @@ interface Props {
 function CommentArea({evaluations, averageRate}: Props) {
     return(
         <>
-            <header>
-                <h1>Avaliaçãoes dos Usuários</h1>
-                <div className="average-rate-area">
-                    <span>{averageRate}</span>
-                    <div className="rate-area-count">
-                        <span>estrlas</span>
-                        <span>{evaluations.length}</span>
-                    </div>
-                </div>
-            </header>
-            <main>
-                {evaluations.map(evaluation => (
-                    <>
-                        <div className="comment-info" key={evaluation.rateId}>
-                            <div className="horizontal-separator"></div>
-                            <span>Nome</span>
-                            <span> Opinião: </span> <span>comment</span>
+            <div className="comment-area">
+                <header>
+                    <h2>Avaliaçãoes dos Usuários</h2>
+                    <div className="average-rate-area">
+                        <span>{averageRate}</span>
+                        <div className="rate-area-count">
+                            <StarRatings
+                                starDimension="16px"
+                                starSpacing="4px"
+                                rating={averageRate}
+                                starRatedColor="rgb(255 101 0)"
+                                star-ratings
+                                numberOfStars={5}
+                                name='rating'
+                            />
+                            <span>({evaluations.length} avaliações)</span>
                         </div>
-                        <div className="rate"></div>
-                    </>
-                ))}
-            </main>
+                    </div>
+                </header>
+                <main>
+                    <div className="horizontal-separator"></div>
+                    {evaluations.map(evaluation => (
+                        <>
+                            <div  key={evaluation.rateId} className="comment-container">
+                            
+                                <div className="comment-info" >
+                                    <span>{evaluation.userName}</span>
+                                    <p>
+                                        <span> Opinião: </span>
+                                        <span>{evaluation.comment}</span>
+                                    </p>
+                                </div>
+                               
+                                <StarRatings 
+                                    starDimension="16px"
+                                    starSpacing="2px"
+                                    rating={evaluation.rateValue}
+                                    starRatedColor="rgb(255 101 0)"
+                                    star-ratings
+                                    numberOfStars={5}
+                                    name='rating'
+                                />
+                            </div>
+
+                            <div className="horizontal-separator"></div>
+                        </>
+                    ))}
+                </main>
+            </div>
         </>
     );
 }
