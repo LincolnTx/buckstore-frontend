@@ -12,6 +12,12 @@
     margin: 12px auto;
 }
 
+.main-container header {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+}
+
 .main-container header h2 {
     color: var(--primary);
     text-transform: uppercase ;
@@ -63,7 +69,7 @@
     align-items: center;
     width: 100%;
 }
-.options  span{
+.options  span {
     margin: 32px 8px;
     text-transform: uppercase;
     color: var(--secondary);
@@ -77,8 +83,42 @@
 }
 
 .buttons-container :first-child {
-    background-color: #f0f0f5;
+    background-color: var(--background);
     color: var(--primary);
     border-color: var(--primary);
     border: 1px solid;
+}
+
+@media screen and (max-width: 600px) {
+
+    .main-container {
+        margin: auto;
+        padding: 0 8px
+    }
+    .product-info {
+        flex-direction: column;
+    }
+
+    .name {
+        width: 90%;
+    }
+
+    .vertical-separator {
+        display: none;
+    }
+
+    .options  span {
+        margin: 12px 0;
+    }
+    .buttons-container {
+        flex-direction: column;
+    }
+
+    
+    .buttons-container button {
+        max-width: 90%;
+        margin: 0;
+        margin-bottom: 12px;
+        padding: 0;
+    }
 }

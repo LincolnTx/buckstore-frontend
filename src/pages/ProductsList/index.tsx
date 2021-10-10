@@ -68,8 +68,10 @@ function ProductsList() {
     return defaultImage;
   }
   return (
-    <div className="list-products-container">
+    <>
       <PageHeader />
+      
+      <div className="list-products-container">
 
       <ul >
         {products.map(product => (
@@ -106,6 +108,7 @@ function ProductsList() {
         />
       </div>
     </div>
+    </>
   );
 }
 

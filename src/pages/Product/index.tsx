@@ -74,8 +74,9 @@ export function Product() {
             {errorCatcher ?
                 <ErrorContainer />
                 :
-               <div className="product-main-container">
+                <>
                     <PageHeader />
+                    <div className="product-main-container">
 
                     <div className="product-container">
                         <h2>{product?.data.name}</h2>
@@ -137,6 +138,7 @@ export function Product() {
                     </div>
                     <CommentArea />
                </div>
+                </>
             }
         </>
     );

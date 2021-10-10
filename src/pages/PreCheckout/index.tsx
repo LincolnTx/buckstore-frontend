@@ -45,30 +45,30 @@ const PreCheckout: React.FC = () => {
 
     return(
         <>
-        <PageHeader />
-        <div className="main-container">
-            <header>
-                <h2>Serviços Buckstore</h2>
-            </header>
-            <main>
-                <div className="product-info">
-                    <img src={handleImage()} alt="Imagem do produto" />
-                    <span className="name">{checkoutItem?.productName}</span>
-                    <div className="vertical-separator"></div>
-                    <span className="price">R$ {checkoutItem?.price}</span>
-                </div>
-                <div className="options">
-                    <div>
-                        <FaCheckCircle  color="#32BF84" size={20}/>
-                        <span>Produto adicionado ao carrinho</span>
+            <PageHeader />
+            <div className="main-container">
+                <header>
+                    <h2>Serviços Buckstore</h2>
+                </header>
+                <main>
+                    <div className="product-info">
+                        <img src={handleImage()} alt="Imagem do produto" />
+                        <span className="name">{checkoutItem?.productName}</span>
+                        <div className="vertical-separator"></div>
+                        <span className="price">R$ {checkoutItem?.price}</span>
                     </div>
-                    <div className="buttons-container">
-                        <button className="button" onClick={handleKeepShop}>Continuar comprando</button>
-                        <button className="button" onClick={handleGoToCart}>Ir para o carrinho</button>
+                    <div className="options">
+                        <div>
+                            <FaCheckCircle  color="#32BF84" size={20}/>
+                            <span>Produto adicionado ao carrinho</span>
+                        </div>
+                        <div className="buttons-container">
+                            <button className="button" onClick={handleKeepShop}>Continuar comprando</button>
+                            <button className="button" onClick={handleGoToCart}>Ir para o carrinho</button>
+                        </div>
                     </div>
-                </div>
-            </main>
-        </div>
+                </main>
+            </div>
         </>
     );
 }

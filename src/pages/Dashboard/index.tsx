@@ -35,8 +35,9 @@ const Dashboard: React.FC = () => {
 
 
   return (
-    <div className="dashboard-container">
+    <>
       <PageHeader />
+    <div className="dashboard-container">
 
       <ul>
         <li onClick={() => redirections["buy"]()}>
@@ -61,6 +62,8 @@ const Dashboard: React.FC = () => {
         </li>
       </ul>
     </div>
+    </>
+    
   );
 }
 
