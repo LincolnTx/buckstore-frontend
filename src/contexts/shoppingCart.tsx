@@ -3,8 +3,8 @@ import { createContext, useState, useEffect } from 'react';
 export interface ShoppingCartContextType {
     addItem(item: ShoppingItem): Promise<void>;
     getItens(): ShoppingItem[];
-    removeItem(id: string): void;
-    editItem(newItem: ShoppingItem): void;
+    removeItem(id: string): ShoppingItem[];
+    editItem(newItem: ShoppingItem): ShoppingItem[];
     findItem(id: string): ShoppingItem | undefined;
     cleanCart(): void;
 
@@ -60,16 +60,22 @@ export const ShoppingCartProvider: React.FC = ({children}) => {
         return shoppingCart;
     }
 
-    function removeItem(id: string): void {
-        setShoppingCart(shoppingCart.filter(item => item.productId !== id));
+    function removeItem(id: string): ShoppingItem[] {
+        const current = shoppingCart.filter(item => item.productId !== id);
+        setShoppingCart([...shoppingCart.filter(item => item.productId !== id)]);
+        storeCart(current);
+
+        return current;
     }
 
-    function editItem(newItem: ShoppingItem): void {
+    function editItem(newItem: ShoppingItem): ShoppingItem[] {
         const index = shoppingCart.findIndex(item => item.productId === newItem.productId);
         const currentCart = shoppingCart;
         currentCart[index] = newItem;
 
         setShoppingCart(currentCart);
+        storeCart(currentCart);
+        return shoppingCart;
     }
 
     function findItem(id: string): ShoppingItem | undefined {
@@ -77,7 +83,8 @@ export const ShoppingCartProvider: React.FC = ({children}) => {
     }
 
     function cleanCart(): void {
-
+        setShoppingCart([]);
+        localStorage.removeItem("cartItens")
     }
 
 
