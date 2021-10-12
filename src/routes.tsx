@@ -1,5 +1,4 @@
-import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { AuthenticationRoutes, NonAuthRoutes } from './helpers/Authentication/authenticationRoutes';
 
 import { Product } from "./pages/Product";
@@ -46,6 +45,7 @@ const Routes = () => (
                 Component={OrderCheckout}
                 requiredRoles={UserRoles.customer}
             />
+            <Redirect to={NonAuthRoutes.notFounded}/>
         </Switch>
     </BrowserRouter>
 );

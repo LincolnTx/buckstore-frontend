@@ -70,7 +70,7 @@ function PageHeader() {
           <div className="dropdown-content">
             <Link to="#" className="mobile-options">Quem Somos</Link>
             <Link to="#" className="mobile-options">Lista de Desejos</Link>
-            <Link to="#" className="mobile-options">Carrinho de Compras</Link>
+            <Link to={AuthenticationRoutes.checkout} className="mobile-options">Carrinho de Compras</Link>
             <span className="mobile-options" onClick={handleLogout}>Logout</span>
           </div>
         </div>

@@ -11,7 +11,7 @@ interface Props {
 function CommentArea({evaluations, averageRate}: Props) {
     return(
         <>
-            <div className="comment-area">
+            <div className={`comment-area ${evaluations.length === 0 ? "disabled" : ""}`}>
                 <header>
                     <h2>Avaliaçãoes dos Usuários</h2>
                     <div className="average-rate-area">
@@ -59,6 +59,10 @@ function CommentArea({evaluations, averageRate}: Props) {
                         </>
                     ))}
                 </main>
+            </div>
+
+            <div className={`empty-area ${evaluations.length > 0 ? "disabled": ""}`}>
+                <h2> Esse Produto ainda não possui avaliações</h2>
             </div>
         </>
     );
