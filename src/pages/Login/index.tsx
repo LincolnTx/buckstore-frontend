@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import './styles.css';
@@ -10,7 +10,7 @@ import FacebookLogin from 'react-facebook-login';
 import { AuthLoginResponse, FacebookLoginResponse } from '../../helpers/Responses/auth/authResponses';
 import UserRoles from '../../helpers/Authentication/userRoles';
 import AuthContext from '../../contexts/auth';
-import { AuthenticationRoutes } from '../../helpers/Authentication/authenticationRoutes';
+import { AuthenticationRoutes, NonAuthRoutes } from '../../helpers/Authentication/authenticationRoutes';
 import * as jwtService from '../../helpers/Jwt/jwtService';
 
 import Logo from '../../assets/logo_color.svg';
@@ -23,11 +23,16 @@ const Login: React.FC = () => {
   const history = useHistory();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const {login, facebookLogin } = useContext(AuthContext);
+  const {login, facebookLogin, signed } = useContext(AuthContext);
 
   toast.configure();
 
 
+  useEffect(()  => {
+    if (signed) {
+      history.push(NonAuthRoutes.produtcs);
+    }
+  });
   async function responseFacebook(response:any) {
     let sanitizeResponse: FacebookLoginResponse = response;
     
