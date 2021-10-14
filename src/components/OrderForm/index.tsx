@@ -1,12 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { FormEvent } from 'react';
 import { OrderCheckoutState } from '../../pages/OrderCheckout';
 import ShoppingCartContext, { ShoppingItem } from '../../contexts/shoppingCart';
+import { NonAuthRoutes } from '../../helpers/Authentication/authenticationRoutes';
 
 import './styles.css';
-import { FaTrash, FaAngleRight, FaAngleLeft, FaShoppingBasket } from 'react-icons/fa';
+import { 
+    FaTrash, 
+    FaShoppingBasket,
+    FaPlusSquare,
+    FaMinusSquare,
+    FaShoppingCart
+ } from 'react-icons/fa';
 import defaultImage from '../../helpers/DefaultImage';
+
 
 interface Props {
     nextStep() : void;
@@ -18,6 +27,7 @@ export function OrderForm({nextStep, prevStep, handleChanges, values}: Props) {
     
     const {getItens, editItem, cleanCart, removeItem} = useContext(ShoppingCartContext);
     const [cartItems, setCartItens] = useState<ShoppingItem[]>([]);
+    const history = useHistory();
 
     useEffect(() => {
 
@@ -27,6 +37,10 @@ export function OrderForm({nextStep, prevStep, handleChanges, values}: Props) {
    function handleAddQuantity(product: ShoppingItem) {
         product.quantity ++;
         setCartItens([...editItem(product)]);
+   }
+
+   function keepShopping() {
+       history.push(NonAuthRoutes.produtcs);
    }
 
     function handleReduceQuantity(product: ShoppingItem) {
@@ -65,7 +79,17 @@ export function OrderForm({nextStep, prevStep, handleChanges, values}: Props) {
 
     return (
        <div className="cart-container">
-           <header>
+           <section className={`empty ${cartItems.length > 0 ? 'disabled' : ''}`}>
+               <span>O seu carrinho está vazio.</span>
+
+               <button className="button" onClick={keepShopping}>
+                   <FaShoppingCart color="#fff"/>
+                   <span> Continuar comprando </span>
+               </button>
+
+           </section>
+
+           <header className={`${cartItems.length <= 0 ? 'disabled' : ''}`}>
                <div className="presentation">
                     <FaShoppingBasket size={26}/>
                     <h2>Produtos</h2>
@@ -76,7 +100,7 @@ export function OrderForm({nextStep, prevStep, handleChanges, values}: Props) {
                 </div>
            </header>
 
-           <ul>
+           <ul className={`${cartItems.length <= 0 ? 'disabled' : ''}`}>
                {cartItems.map(product => (
                    <React.Fragment key={product.productId}>
                     <li key={product.productId}>
@@ -94,13 +118,13 @@ export function OrderForm({nextStep, prevStep, handleChanges, values}: Props) {
                         <div className="prodcut-cart-info">
                                 <span>Quant:</span>
                                 <div>
-                                    <FaAngleLeft 
+                                    <FaMinusSquare 
                                         onClick={() => handleReduceQuantity(product)}
                                         color="#048243"
                                         size={16}
                                     />
                                     <span>{product.quantity}</span>
-                                    <FaAngleRight 
+                                    <FaPlusSquare 
                                         onClick={() => handleAddQuantity(product)}
                                         color="#048243"
                                         size={16}
