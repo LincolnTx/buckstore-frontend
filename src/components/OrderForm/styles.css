@@ -196,6 +196,92 @@
     width: 30%;
 }
 
+.summary {
+    /* position: fixed;
+    right: -1px;
+    top: auto;
+    z-index: 1; */
+
+    margin: 0;
+    margin-top: 24px;
+
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    width: 30%;
+}
+
+.summary header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0;
+}
+
+.summary header span {
+    font-weight: 700;
+    font-size: 18px;
+    margin-left: 8px;
+}
+
+.summary .gross-price-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 90%;
+}
+.summary .total-price-caption {
+    font-size: 14px;
+    color: var(--gray);
+}
+
+.summary .total-price {
+    font-weight: 700;
+    margin-left: 24px;
+}
+
+.summary .dicount-price {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100px;
+    width: 60%;
+    background-color:  rgba(62, 187, 125, .4);
+    margin: 12px 0;
+    padding: 0 8px;
+}
+
+.summary .dicount-price span {
+    color: var(--primary);
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.summary .dicount-price p {
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--primary);
+    align-self: flex-end;
+}
+
+.summary .button-container {
+    margin-top: 12px;
+}
+
+.summary .button-container button {
+    text-transform: uppercase;
+}
+
+.summary .button-container button + button {
+    margin-top: 8px;
+    background-color: #fff;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
 
 @media screen and (max-width: 600px) {
 
@@ -274,6 +360,10 @@
         width: 100%;
     }
 
+    .summary {
+        width: 100%;
+        align-self: auto;
+    }
 
     .empty {
         margin-top: 64px;

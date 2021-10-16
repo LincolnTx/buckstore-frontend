@@ -12,7 +12,8 @@ import {
     FaShoppingBasket,
     FaPlusSquare,
     FaMinusSquare,
-    FaShoppingCart
+    FaShoppingCart,
+    FaFile
  } from 'react-icons/fa';
 import defaultImage from '../../helpers/DefaultImage';
 
@@ -27,6 +28,7 @@ export function OrderForm({nextStep, prevStep, handleChanges, values}: Props) {
     
     const {getItens, editItem, cleanCart, removeItem} = useContext(ShoppingCartContext);
     const [cartItems, setCartItens] = useState<ShoppingItem[]>([]);
+    const[discount, setDiscount] = useState(0);
     const history = useHistory();
 
     useEffect(() => {
@@ -57,6 +59,8 @@ export function OrderForm({nextStep, prevStep, handleChanges, values}: Props) {
 
     function handleCupom() {
         // fazer
+        // fazer req para validar cupom, se for valido aad no disconto
+        // se nao for deixar o input vermelho
     }
 
     function handleClearCart() {
@@ -75,6 +79,21 @@ export function OrderForm({nextStep, prevStep, handleChanges, values}: Props) {
         }
 
         return defaultImage;
+    }
+
+    function getTotalPrice(type: number): number {
+        let totalVauePerItem = cartItems.map(item => item.price * item.quantity);
+        if (type === 1) {
+            
+            return totalVauePerItem.reduce((a, b) => a + b, 0);
+        }
+
+        if (type === 2) {
+            const value = totalVauePerItem.reduce((a, b) => a + b, 0);
+            return value - discount;
+        }
+
+        return 0;
     }
 
     return (
@@ -159,6 +178,27 @@ export function OrderForm({nextStep, prevStep, handleChanges, values}: Props) {
                    </form>
                </section>
            </ul>
+
+           <section className="summary">
+               <header> 
+                   <FaFile color="#048243" size={18}/> 
+                   <span>Resumo</span>
+                </header>
+               <div className="gross-price-container">
+                   <span className="total-price-caption">Valor total dos Produtos:</span>
+                   <span className="total-price">R$ {getTotalPrice(1).toLocaleString('pt-br')}</span>
+               </div>
+
+               <div className="dicount-price">
+                   <span>Valor com desconto</span>
+                   <p>R$ {getTotalPrice(2).toLocaleString('pt-br')}</p>
+               </div>
+
+               <div className="button-container">
+                   <button className="button" onClick={() => nextStep()}>Ir para o pagamento</button>
+                   <button className="button" onClick={() => keepShopping()}>Continuar comprando</button>
+               </div>
+           </section>
        </div>
     );
 }
