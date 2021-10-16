@@ -58,7 +58,7 @@ export function OrderForm({nextStep, prevStep, handleChanges, values}: Props) {
     }
 
     function handleCupom() {
-        // fazer
+        // TODO
         // fazer req para validar cupom, se for valido aad no disconto
         // se nao for deixar o input vermelho
     }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { OrderForm } from '../../components/OrderForm';
 import PageHeader from '../../components/PageHeader';
+import { PaymentInfoForm } from '../../components/PaymentInfoForm';
 
 import { ShoppingItem } from '../../contexts/shoppingCart';
 
@@ -70,7 +71,12 @@ const OrderCheckout: React.FC = () => {
                 );
             case 2: 
                 return (
-                    <h1>Segundo</h1>
+                    <PaymentInfoForm 
+                        nextStep={nextStep}
+                        prevStep={prevStep}
+                        handleChanges={handleChange}
+                        values={pageState}
+                    />
                 );
             case 3:
                 return(
