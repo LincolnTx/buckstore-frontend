@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { OrderCheckoutState } from '../../pages/OrderCheckout';
 
 import './styles.css';
@@ -13,9 +13,10 @@ interface Props {
     prevStep(): void;
     handleChanges(input: string) : (e:FormEvent<HTMLInputElement>) => void;
     values: OrderCheckoutState;
+    cardSelected(cardAlias: string,cardHolderName: string, cardExpiration: string) :void;
 }
 
-export function PaymentInfoForm({nextStep, prevStep, handleChanges, values}: Props) {
+export function PaymentInfoForm({nextStep, prevStep, handleChanges, values, cardSelected}: Props) {
     const [creditCards, setCreditCards] = useState<BuyerPaymentMethods[]>([]);
 
     useEffect(() => {
@@ -27,7 +28,11 @@ export function PaymentInfoForm({nextStep, prevStep, handleChanges, values}: Pro
         }
 
         requestCreditCards();
-    });
+    }, [setCreditCards]);
+
+    function handleCardSelection(cardAlias:string, cardHolderName:string, cardExpiration:Date) {
+        cardSelected(cardAlias, cardHolderName, new Date(cardExpiration).toISOString());
+    }
 
     return (
         <div className="payment-info-container">
@@ -103,10 +108,11 @@ export function PaymentInfoForm({nextStep, prevStep, handleChanges, values}: Pro
             >
                 <ul>
                     {creditCards.map(card => (
-                       
                         <li key={card.id}>
-                            <label>
-                                <input type="radio" name="radio"/>
+                            <label 
+                               
+                            >
+                                <input type="radio" name="radio"  onClick={() => handleCardSelection(card.alias, card.cardHolderName, card.expiration)}/>
                                 <span>{card.alias}</span>
                             </label>
                             <div>
@@ -126,8 +132,6 @@ export function PaymentInfoForm({nextStep, prevStep, handleChanges, values}: Pro
                 <button className="button" onClick={() => prevStep()}>Voltar</button>
                 <button className="button" onClick={() => nextStep()}>Pagar com Cartão</button>
             </div>
-
-            {/* TODO add botao de continuar e voltar */}
         </div>
     );
 }
