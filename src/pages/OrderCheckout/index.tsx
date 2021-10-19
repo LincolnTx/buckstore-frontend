@@ -23,6 +23,7 @@ export interface OrderCheckoutState {
     cardSecurityNumber: string;
     orderItems: ShoppingItem[];
     cupom: string;
+    cpf: string;
     [key: string]: string | ShoppingItem[] | number;
 }
 const OrderCheckout: React.FC = () => {
@@ -58,6 +59,20 @@ const OrderCheckout: React.FC = () => {
         }
     }
 
+    function passCardSelected(cardAlias: string,cardHolderName: string, cardExpiration: string): void{
+        console.log('entrando')
+        let current = pageState;
+        current.cardNumber = "";
+        current.cardAlias = cardAlias;
+        current.cardHolderName = cardHolderName;
+        current.cardExpiration = cardExpiration;
+        current.cardSecurityNumber = "";
+
+        setState(current)
+
+        console.log(pageState)
+    }
+
     function handleFormExibition() {
         switch(pageState.step) {
             case 1:
@@ -76,6 +91,7 @@ const OrderCheckout: React.FC = () => {
                         prevStep={prevStep}
                         handleChanges={handleChange}
                         values={pageState}
+                        cardSelected={passCardSelected}
                     />
                 );
             case 3:
