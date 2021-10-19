@@ -1,9 +1,12 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { OrderCheckoutState } from '../../pages/OrderCheckout';
 
 import './styles.css';
 import { FaMoneyBillAlt, FaCreditCard, FaMinusCircle } from 'react-icons/fa';
 import Collapsible from '../Collapsible';
+
+import { Api } from '../../helpers/api';
+import { BuyerPaymentMethods, AvailableCredirCardsResponse } from '../../helpers/Responses/orders/ordersResponses';
 
 interface Props {
     nextStep() : void;
@@ -13,7 +16,19 @@ interface Props {
 }
 
 export function PaymentInfoForm({nextStep, prevStep, handleChanges, values}: Props) {
-    
+    const [creditCards, setCreditCards] = useState<BuyerPaymentMethods[]>([]);
+
+    useEffect(() => {
+        async function requestCreditCards() {
+            const response = await Api.apiOrders.get<AvailableCredirCardsResponse>('/buyer');
+            const paymentMethodsResponse: AvailableCredirCardsResponse = response.data;
+
+            setCreditCards(paymentMethodsResponse.data.paymentMethods);
+        }
+
+        requestCreditCards();
+    });
+
     return (
         <div className="payment-info-container">
             <header>
@@ -73,20 +88,44 @@ export function PaymentInfoForm({nextStep, prevStep, handleChanges, values}: Pro
                             defaultValue={values.cardSecurityNumber}
                             name={values.cardSecurityNumber}
                         />
+                        <input 
+                            type="text" 
+                            placeholder="Apelido para esse cartão"
+                            onChange={handleChanges('cardAlias')}
+                            defaultValue={values.cardAlias}
+                            name={values.cardAlias}
+                        />
                     </form>
                 </section>
             </div>
             <Collapsible 
-                title="Cartões já disponíveis"
+                title="Cartões já cadastrados"
             >
-                {/* TODO exibir lista de métodos de pagamento, fazer get na api de orders */}
                 <ul>
-                    <li>Guedes Fede</li>
-                    <li>Texto</li>
-                    <li>Texto</li>
-                    <li>Texto</li>
+                    {creditCards.map(card => (
+                       
+                        <li key={card.id}>
+                            <label>
+                                <input type="radio" name="radio"/>
+                                <span>{card.alias}</span>
+                            </label>
+                            <div>
+                                <span>Cartão que termina com o final</span>
+                                <p><FaCreditCard /> {card.cardNumber}</p>
+
+                                <span className="expiration">Vencimento: {new Date(card.expiration).getMonth() +1}/
+                                {new Date(card.expiration).getFullYear()}
+                                </span>
+                            </div>
+                        </li>
+                    ))}
                 </ul>
             </Collapsible>
+
+            <div className="button-container">
+                <button className="button" onClick={() => prevStep()}>Voltar</button>
+                <button className="button" onClick={() => nextStep()}>Pagar com Cartão</button>
+            </div>
 
             {/* TODO add botao de continuar e voltar */}
         </div>

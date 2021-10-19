@@ -102,4 +102,113 @@
     width: 80%;
 }
 
+.payment-info-container .button-container {
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
 
+
+.payment-info-container .button-container button:first-of-type {
+    background-color: #fff;
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+    margin-right: 12px;
+    width: 20%;
+}
+
+.payment-info-container .button-container button + button {
+    width: 50%;
+}
+
+.payment-info-container ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 24px;
+    list-style: none;
+}
+
+.payment-info-container ul li {
+    width: 80%;
+    margin-right: 32px;
+    display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+    border-radius: 8px;
+    border: 1px solid var(--secondary);
+}
+
+.payment-info-container ul li  label {
+    display: flex;
+	cursor: pointer;
+	font-weight: 500;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 0.375em;
+}
+
+.payment-info-container ul li input {
+    position: absolute;
+    left: -9999px;
+}
+
+.payment-info-container ul li label input:checked + span {
+    /* background-color: var(--secondary); */
+    text-transform: uppercase;
+}
+
+.payment-info-container ul li label input:checked + span:before {
+    box-shadow: inset 0 0 0 0.4375em var(--secondary);
+}
+
+
+.payment-info-container ul li label span {
+    display: flex;
+    align-items: center;
+    padding: 0.375em 0.75em 0.375em 0.375em;
+    border-radius: 99em;
+    transition: 0.25s ease;
+}
+
+.payment-info-container ul li label span:hover {
+    background-color: #f0f0f0;
+}
+.payment-info-container ul li label span:before {
+    display: flex;
+    flex-shrink: 0;
+    content: "";
+    background-color: var(--background);
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    margin-right: 0.375em;
+    transition: 0.25s ease;
+    box-shadow: inset 0 0 0 0.125em var(--secondary);
+}
+
+.payment-info-container ul li div {
+    padding: 8px;
+}
+
+.payment-info-container ul li div svg {
+    color: var(--secondary);
+    font-size: 16px;
+    margin-right: 8px;
+}
+
+.payment-info-container ul li div span {
+    font-weight: 500;
+}
+
+.payment-info-container ul li div p {
+    display: flex;
+    align-items: center;
+    margin: 8px auto;
+    font-weight: 500;
+}
+
+.payment-info-container ul li div .expiration {
+    font-size: 14px;
+    color: var(--gray);
+}
