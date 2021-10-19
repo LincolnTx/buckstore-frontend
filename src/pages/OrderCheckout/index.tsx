@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { Confirm } from '../../components/Confirm';
 import { OrderForm } from '../../components/OrderForm';
 import PageHeader from '../../components/PageHeader';
 import { PaymentInfoForm } from '../../components/PaymentInfoForm';
+import { Success } from '../../components/Success';
+import { UserInfoForm } from '../../components/UserInfoForm';
 
 import { ShoppingItem } from '../../contexts/shoppingCart';
 
@@ -60,7 +63,6 @@ const OrderCheckout: React.FC = () => {
     }
 
     function passCardSelected(cardAlias: string,cardHolderName: string, cardExpiration: string): void{
-        console.log('entrando')
         let current = pageState;
         current.cardNumber = "";
         current.cardAlias = cardAlias;
@@ -69,8 +71,6 @@ const OrderCheckout: React.FC = () => {
         current.cardSecurityNumber = "";
 
         setState(current)
-
-        console.log(pageState)
     }
 
     function handleFormExibition() {
@@ -96,19 +96,24 @@ const OrderCheckout: React.FC = () => {
                 );
             case 3:
                 return(
-                    <h1>Terceito</h1>
+                    <UserInfoForm />
                 );
             case 4: 
                 return (
-                    <h1>Quarto</h1>
+                    <Confirm />
                 );
             case 5:
                 return(
-                    <h1>Quinto</h1>
+                    <Success />
                 );
             default:
                 return(
-                    <h1>Primeiro mas default</h1>
+                    <OrderForm 
+                        nextStep={nextStep}
+                        prevStep={prevStep}
+                        handleChanges={handleChange}
+                        values={pageState}
+                    />
                 );
         }
     }
