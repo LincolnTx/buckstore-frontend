@@ -73,19 +73,38 @@ const OrderCheckout: React.FC = () => {
         setState(current)
     }
 
+    function setSateValue(input:string, value:string) {
+        let current = pageState;
+        current[input] = value;
+
+        setState(current);
+    }
+
     function handleFormExibition() {
         switch(pageState.step) {
             case 1:
                 return (
                     <OrderForm 
-                        nextStep={nextStep}
-                        prevStep={prevStep}
-                        handleChanges={handleChange}
-                        values={pageState}
+                    nextStep={nextStep}
+                    prevStep={prevStep}
+                    handleChanges={handleChange}
+                    values={pageState}
                     />
                 );
             case 2: 
                 return (
+                    <UserInfoForm 
+                        nextStep={nextStep}
+                        prevStep={prevStep}
+                        handleChanges={handleChange}
+                        values={pageState}
+                        setStringInfo={setSateValue}
+                    />
+                   
+                );
+            case 3:
+                return(
+                    
                     <PaymentInfoForm 
                         nextStep={nextStep}
                         prevStep={prevStep}
@@ -93,10 +112,6 @@ const OrderCheckout: React.FC = () => {
                         values={pageState}
                         cardSelected={passCardSelected}
                     />
-                );
-            case 3:
-                return(
-                    <UserInfoForm />
                 );
             case 4: 
                 return (
@@ -109,10 +124,10 @@ const OrderCheckout: React.FC = () => {
             default:
                 return(
                     <OrderForm 
-                        nextStep={nextStep}
-                        prevStep={prevStep}
-                        handleChanges={handleChange}
-                        values={pageState}
+                    nextStep={nextStep}
+                    prevStep={prevStep}
+                    handleChanges={handleChange}
+                    values={pageState}
                     />
                 );
         }

@@ -26,3 +26,11 @@ export interface AuthLoginResponse {
     };
     errors: RequestErrors[];
 }
+
+export interface BuyRequirementsResponse {
+    success: boolean;
+    data: {
+        cpfChecked: boolean; 
+        cpf: string;
+    }
+}
