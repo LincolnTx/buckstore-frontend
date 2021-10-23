@@ -1,0 +1,17 @@
+@import '../../global.css';
+
+.steps-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 48px;
+}
+
+.completed-step {
+    color: var(--secondary) !important;
+    
+} 
+
+circle {
+    color: var(--primary);
+}
+

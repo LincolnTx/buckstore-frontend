@@ -20,6 +20,7 @@ interface Props {
 export function UserInfoForm({nextStep, prevStep, handleChanges, values, setStringInfo}: Props) {
     const [formTitle, setFormTitle] = useState("Precisamos dessa informação para prosseguir");
     const [hasCpf, setHasCpf] = useState(false);
+    const [cpf, setCpf] = useState('');
 
     useEffect(() => {
         async function verifyUserBuyRequirements() {
@@ -29,6 +30,7 @@ export function UserInfoForm({nextStep, prevStep, handleChanges, values, setStri
             if (response.data.data.cpfChecked) {
                 setFormTitle("Você já informou seu cpf anteriormente");
                 setStringInfo('cpf', response.data.data.cpf);
+                setCpf(response.data.data.cpf);
             }
         }
 
@@ -57,8 +59,8 @@ export function UserInfoForm({nextStep, prevStep, handleChanges, values, setStri
                     <input 
                         className={`${hasCpf ? '' : 'invisible'}`}
                         type="text" 
-                        placeholder={values.cpf}
-                        defaultValue={values.cpf}
+                        placeholder={cpf}
+                        defaultValue={cpf}
                         name={values.cpf}
                         disabled
                     />

@@ -9,6 +9,9 @@ import { UserInfoForm } from '../../components/UserInfoForm';
 import { ShoppingItem } from '../../contexts/shoppingCart';
 
 import './styles.css';
+import { Step, StepLabel, Stepper } from '@material-ui/core';
+
+
 
 
 export interface OrderCheckoutState {
@@ -31,7 +34,13 @@ export interface OrderCheckoutState {
 }
 const OrderCheckout: React.FC = () => {
 
-    const [pageState, setState] = useState<OrderCheckoutState>({step : 1} as OrderCheckoutState) ;
+    const [pageState, setState] = useState<OrderCheckoutState>({step : 0} as OrderCheckoutState);
+    const steps = [
+        'Itens de compra',
+        'Informação pessoal',
+        'Informações de pagamento',
+    ]
+
     
     function nextStep() {
         const { step } = pageState;
@@ -82,7 +91,7 @@ const OrderCheckout: React.FC = () => {
 
     function handleFormExibition() {
         switch(pageState.step) {
-            case 1:
+            case 0:
                 return (
                     <OrderForm 
                     nextStep={nextStep}
@@ -91,7 +100,7 @@ const OrderCheckout: React.FC = () => {
                     values={pageState}
                     />
                 );
-            case 2: 
+            case 1: 
                 return (
                     <UserInfoForm 
                         nextStep={nextStep}
@@ -102,7 +111,7 @@ const OrderCheckout: React.FC = () => {
                     />
                    
                 );
-            case 3:
+            case 2:
                 return(
                     
                     <PaymentInfoForm 
@@ -113,11 +122,11 @@ const OrderCheckout: React.FC = () => {
                         cardSelected={passCardSelected}
                     />
                 );
-            case 4: 
+            case 3: 
                 return (
                     <Confirm />
                 );
-            case 5:
+            case 4:
                 return(
                     <Success />
                 );
@@ -135,7 +144,27 @@ const OrderCheckout: React.FC = () => {
     return (
         <>
             <PageHeader />
-            {handleFormExibition()}
+            <div className="steps-container">
+                <Stepper activeStep={pageState.step} alternativeLabel>
+                    {steps.map((label) => (
+                        <Step key={label} >
+                        <StepLabel 
+                            classes={{active: 'active-icon', completed:'active-icon', root: 'active-icon'}}
+                            StepIconProps={{
+                                classes: {
+                                    root: 'step-icon',
+                                    completed: 'completed-step',
+                                    active: 'active-icon',
+                                }
+                            }}
+                        >
+                            {label}
+                        </StepLabel>
+                        </Step>
+                    ))}
+                </Stepper>
+                {handleFormExibition()}
+            </div>
         </>
     );
 }
