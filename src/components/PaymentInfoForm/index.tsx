@@ -81,13 +81,6 @@ export function PaymentInfoForm({nextStep, prevStep, handleChanges, values, card
                         />
                          <input 
                             type="text" 
-                            placeholder="Nome impresso no cartão"
-                            onChange={handleChanges('cardHolderName')}
-                            defaultValue={values.cardHolderName}
-                            name={values.cardHolderName}
-                        />
-                         <input 
-                            type="text" 
                             placeholder="Código de verificação(CVV)"
                             onChange={handleChanges('cardSecurityNumber')}
                             defaultValue={values.cardSecurityNumber}
