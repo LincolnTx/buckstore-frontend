@@ -23,8 +23,9 @@ interface Props {
     prevStep(): void;
     handleChanges(input: string) : (e:FormEvent<HTMLInputElement>) => void;
     values: OrderCheckoutState;
+    handleItens(itens:ShoppingItem[] ): void;
 }
-export function OrderForm({nextStep, prevStep, handleChanges, values}: Props) {
+export function OrderForm({nextStep, prevStep, handleChanges, values, handleItens}: Props) {
     
     const {getItens, editItem, cleanCart, removeItem} = useContext(ShoppingCartContext);
     const [cartItems, setCartItens] = useState<ShoppingItem[]>([]);
@@ -94,6 +95,12 @@ export function OrderForm({nextStep, prevStep, handleChanges, values}: Props) {
         }
 
         return 0;
+    }
+
+    function setOrderItens() {
+        handleItens(getItens());
+
+        nextStep();
     }
 
     return (
@@ -195,7 +202,7 @@ export function OrderForm({nextStep, prevStep, handleChanges, values}: Props) {
                </div>
 
                <div className="button-container">
-                   <button className="button" onClick={() => nextStep()}>Ir para o pagamento</button>
+                   <button className="button" onClick={() => setOrderItens()}>Ir para o pagamento</button>
                    <button className="button" onClick={() => keepShopping()}>Continuar comprando</button>
                </div>
            </section>

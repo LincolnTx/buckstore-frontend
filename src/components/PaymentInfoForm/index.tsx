@@ -13,7 +13,7 @@ interface Props {
     prevStep(): void;
     handleChanges(input: string) : (e:FormEvent<HTMLInputElement>) => void;
     values: OrderCheckoutState;
-    cardSelected(cardAlias: string,cardHolderName: string, cardExpiration: string) :void;
+    cardSelected(paymentMethodId:string, cardAlias: string,cardHolderName: string, cardExpiration: string) :void;
 }
 
 export function PaymentInfoForm({nextStep, prevStep, handleChanges, values, cardSelected}: Props) {
@@ -30,8 +30,8 @@ export function PaymentInfoForm({nextStep, prevStep, handleChanges, values, card
         requestCreditCards();
     }, [setCreditCards]);
 
-    function handleCardSelection(cardAlias:string, cardHolderName:string, cardExpiration:Date) {
-        cardSelected(cardAlias, cardHolderName, new Date(cardExpiration).toISOString());
+    function handleCardSelection(paymentMethodId: string, cardAlias:string, cardHolderName:string, cardExpiration:Date) {
+        cardSelected(paymentMethodId, cardAlias, cardHolderName, new Date(cardExpiration).toISOString());
     }
 
     return (
@@ -97,7 +97,7 @@ export function PaymentInfoForm({nextStep, prevStep, handleChanges, values, card
                 </section>
             </div>
             <Collapsible 
-                title="Cartões já cadastrados"
+                title={creditCards.length > 0 ? "Cartões já cadastrados" : "Você não possui cartões Cadastrados"}
             >
                 <ul>
                     {creditCards.map(card => (
@@ -105,7 +105,7 @@ export function PaymentInfoForm({nextStep, prevStep, handleChanges, values, card
                             <label 
                                
                             >
-                                <input type="radio" name="radio"  onClick={() => handleCardSelection(card.alias, card.cardHolderName, card.expiration)}/>
+                                <input type="radio" name="radio"  onClick={() => handleCardSelection(card.id, card.alias, card.cardHolderName, card.expiration)}/>
                                 <span>{card.alias}</span>
                             </label>
                             <div>

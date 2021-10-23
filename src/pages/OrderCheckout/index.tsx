@@ -16,12 +16,12 @@ import { Step, StepLabel, Stepper } from '@material-ui/core';
 
 export interface OrderCheckoutState {
     step: number;
-    username: string;
     street: string;
     zipcode: string;
     district: string;
     city: string;
     state: string;
+    addressNumber: number,
     cardNumber: string;
     cardAlias: string;
     cardHolderName: string;
@@ -30,6 +30,7 @@ export interface OrderCheckoutState {
     orderItems: ShoppingItem[];
     cupom: string;
     cpf: string;
+    paymentMethodId: string;
     [key: string]: string | ShoppingItem[] | number;
 }
 const OrderCheckout: React.FC = () => {
@@ -71,13 +72,21 @@ const OrderCheckout: React.FC = () => {
         }
     }
 
-    function passCardSelected(cardAlias: string,cardHolderName: string, cardExpiration: string): void{
+    function handlerOrderItens(itens: ShoppingItem[]) {
+        let current = pageState;
+
+        current.orderItems = itens;
+        setState(current);
+    }
+
+    function passCardSelected(paymentMethodId:string, cardAlias: string,cardHolderName: string, cardExpiration: string): void{
         let current = pageState;
         current.cardNumber = "";
         current.cardAlias = cardAlias;
         current.cardHolderName = cardHolderName;
         current.cardExpiration = cardExpiration;
         current.cardSecurityNumber = "";
+        current.paymentMethodId = paymentMethodId;
 
         setState(current)
     }
@@ -98,6 +107,7 @@ const OrderCheckout: React.FC = () => {
                     prevStep={prevStep}
                     handleChanges={handleChange}
                     values={pageState}
+                    handleItens={handlerOrderItens}
                     />
                 );
             case 1: 
@@ -124,7 +134,12 @@ const OrderCheckout: React.FC = () => {
                 );
             case 3: 
                 return (
-                    <Confirm />
+                    <Confirm
+                        nextStep={nextStep}
+                        prevStep={prevStep}
+                        handleChanges={handleChange}
+                        values={pageState}
+                     />
                 );
             case 4:
                 return(
@@ -137,6 +152,7 @@ const OrderCheckout: React.FC = () => {
                     prevStep={prevStep}
                     handleChanges={handleChange}
                     values={pageState}
+                    handleItens={handlerOrderItens}
                     />
                 );
         }

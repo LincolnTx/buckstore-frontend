@@ -21,3 +21,12 @@ export interface RequestErrors {
     paramName: string;
     timestamp: string;
 } 
+
+export interface ProvideAdditionalInformation {
+    cpf: string;
+}
+
+export interface ProvideAdditionalInformationResponse {
+    success: boolean;
+    errors: RequestErrors[];
+}
