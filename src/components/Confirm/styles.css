@@ -1,0 +1,7 @@
+
+
+.closed {
+    cursor: not-allowed;
+    background-color: var(--outline);
+    color: var(--gray);
+}
