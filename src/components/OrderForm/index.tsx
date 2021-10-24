@@ -98,6 +98,9 @@ export function OrderForm({nextStep, prevStep, handleChanges, values, handleIten
     }
 
     function setOrderItens() {
+        if (cartItems.length <= 0 ) {
+            return;
+        }
         handleItens(getItens());
 
         nextStep();
@@ -186,7 +189,7 @@ export function OrderForm({nextStep, prevStep, handleChanges, values, handleIten
                </section>
            </ul>
 
-           <section className="summary">
+           <section className={`summary ${cartItems.length <= 0 ? 'disabled' :'' }`}>
                <header> 
                    <FaFile color="#048243" size={18}/> 
                    <span>Resumo</span>
@@ -202,7 +205,7 @@ export function OrderForm({nextStep, prevStep, handleChanges, values, handleIten
                </div>
 
                <div className="button-container">
-                   <button className="button" onClick={() => setOrderItens()}>Ir para o pagamento</button>
+                   <button className={`button ${cartItems.length <= 0 ? 'closed' : ''}`} onClick={() => setOrderItens()}>Ir para o pagamento</button>
                    <button className="button" onClick={() => keepShopping()}>Continuar comprando</button>
                </div>
            </section>

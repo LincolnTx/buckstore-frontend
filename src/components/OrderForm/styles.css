@@ -15,6 +15,12 @@
     display: none !important;
 }
 
+.closed {
+    cursor: not-allowed;
+    background-color: var(--outline);
+    color: var(--gray);
+}
+
 .empty {
     margin-top: 64px;
     height: 16vh;

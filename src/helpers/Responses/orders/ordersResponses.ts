@@ -13,3 +13,8 @@ export interface BuyerPaymentMethods {
     expiration: Date;
     alias: string;
 }
+
+export interface OrderingResponse {
+    success: boolean;
+    data: boolean
+}

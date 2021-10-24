@@ -21,7 +21,7 @@ export interface OrderCheckoutState {
     district: string;
     city: string;
     state: string;
-    addressNumber: number,
+    addressNumber: string,
     cardNumber: string;
     cardAlias: string;
     cardHolderName: string;
@@ -29,13 +29,13 @@ export interface OrderCheckoutState {
     cardSecurityNumber: string;
     orderItems: ShoppingItem[];
     cupom: string;
+    discountPercent: number;
     cpf: string;
-    paymentMethodId: string;
     [key: string]: string | ShoppingItem[] | number;
 }
 const OrderCheckout: React.FC = () => {
 
-    const [pageState, setState] = useState<OrderCheckoutState>({step : 0} as OrderCheckoutState);
+    const [pageState, setState] = useState<OrderCheckoutState>({step : 0, discountPercent: 0} as OrderCheckoutState);
     const steps = [
         'Itens de compra',
         'Informação pessoal',
@@ -66,6 +66,12 @@ const OrderCheckout: React.FC = () => {
         
         return function (e: React.FormEvent<HTMLInputElement>) {
             let current = pageState;
+            if (input === "cardExpiration") {
+                current[input] = new Date(e.currentTarget.value).toISOString();
+                
+                setState(current);
+                return;
+            }
             current[input] = e.currentTarget.value;
 
             setState(current);
@@ -86,7 +92,7 @@ const OrderCheckout: React.FC = () => {
         current.cardHolderName = cardHolderName;
         current.cardExpiration = cardExpiration;
         current.cardSecurityNumber = "";
-        current.paymentMethodId = paymentMethodId;
+        current['paymentMethodId'] = paymentMethodId;
 
         setState(current)
     }
@@ -139,6 +145,7 @@ const OrderCheckout: React.FC = () => {
                         prevStep={prevStep}
                         handleChanges={handleChange}
                         values={pageState}
+                        isNewCard={pageState["paymentMethodId"] ? false : true}
                      />
                 );
             case 4:
