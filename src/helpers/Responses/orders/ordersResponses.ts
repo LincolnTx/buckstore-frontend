@@ -16,5 +16,13 @@ export interface BuyerPaymentMethods {
 
 export interface OrderingResponse {
     success: boolean;
-    data: boolean
+    data: OrderResposeDto
+}
+
+export interface OrderResposeDto {
+    id: string;
+    orderStatusId: number;
+    orderStatus: string;
+    orderAmount: number;
+    orderDate: string;
 }

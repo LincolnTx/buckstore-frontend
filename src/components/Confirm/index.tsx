@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';  
 import defaultImage from '../../helpers/DefaultImage';
 import { ShoppingItem } from '../../contexts/shoppingCart';
+import { OrderingResponse } from '../../helpers/Responses/orders/ordersResponses';
 
 interface Props {
     nextStep() : void;
@@ -101,24 +102,45 @@ export function Confirm({nextStep, prevStep, values, isNewCard}: Props) {
             cpf,
         } = values
 
-        const body = {street,
-            zipcode,
-            district,
-            city,
-            state,
-            cardNumber,
-            cardAlias,
-            cardHolderName,
-            cardExpiration,
-            cardSecurityNumber,
-            orderItems,
-            discountPercent,
-            cpf, 
-            addressNumber: parseInt(addressNumber)
+        let body = {}
+        
+        if(isNewCard) {
+            body = {street,
+                zipcode,
+                district,
+                city,
+                state,
+                cardNumber,
+                cardAlias,
+                cardHolderName,
+                cardExpiration,
+                cardSecurityNumber,
+                orderItems,
+                discountPercent,
+                cpf, 
+                addressNumber: parseInt(addressNumber)
+            };
+        } else {
+            body = {street,
+                zipcode,
+                district,
+                city,
+                state,
+                cardNumber,
+                cardAlias,
+                cardHolderName,
+                cardExpiration,
+                cardSecurityNumber,
+                orderItems,
+                discountPercent,
+                cpf, 
+                addressNumber: parseInt(addressNumber),
+                paymentMethodId: values['paymentMethodId']
+            };
         }
         
         try {
-           await Api.apiOrders.post('order', body)
+            await Api.apiOrders.post<OrderingResponse>('order', body)
         } catch (error) {
             toast.error(
                 "Erro ao realizar seu pedido, tente novamente mais tarde, ou entre em contato."
