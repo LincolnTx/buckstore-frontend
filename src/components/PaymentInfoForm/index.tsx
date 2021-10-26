@@ -13,7 +13,7 @@ interface Props {
     prevStep(): void;
     handleChanges(input: string) : (e:FormEvent<HTMLInputElement>) => void;
     values: OrderCheckoutState;
-    cardSelected(paymentMethodId:string, cardAlias: string,cardHolderName: string, cardExpiration: string) :void;
+    cardSelected(paymentMethodId:string, cardAlias: string,cardHolderName: string, cardExpiration: string, cardNumberShow: string) :void;
 }
 
 export function PaymentInfoForm({nextStep, prevStep, handleChanges, values, cardSelected}: Props) {
@@ -30,8 +30,8 @@ export function PaymentInfoForm({nextStep, prevStep, handleChanges, values, card
         requestCreditCards();
     }, [setCreditCards]);
 
-    function handleCardSelection(paymentMethodId: string, cardAlias:string, cardHolderName:string, cardExpiration:Date) {
-        cardSelected(paymentMethodId, cardAlias, cardHolderName, new Date(cardExpiration).toISOString());
+    function handleCardSelection(paymentMethodId: string, cardAlias:string, cardHolderName:string, cardExpiration:Date, cardNumberShow: string) {
+        cardSelected(paymentMethodId, cardAlias, cardHolderName, new Date(cardExpiration).toISOString(), cardNumberShow);
     }
 
     return (
@@ -105,7 +105,7 @@ export function PaymentInfoForm({nextStep, prevStep, handleChanges, values, card
                             <label 
                                
                             >
-                                <input type="radio" name="radio"  onClick={() => handleCardSelection(card.id, card.alias, card.cardHolderName, card.expiration)}/>
+                                <input type="radio" name="radio"  onClick={() => handleCardSelection(card.id, card.alias, card.cardHolderName, card.expiration, card.cardNumber)}/>
                                 <span>{card.alias}</span>
                             </label>
                             <div>

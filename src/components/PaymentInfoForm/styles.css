@@ -244,6 +244,29 @@
         justify-content: space-between;
         margin-top: 8px;
     }
+
+    .payment-info-container ul {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 24px;
+        list-style: none;
+    }
+
+    .payment-info-container ul li {
+        margin-left: 12px;
+    }
+
+    .payment-info-container .button-container button:first-of-type {
+        background-color: #fff;
+        color: var(--secondary);
+        border: 1px solid var(--secondary);
+        margin-right: 12px;
+        width: 40%;
+    }
+
+    .payment-info-container .button-container button + button {
+        width: 60%;
+    }
 }
 
 

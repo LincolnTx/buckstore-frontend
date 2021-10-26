@@ -145,6 +145,15 @@ export function Confirm({nextStep, prevStep, values, isNewCard}: Props) {
         return defaultImage;
       }
 
+    function getCardNmberExibition(): string {
+        if (isNewCard) {
+            return `Final: ${values.cardHolderName
+                .substr(values.cardHolderName.length - 4)}`;
+        }
+
+        return  `Final: ${values.cardNumberShow}`;
+    }
+
     return (
        <div className="confirm-main-container">
 
@@ -190,24 +199,12 @@ export function Confirm({nextStep, prevStep, values, isNewCard}: Props) {
                 <div className="input-group">
                     <input 
                         type="text" 
-                        placeholder='Número do cartão'
-                        defaultValue={values.cardNumber}
-                        name={values.cardNumber}
+                        placeholder='Número de entrega'
+                        defaultValue={values.addressNumber}
+                        name={values.addressNumber}
                         disabled
-                        className="input-cover"
+                        className={verifyErrorClass(values.addressNumber)}
                     />
-                    <input 
-                        type="text" 
-                        placeholder='CVV'
-                        defaultValue={values.cardSecurityNumber}
-                        name={values.cardSecurityNumber}
-                        disabled
-                        className="input-cover"
-                    />
-                   
-                </div>
-
-                <div className="input-group">
                     <input 
                         type="text" 
                         placeholder='Apelido do cartão'
@@ -216,6 +213,9 @@ export function Confirm({nextStep, prevStep, values, isNewCard}: Props) {
                         disabled
                         className={verifyErrorClass(values.cardAlias)}
                     />
+                </div>
+
+                <div className="input-group">
                     <input 
                         type="text" 
                         placeholder='Nome impresso no cartão'
@@ -224,10 +224,27 @@ export function Confirm({nextStep, prevStep, values, isNewCard}: Props) {
                         disabled
                         className={verifyErrorClass(values.cardHolderName)}
                     />
-                   
+                    <input 
+                        type="text" 
+                        placeholder='Número do cartão'
+                        defaultValue={getCardNmberExibition()}
+                        name={values.cardNumber}
+                        disabled
+                        className="input-cover"
+                    />
                 </div>
 
-                <div className="input-group">
+
+                <div className="input-group desktop-view">
+                    
+                    <input 
+                        type="text" 
+                        placeholder='CVV'
+                        defaultValue={values.cardSecurityNumber}
+                        name={values.cardSecurityNumber}
+                        disabled
+                        className="input-cover"
+                    />
                     <input 
                         type="text" 
                         placeholder='Data de expiração do cartao'
@@ -244,13 +261,33 @@ export function Confirm({nextStep, prevStep, values, isNewCard}: Props) {
                         disabled
                         className={verifyErrorClass(values.cpf)}
                     />
+                </div>
+
+                <input 
+                    type="text" 
+                    placeholder='cpf'
+                    defaultValue={values.cpf}
+                    name={values.cpf}
+                    disabled
+                    className={`mobile-view ${verifyErrorClass(values.cardExpiration)}`}
+                />
+                <div className="input-group mobile-view">
                     <input 
                         type="text" 
-                        placeholder='Número de entrega'
-                        defaultValue={values.addressNumber}
-                        name={values.addressNumber}
+                        placeholder='Data de expiração do cartao'
+                        defaultValue={new Date(values.cardExpiration).toLocaleDateString()}
+                        name={values.cardExpiration}
                         disabled
-                        className={verifyErrorClass(values.addressNumber)}
+                        className={`mobile-view ${verifyErrorClass(values.cardExpiration)}`}
+                    />
+                    
+                    <input 
+                        type="text" 
+                        placeholder='CVV'
+                        defaultValue={values.cardSecurityNumber}
+                        name={values.cardSecurityNumber}
+                        disabled
+                        className="input-cover"
                     />
                 </div>
             </form>
@@ -279,9 +316,8 @@ export function Confirm({nextStep, prevStep, values, isNewCard}: Props) {
                 >
                     <span> Não há nada aqui</span>
                 </div>
-
-                
             </Collapsible>
+
             <div className="buttons-container">
                 <button className="button" onClick={() => prevStep()}>Voltar</button>
                 <button onClick={() => handleOrdering()}

@@ -31,6 +31,7 @@ export interface OrderCheckoutState {
     cupom: string;
     discountPercent: number;
     cpf: string;
+    cardNumberShow: string;
     [key: string]: string | ShoppingItem[] | number;
 }
 const OrderCheckout: React.FC = () => {
@@ -85,7 +86,7 @@ const OrderCheckout: React.FC = () => {
         setState(current);
     }
 
-    function passCardSelected(paymentMethodId:string, cardAlias: string,cardHolderName: string, cardExpiration: string): void{
+    function passCardSelected(paymentMethodId:string, cardAlias: string,cardHolderName: string, cardExpiration: string, cardNumberShow: string) : void{
         let current = pageState;
         current.cardNumber = "";
         current.cardAlias = cardAlias;
@@ -93,6 +94,7 @@ const OrderCheckout: React.FC = () => {
         current.cardExpiration = cardExpiration;
         current.cardSecurityNumber = "";
         current['paymentMethodId'] = paymentMethodId;
+        current.cardNumberShow = cardNumberShow;
 
         setState(current)
     }
