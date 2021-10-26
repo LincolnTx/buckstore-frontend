@@ -65,7 +65,7 @@
     .user-info-container {
         margin: 24px auto;
         width: 90%;
-        height: calc(100vh - 64px);
+        height: 100vh;
     }
     .user-info-container .button-container {
         width: 100%;
@@ -86,8 +86,11 @@
         flex-direction: column;
     }
 
-    
-    .buttons-container button {
+    .user-info-container .button-container button:first-of-type {
+        margin-top: 8px;
+    }
+
+    .user-info-container .buttons-container button {
         max-width: 90%;
         margin: 0;
         margin-bottom: 12px;
