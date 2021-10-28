@@ -1,5 +1,5 @@
 
-import { FormEvent, useState, useEffect } from 'react';
+import { FormEvent, useState, useEffect, useContext } from 'react';
 
 import { OrderCheckoutState } from '../../pages/OrderCheckout';
 import { Api } from '../../helpers/api';
@@ -9,8 +9,8 @@ import './styles.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';  
 import defaultImage from '../../helpers/DefaultImage';
-import { ShoppingItem } from '../../contexts/shoppingCart';
 import { OrderingResponse } from '../../helpers/Responses/orders/ordersResponses';
+import ShoppingCartContext, { ShoppingItem } from '../../contexts/shoppingCart';
 
 interface Props {
     nextStep() : void;
@@ -18,10 +18,12 @@ interface Props {
     handleChanges(input: string) : (e:FormEvent<HTMLInputElement>) => void;
     values: OrderCheckoutState;
     isNewCard: boolean
+    setOrderSucess(id: string, orderAmount: number, orderStatuId: number): void;
 }
 
 
-export function Confirm({nextStep, prevStep, values, isNewCard}: Props) {
+export function Confirm({nextStep, prevStep, values, isNewCard, setOrderSucess}: Props) {
+    const {cleanCart} = useContext(ShoppingCartContext);
     toast.configure();
     const [isValid, setIsValid] = useState(false);
     
@@ -140,7 +142,12 @@ export function Confirm({nextStep, prevStep, values, isNewCard}: Props) {
         }
         
         try {
-            await Api.apiOrders.post<OrderingResponse>('order', body)
+            const response = await Api.apiOrders.post<OrderingResponse>('order', body)
+            var order: OrderingResponse = response.data;
+
+            cleanCart();
+            setOrderSucess(order.data.id, order.data.orderAmount, order.data.orderStatusId);
+            
         } catch (error) {
             toast.error(
                 "Erro ao realizar seu pedido, tente novamente mais tarde, ou entre em contato."

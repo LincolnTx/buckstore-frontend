@@ -34,9 +34,17 @@ export interface OrderCheckoutState {
     cardNumberShow: string;
     [key: string]: string | ShoppingItem[] | number;
 }
+
+interface OrderSuccess {
+    id: string;
+    orderAmount: number;
+    orderStatuId: number;
+}
 const OrderCheckout: React.FC = () => {
 
     const [pageState, setState] = useState<OrderCheckoutState>({step : 0, discountPercent: 0} as OrderCheckoutState);
+    const [orderSuccess, setOrderSuccess] = useState<OrderSuccess>({} as OrderSuccess);
+    const [stepShow, setStepShow] = useState('visible');
     const steps = [
         'Itens de compra',
         'Informação pessoal',
@@ -44,14 +52,18 @@ const OrderCheckout: React.FC = () => {
     ]
 
     
+
+    
     function nextStep() {
         const { step } = pageState;
         setState(prevState => {
             let current = {...prevState};
             current.step = step + 1;
+            handleStepShow(current.step);
             return current;
         });
     }
+
 
     function prevStep() {
         const { step } = pageState;
@@ -59,8 +71,17 @@ const OrderCheckout: React.FC = () => {
         setState(prevState => {
             let current = {...prevState};
             current.step = step - 1;
+            handleStepShow(current.step);
             return current;
         });
+    }
+
+    function handleStepShow(currentStep: number ) {
+        if (currentStep === 4) {
+            setStepShow('invisible');
+        } else {
+            setStepShow('visible');
+        }
     }
 
     function handleChange(input: string) {
@@ -106,6 +127,13 @@ const OrderCheckout: React.FC = () => {
         setState(current);
     }
 
+    function setOrderSucess(id: string, orderAmount: number, orderStatuId: number): void {
+        const order: OrderSuccess = { id, orderAmount, orderStatuId };
+
+        setOrderSuccess(order);
+        nextStep();
+    }
+
     function handleFormExibition() {
         switch(pageState.step) {
             case 0:
@@ -148,11 +176,16 @@ const OrderCheckout: React.FC = () => {
                         handleChanges={handleChange}
                         values={pageState}
                         isNewCard={pageState["paymentMethodId"] ? false : true}
+                        setOrderSucess={setOrderSucess}
                      />
                 );
             case 4:
                 return(
-                    <Success />
+                    <Success 
+                        id={orderSuccess.id}
+                        orderAmount={orderSuccess.orderAmount}
+                        orderStatuId={orderSuccess.orderStatuId}
+                    />
                 );
             default:
                 return(
@@ -170,7 +203,7 @@ const OrderCheckout: React.FC = () => {
         <>
             <PageHeader />
             <div className="steps-container">
-                <Stepper activeStep={pageState.step} alternativeLabel>
+                <Stepper activeStep={pageState.step} alternativeLabel className={stepShow}>
                     {steps.map((label) => (
                         <Step key={label} >
                         <StepLabel 
