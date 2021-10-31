@@ -3,9 +3,9 @@ enum AuthenticationRoutes {
     employeeDashboard = '/emp-dashboard',
     preCheckout = '/precheck/:id',
     checkout = '/checkout',
-    orders = 'me/orders',
-    favorites = 'me/favorites',
-    sales = 'sales'
+    orders = '/me/orders',
+    favorites = '/me/favorites',
+    sales = '/sales'
 }
 
 enum NonAuthRoutes {

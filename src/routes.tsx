@@ -12,6 +12,7 @@ import AuthRoute from './helpers/Authentication/AuthRoute';
 import  UserRoles  from './helpers/Authentication/userRoles';
 import PreCheckout from "./pages/PreCheckout";
 import OrderCheckout from "./pages/OrderCheckout";
+import MyOrders from "./pages/MyOrders";
 
 const Routes = () => (
     <BrowserRouter> 
@@ -45,6 +46,14 @@ const Routes = () => (
                 Component={OrderCheckout}
                 requiredRoles={UserRoles.customer}
             />
+
+            <AuthRoute 
+                path={AuthenticationRoutes.orders}
+                exact
+                Component={MyOrders}
+                requiredRoles={UserRoles.customer}
+            />
+            
             <Redirect to={NonAuthRoutes.notFounded}/>
         </Switch>
     </BrowserRouter>
