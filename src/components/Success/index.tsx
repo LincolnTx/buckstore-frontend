@@ -9,7 +9,7 @@ interface Props {
     orderStatuId: number;
 }
 
-enum OrderStatus {
+export enum OrderStatus {
     "Confirmando Estoque" = "1" as any,
     "Pagamento Pendente" = "2" as any,
     "Pedido Aceito" = "3" as any,
