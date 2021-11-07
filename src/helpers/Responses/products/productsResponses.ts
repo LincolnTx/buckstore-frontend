@@ -38,3 +38,13 @@ export interface Products {
     category: string;
     imagesUrl: string[];
 }
+
+export interface ProductImagesGet {
+    success: boolean;
+    data:ProductImagesDto[];
+}
+
+export interface ProductImagesDto {
+    productId: string;
+    image: string;
+}

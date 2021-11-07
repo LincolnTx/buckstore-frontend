@@ -35,6 +35,12 @@
     width: 80%;
 }
 
+.order-items .item .img-container img {
+    height: 150px;
+    width: 250px;
+    border-radius: 8px;
+}
+
 .order-items .item .img-container .item-info {
     display: flex;
     flex-direction: column;

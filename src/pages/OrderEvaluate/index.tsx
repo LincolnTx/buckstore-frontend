@@ -9,8 +9,9 @@ import PageHeader from '../../components/PageHeader';
 import { OrderStatus } from '../../components/Success';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import {Api} from '../../helpers/api'
-import { OrderBydIdReponsesDto } from '../../helpers/Responses/orders/ordersResponses';
+import { OrderBydIdReponsesDto, OrderItemDto } from '../../helpers/Responses/orders/ordersResponses';
 import React from 'react';
+import { ProductImagesDto, ProductImagesGet } from '../../helpers/Responses/products/productsResponses';
 
 interface RouteParams {
     id: string;
@@ -37,6 +38,7 @@ function OrderEvaluate() {
     const [invalidComment, setInvalidComment]= useState('');
     const [rate, setRate] = useState<number | null>(null);
     const [comment, setComment] = useState<string | null>(null);
+    const [productsImages, setProductsImages] = useState<ProductImagesDto[]>([]);
 
 
     useEffect(() => {
@@ -47,6 +49,7 @@ function OrderEvaluate() {
                 const response = await Api.apiOrders.get<OrderGetResponse>(requestUrl);
                 const orderResponse: OrderGetResponse = response.data;
                 setOrder(orderResponse.data);
+                await getProductsImages(orderResponse.data.orderItems);
                 setLoading(false);
                 
             } catch(err) {
@@ -58,12 +61,28 @@ function OrderEvaluate() {
         getOrderById();
     },[id]);
 
+    async function getProductsImages(orderItems: OrderItemDto[]) {
+        let query = "/commodities/Product/image?";
+        const productsIds = orderItems.map(item => item.productId);
+
+        productsIds.map(key =>  query += `productId=${key}&`)
+        
+        const response = await Api.apiProducts.get<ProductImagesGet>(query);
+        setProductsImages(response.data.data);
+    }
+
     function handleRateChange(e: React.FormEvent<HTMLInputElement>) {
         setRate(parseFloat(e.currentTarget.value.replace(',', '.')));
     }
 
     function handleCommentChange(e: React.FormEvent<HTMLTextAreaElement>) {
         setComment(e.currentTarget.value);
+    }
+
+    function handleProductImages(productId: string): string {
+        const image = productsImages.find(image => image.productId === productId);
+        
+        return image !== undefined ? image?.image as string : defaultImage;
     }
 
     async function handleSendEvaluations(statusId: number, productId: string) {
@@ -143,7 +162,7 @@ function OrderEvaluate() {
                                     <React.Fragment key={item.productId}>
                                         <div className="item">
                                             <div className="img-container">
-                                                <img src={defaultImage} alt="imagem do produtos" />
+                                                <img src={handleProductImages(item.productId)} alt="imagem do produtos" />
                                                 <div className="item-info">
                                                     <span>{item.productName}</span>
                                                     <span>Quantidade: {item.quantity}</span>
