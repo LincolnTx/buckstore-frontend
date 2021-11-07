@@ -20,7 +20,7 @@ const Dashboard: React.FC = () => {
       history.push(NonAuthRoutes.produtcs);
     },
     orders() {
-      history.push(NonAuthRoutes.login);
+      history.push(AuthenticationRoutes.orders);
     },
     wishlist() {
       history.push(AuthenticationRoutes.favorites);

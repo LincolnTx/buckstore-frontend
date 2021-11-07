@@ -1,10 +1,14 @@
 import {useEffect, useState} from 'react';
+
 import './styles.css';
+
 import {FaShoppingBag, FaArrowDown} from 'react-icons/fa';
 import PageHeader from '../../components/PageHeader';
 import {Api} from '../../helpers/api'
 import { OrderResposeDto } from '../../helpers/Responses/orders/ordersResponses';
 import { OrderStatus } from '../../components/Success';
+import { useHistory } from 'react-router-dom';
+import { AuthenticationRoutes } from '../../helpers/Authentication/authenticationRoutes';
 
 interface ListOrders {
     success: boolean;
@@ -16,10 +20,9 @@ interface ListOrders {
 
 function MyOrders () {
     const [orders, setOrders] = useState<OrderResposeDto[]>([]);
+    const history = useHistory();
 
     useEffect(() => {
-
-        console.log('dadsad', )
         getUserOrders();
     },[]);
 
@@ -35,15 +38,17 @@ function MyOrders () {
             setOrders(userOrders.data.orders);
                 
         } catch (error) {
-            
+            console.log('error', error);
        }
     }
     
-    
-
     function handleFilterSelection(e: React.FormEvent) {
         const target = e.target as HTMLSelectElement
         target.value === '0' ? getUserOrders() : getUserOrders(target.value);
+    }
+
+    function handleOrderClick(orderId:string) { 
+        history.push(AuthenticationRoutes.order.replace(":id", orderId));
     }
 
     return (
@@ -69,7 +74,7 @@ function MyOrders () {
                 <div className="orders-list">
                     <ul>
                         {orders.map(order => (
-                            <li key={order.id}>
+                            <li key={order.id} onClick={() => handleOrderClick(order.id)}>
                                 <div className="order-number">
                                     <h3>Número do pedido</h3>
                                     <span>{order.id}</span>
