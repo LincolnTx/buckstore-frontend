@@ -4,6 +4,7 @@ enum AuthenticationRoutes {
     preCheckout = '/precheck/:id',
     checkout = '/checkout',
     orders = '/me/orders',
+    order = '/me/order/:id',
     favorites = '/me/favorites',
     sales = '/sales'
 }

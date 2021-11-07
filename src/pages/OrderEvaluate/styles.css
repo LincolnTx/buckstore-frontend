@@ -1,0 +1,109 @@
+@import '../../global.css';
+
+.my-order-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 100%;
+    height: calc(100vh - 24);
+    max-width: 1024px;
+    /* padding: 0 24px 12px; */
+    margin: 12px auto;
+}
+
+.my-order-container header {
+    font-weight: 500;
+    font-size: 16px;
+    padding: 0;
+}
+
+.my-order-container section  {
+    padding: 0;
+    width: 100%;
+}
+
+.order-items .item {
+    display: flex;
+    align-items: center;
+}
+
+.order-items .item .img-container {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+}
+
+.order-items .item .img-container .item-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 60%;
+
+}
+
+.order-items .item .img-container .item-info span {
+    margin: 0 8px 8px 8px;
+    font-family: 16px;
+}
+
+.order-items .item .img-container .item-info span:first-of-type {
+    font-weight: 500;
+}
+
+.order-items .item .price {
+    font-size: 18px;
+}
+
+.order-items .evaluation {
+    margin-top: 16px;
+}
+.order-items .evaluation h3 {
+    margin-bottom: 8px;
+}
+
+.order-items .evaluation textarea {
+    border-radius: 8px;
+}
+
+.order-items .evaluation input {
+    border-radius: 4px;
+    border: 1px solid;
+} 
+
+.order-items .evaluation label {
+    font-weight: 500;
+    margin-right: 8px;
+}
+
+.order-items .evaluation div {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 8px;
+    width: 100%;
+}
+.order-items .evaluation .rate {
+    display: flex;
+    margin-right: 24px;
+}
+
+.order-items .evaluation .rate span {
+    color: var(--gray);
+    font-size: 10px;
+    padding-bottom: 2px;
+}
+
+.order-items .evaluation button {
+    width: 10%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.order-items .evaluation .invalid {
+    border-color: var(--danger);
+}
