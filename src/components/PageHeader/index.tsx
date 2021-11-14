@@ -69,7 +69,7 @@ function PageHeader() {
           <FaBars  size={32}  onClick={handleBurguerDropDown}/>
           <div className="dropdown-content">
             <Link to={AuthenticationRoutes.orders} className="mobile-options">Meus Pedidos</Link>
-            <Link to="#" className="mobile-options">Lista de Desejos</Link>
+            <Link to={AuthenticationRoutes.favorites} className="mobile-options">Lista de Desejos</Link>
             <Link to={AuthenticationRoutes.checkout} className="mobile-options">Carrinho de Compras</Link>
             <span className="mobile-options" onClick={handleLogout}>Logout</span>
           </div>

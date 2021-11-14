@@ -12,7 +12,7 @@ function NotFound({ children }: NotFoundProps) {
   return (
    <>
     <PageHeader />
-      <div>
+      <div className="not-found-container">
           <img src={Error} alt="erro 404" />
           <h2>A página que você esta procurando não existe</h2>
           <p>Talvez você tenha errado o endereçõ na barra</p>

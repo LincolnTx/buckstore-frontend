@@ -70,7 +70,7 @@
 }
 
 .visual-container .favorite {
-    color: var(--danger);
+    color: var(--favorite);
 }
 
 .star-ratings {

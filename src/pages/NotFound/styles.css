@@ -1,0 +1,33 @@
+@import '../../global.css';
+
+.not-found-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100vh;
+    max-width: calc(100vh - 24);
+    margin: 12px auto;
+
+    color: var(--primary);
+}
+
+.not-found-container img {
+    height: 300px;
+    width: 300px;
+}
+
+.not-found-container p {
+    color: var(--retweet);
+}
+
+
+@media(max-width: 600px) {
+
+    .not-found-container {
+        margin: 0;
+        padding: 16px;
+    }
+}
