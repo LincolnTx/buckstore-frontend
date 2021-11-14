@@ -1,0 +1,117 @@
+@import '../../global.css';
+
+.favorites-main-container {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: calc(100vh - 24);
+    max-width: 1024px;
+    margin: 12px auto;
+}
+
+.desktop {
+    display: block;
+}
+
+.mobile {
+    display: none;
+}
+
+.favorites-main-container header {
+    display: flex;
+    margin: 12px 0 16px 0;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.favorites-main-container header svg {
+    margin-right: 12px;
+    color: var(--primary);
+    font-size: 20px;
+}
+
+.favorites-main-container section {
+    margin-top: 16px;
+}
+.favorites-main-container .favorites-items {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.favorites-main-container .favorites-items {
+    align-self: flex-start;
+
+    font-weight: 700;
+}
+
+.favorites-main-container .favorites-items .product-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 40%;
+    overflow:hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+}
+.favorites-main-container .favorites-items .product-info  img {
+    height: 120px;
+    width: 170px;
+}
+
+.favorites-main-container .favorites-items .button {
+    width: 20%;
+    background-color: var(--background);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    
+}
+
+.favorites-main-container .favorites-items svg {
+    font-size: 30px;
+    color: var(--danger);
+}
+
+.favorites-main-container .favorites-items svg :hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+@media(max-width: 600px) {
+
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: block;
+        margin-top: 4px;
+    }
+
+    .favorites-main-container header {
+        margin-left: 12px;
+    }
+    .favorites-main-container .favorites-items {
+        flex-direction: column;
+        justify-content: space-around;
+        height: 300px;
+    }
+
+    .favorites-main-container .favorites-items .product-info {
+        width: 100%;
+        align-items: center;
+    }
+
+    .favorites-main-container .favorites-items .button {
+        width: 50%;
+    }
+
+    .favorites-main-container .favorites-items svg {
+        align-self: flex-end;
+    }
+
+    .favorites-main-container .favorites-items .price {
+        margin-bottom: 8px;
+    }
+}

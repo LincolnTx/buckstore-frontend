@@ -53,7 +53,7 @@ function PageHeader() {
           </Link>
 
           
-          <Link to="#" title="Lista de Desejos"  className="icon-link">
+          <Link to={AuthenticationRoutes.favorites} title="Lista de Desejos"  className="icon-link">
             <FaHeart size={32} color="#048243"/>
           </Link>
         

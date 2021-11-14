@@ -14,6 +14,7 @@ import PreCheckout from "./pages/PreCheckout";
 import OrderCheckout from "./pages/OrderCheckout";
 import MyOrders from "./pages/MyOrders";
 import OrderEvaluate from "./pages/OrderEvaluate";
+import UserFavorites from "./pages/UserFavorites";
 
 const Routes = () => (
     <BrowserRouter> 
@@ -59,6 +60,14 @@ const Routes = () => (
                 path={AuthenticationRoutes.order}
                 exact
                 Component={OrderEvaluate}
+                requiredRoles={UserRoles.customer}
+            />
+
+            
+            <AuthRoute 
+                path={AuthenticationRoutes.favorites}
+                exact
+                Component={UserFavorites}
                 requiredRoles={UserRoles.customer}
             />
 
