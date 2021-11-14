@@ -52,12 +52,12 @@
     align-items: flex-start;
     width: 40%;
     overflow:hidden; 
-    white-space: nowrap; 
     text-overflow: ellipsis;
 }
 .favorites-main-container .favorites-items .product-info  img {
     height: 120px;
     width: 170px;
+    margin-right: 8px;
 }
 
 .favorites-main-container .favorites-items .button {
@@ -101,6 +101,10 @@
     .favorites-main-container .favorites-items .product-info {
         width: 100%;
         align-items: center;
+    }
+
+    .favorites-main-container .favorites-items .product-info span {
+        margin-left: 12px;
     }
 
     .favorites-main-container .favorites-items .button {
