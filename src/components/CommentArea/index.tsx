@@ -2,6 +2,7 @@ import { ProductEvaluation } from '../../helpers/Responses/products/productsResp
 import StarRatings from 'react-star-ratings';
 
 import './styles.css';
+import React from 'react';
 
 interface Props {
     averageRate: number;
@@ -33,7 +34,7 @@ function CommentArea({evaluations, averageRate}: Props) {
                 <main>
                     <div className="horizontal-separator"></div>
                     {evaluations.map(evaluation => (
-                        <>
+                        <React.Fragment key={evaluation.rateId}>
                             <div  key={evaluation.rateId} className="comment-container">
                             
                                 <div className="comment-info" >
@@ -56,7 +57,7 @@ function CommentArea({evaluations, averageRate}: Props) {
                             </div>
 
                             <div className="horizontal-separator"></div>
-                        </>
+                        </React.Fragment>
                     ))}
                 </main>
             </div>

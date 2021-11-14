@@ -2,6 +2,8 @@ import {useState, useEffect} from 'react';
 
 import './styles.css';
 import {FaTrash, FaHeart } from 'react-icons/fa';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';  
 
 import {Api} from '../../helpers/api'
 import PageHeader from '../../components/PageHeader';
@@ -10,7 +12,7 @@ import React from 'react';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import {useHistory} from 'react-router-dom';
 import { NonAuthRoutes } from '../../helpers/Authentication/authenticationRoutes';
-interface Favorite {
+export interface Favorite {
     product_id: string;
     name: string;
     price: number;
@@ -32,6 +34,7 @@ const UserFavorites: React.FC = () => {
     const [favorites, setFavorites] = useState<Favorite[]>([]);
     const [loading, setLoading] = useState(true);
     const history = useHistory();
+    toast.configure();
 
     useEffect(() => {
         async function getUserFavorites() {
@@ -63,7 +66,7 @@ const UserFavorites: React.FC = () => {
 
             setFavorites([...favorites.filter(fav => fav.product_id !== item.product_id)]);
         } catch (error) {
-            console.log("Algo de errado ocorreu ao remover este item, tente novamente mais tarde.");
+            toast.error("Algo de errado ocorreu ao remover este item, tente novamente mais tarde.");
         }
     }
 
@@ -100,7 +103,7 @@ const UserFavorites: React.FC = () => {
                                         <span className="price">R$ {favorite.price.toLocaleString('pt-br')}</span>
 
                                         <button className="button" onClick={() => handleProductSelection(favorite.product_id)}>
-                                            Comprar
+                                            Ir para o Produto
                                         </button>
 
                                         <FaTrash className="desktop" onClick={() => handleFavoriteDelete(favorite)}/>
