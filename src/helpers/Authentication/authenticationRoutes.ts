@@ -6,7 +6,12 @@ enum AuthenticationRoutes {
     orders = '/me/orders',
     order = '/me/order/:id',
     favorites = '/me/favorites',
-    sales = '/sales'
+    sales = '/sales',
+    newProduct = '/product-creation',
+    newEmployee = '/register-employee',
+    inventory = '/inventory',
+    salesHandler = '/sales-handler',
+    reports = '/reports'
 }
 
 enum NonAuthRoutes {
