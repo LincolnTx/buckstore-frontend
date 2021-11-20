@@ -1,0 +1,58 @@
+@import '../../global.css';
+
+.tabs {
+    width: 80%;
+    height: auto;
+    min-height: calc(100vh - 200px);
+    background: #fff;
+    margin: 3.5rem auto 1.5rem;
+    padding: 2rem 1rem;
+    color: #000;
+    border-radius: 2rem;
+    @media (max-width: 769px) {
+        padding: 2rem 0;
+    }    
+}
+
+.tabs ul.nav {
+    width: 60%;
+    margin: 0 auto 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--secondary);
+    border-radius: 2rem;
+    @media (max-width: 768px) {
+        width: 90%;
+    }
+}
+
+.tabs ul.nav li {
+    width: 50%;
+    padding: 1rem;
+    list-style: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.7s;
+    font-weight: 500;
+    
+}
+
+.tabs ul.nav li:nth-child(1) {
+    border-bottom-left-radius: 2rem;
+    border-top-left-radius: 2rem;
+}
+
+.tabs ul.nav li:nth-child(3) {
+    border-radius: 0;
+    border-bottom-right-radius: 2rem;
+    border-top-right-radius: 2rem;
+}
+
+.tabs ul.nav li :hover {
+    background: rgba(50, 224, 196, 0.15);
+}
+
+.tabs ul.nav li.active {
+    background: var(--secondary);
+}
