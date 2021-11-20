@@ -10,7 +10,7 @@ import FacebookLogin from 'react-facebook-login';
 import { AuthLoginResponse, FacebookLoginResponse } from '../../helpers/Responses/auth/authResponses';
 import UserRoles from '../../helpers/Authentication/userRoles';
 import AuthContext from '../../contexts/auth';
-import { AuthenticationRoutes, NonAuthRoutes } from '../../helpers/Authentication/authenticationRoutes';
+import { AuthenticationRoutes } from '../../helpers/Authentication/authenticationRoutes';
 import * as jwtService from '../../helpers/Jwt/jwtService';
 
 import Logo from '../../assets/logo_color.svg';
@@ -30,9 +30,11 @@ const Login: React.FC = () => {
 
   useEffect(()  => {
     if (signed) {
-      history.push(NonAuthRoutes.produtcs);
+      const token = localStorage.getItem('token') as string
+      handleLoginRedirection(token);
     }
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
   async function responseFacebook(response:any) {
     let sanitizeResponse: FacebookLoginResponse = response;
     

@@ -30,6 +30,7 @@ const Routes = () => (
                 requiredRoles ={UserRoles.customer}
             />
             <AuthRoute 
+                exact
                 path= {AuthenticationRoutes.employeeDashboard} 
                 Component={AdminDashboard} 
                 requiredRoles ={UserRoles.employee}
