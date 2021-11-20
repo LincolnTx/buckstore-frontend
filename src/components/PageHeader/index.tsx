@@ -24,7 +24,9 @@ function PageHeader() {
 
   function homeRedirection() {
     if (signed) {
-      history.push(AuthenticationRoutes.dashboard);
+      UserRoles.customer.includes(role) ? 
+        history.push(AuthenticationRoutes.dashboard) :
+        history.push(AuthenticationRoutes.employeeDashboard);
       return;
     }
 

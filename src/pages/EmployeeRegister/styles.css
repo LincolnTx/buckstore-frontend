@@ -1,0 +1,125 @@
+@import '../../global.css';
+
+.register-employee-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    height: calc(100vh - 24);
+    max-width: 1024px;
+    padding: 0 24px 12px;
+    margin: 12px auto;
+}
+
+.register-employee-container header {
+    display: flex;
+    margin: 12px 0 16px 0;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 16px;
+    color: var(--primary);
+}
+
+.register-employee-container header svg {
+    margin-right: 12px;
+    font-size: 20px;
+}
+
+.register-employee-container section {
+    width: 100%;
+    margin-top: 24px;
+}
+
+.register-employee-container .employee-filters {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    font-weight: 500;
+    color: #000;
+    font-size: 16px;
+}
+
+.register-employee-container .employee-filters  svg {
+    position: relative;
+    right: 16px;
+    top: calc(50% - 50%);
+    width: 10px;
+    height: 10px;
+    stroke-width: 2px;
+    stroke: #9098A9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+    color: var(--primary);
+}
+
+.register-employee-container .employee-filters select {
+    margin-left: 12px;
+    -webkit-appearance: none;
+    padding: 8px;
+    width: 20%;
+    border: 1px solid #e8eaed;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 1px 3px -2px #9098a9;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+    transition: all 150ms ease;
+}
+
+.register-employee-container .employee-filters select:required:invalid {
+    color: #5a667f;
+}
+
+.register-employee-container .employee-filters select option {
+    color: var(--gray);
+}
+
+.register-employee-container .employee-filters select option[value=""][disabled] {
+    display: none;
+}
+
+.register-employee-container .employee-filters select:focus {
+    outline: none;
+    border-color: var(--gray);
+    box-shadow: 0 0 0 2px rgba(56, 63, 70, 0.2);
+}
+
+.register-employee-container .employee-filters select:hover + svg {
+    stroke: var(--gray);
+}
+
+.register-employee-container section form {
+    width: 100%;
+    margin-top: 24px;
+}
+
+.register-employee-container section .button-container {
+    margin-top: 12px;
+}
+
+.register-employee-container section .button-container {
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.register-employee-container section .button-container button:first-of-type{
+    background-color: #fff;
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+    width: 40%;
+    margin-right: 12px;
+}
+
+@media screen and (max-width: 600px) {
+
+    .register-employee-container .employee-filters  select {
+        width: 55% !important;
+    }
+}
+

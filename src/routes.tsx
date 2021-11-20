@@ -15,6 +15,7 @@ import OrderCheckout from "./pages/OrderCheckout";
 import MyOrders from "./pages/MyOrders";
 import OrderEvaluate from "./pages/OrderEvaluate";
 import UserFavorites from "./pages/UserFavorites";
+import EmployeeRegister from "./pages/EmployeeRegister";
 
 const Routes = () => (
     <BrowserRouter> 
@@ -70,6 +71,13 @@ const Routes = () => (
                 exact
                 Component={UserFavorites}
                 requiredRoles={UserRoles.customer}
+            />
+
+            <AuthRoute 
+                path={AuthenticationRoutes.newEmployee}
+                exact
+                Component={EmployeeRegister}
+                requiredRoles={UserRoles.admin}
             />
 
             
