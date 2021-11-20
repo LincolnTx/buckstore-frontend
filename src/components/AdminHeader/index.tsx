@@ -1,6 +1,6 @@
 import { 
     FaPowerOff, 
-    FaUserPlus, 
+    FaDollyFlatbed, 
     FaPlusSquare,
     FaBars,
     FaChartBar } from 'react-icons/fa';
@@ -16,13 +16,12 @@ function AdminHeader({handleLogout, handleBurguerDropDown}: Props) {
     return(
         <>
          <div className="icons-container">
-            <Link to={AuthenticationRoutes.newEmployee} title="Cadastrasr funcionário" className="icon-link">
-                <FaUserPlus size={32} color="#048243"/>
-            </Link>
-    
-            
             <Link to={AuthenticationRoutes.newProduct} title="Cadastrar produtos"  className="icon-link">
                 <FaPlusSquare size={32} color="#048243"/>
+            </Link>
+
+            <Link to={AuthenticationRoutes.inventory} title="Atualizar estoque" className="icon-link">
+                <FaDollyFlatbed size={32} color="#048243"/>
             </Link>
             
             <Link to={AuthenticationRoutes.reports} title="Relatórios"  className="icon-link">
@@ -36,8 +35,8 @@ function AdminHeader({handleLogout, handleBurguerDropDown}: Props) {
             <div className="menu-burguer"  id="dropMenu">
             <FaBars  size={32}  onClick={handleBurguerDropDown}/>
             <div className="dropdown-content">
-                <Link to={AuthenticationRoutes.newEmployee} className="mobile-options">Cadastrasr funcionário</Link>
                 <Link to={AuthenticationRoutes.newProduct} className="mobile-options">Cadastrar produtos</Link>
+                <Link to={AuthenticationRoutes.inventory} className="mobile-options">Atualizar estoque</Link>
                 <Link to={AuthenticationRoutes.reports} className="mobile-options">Relatórios</Link>
                 <span className="mobile-options" onClick={handleLogout}>Logout</span>
             </div>
