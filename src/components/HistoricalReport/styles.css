@@ -1,6 +1,6 @@
 @import '../../global.css';
 
-header {
+.first-report-header {
     display: flex;
     margin: 12px 0 16px 0;
     justify-content: flex-start;

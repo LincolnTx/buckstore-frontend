@@ -8,31 +8,13 @@ import './styles.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import {FaArrowDown} from 'react-icons/fa';
+import { BarReportProps, HistoricalData } from '../../pages/Reports/ReportsInterfaces';
 
-interface HistoricalData {
-    success: boolean;
-    data: {
-        reportData: ReportData[];
-    }
-}
-
-interface ReportData {
+export interface ReportData {
     year: string;
     month: string;
     monthNumber: string;
     monthlySum: number;
-}
-
-interface BarReportProps {
-    labels: string[];
-    datasets: [
-        {
-          label: string,
-          data: number[],
-          backgroundColor: string[];
-          borderWidth: number,
-        },
-      ],
 }
 
 function HistoricalReport() {
@@ -53,7 +35,6 @@ function HistoricalReport() {
     }
 
     function buildData(reportData: ReportData[]){
-        console.log('teste')
         const buildData = {} as BarReportProps;
         const labels: string [] = [];
          reportData.forEach(item => {
@@ -72,7 +53,7 @@ function HistoricalReport() {
     }
 
     useEffect(() => {
-        async function getHistorialRepost(): Promise<void> {
+        async function getHistorialReport(): Promise<void> {
             try {
                 const response = await Api.apiOrders.get<HistoricalData>(`/reports/historical/${statusFilter}`);
                 buildData(response.data.data.reportData);
@@ -82,7 +63,7 @@ function HistoricalReport() {
 
             return new Promise(resolve => resolve());
         };
-        getHistorialRepost();
+        getHistorialReport();
         
     }, [statusFilter]);
 
@@ -92,7 +73,7 @@ function HistoricalReport() {
                 <LoadingSpinner />
                 :
                 <>
-                <header>
+                <header className="first-report-header">
                     <div className="status-filters">
                         <span>Filtro de status das ordens: </span>
                         <select name="filters" id="report=filter" onChange={e => handleFilterSelection(e)}>
