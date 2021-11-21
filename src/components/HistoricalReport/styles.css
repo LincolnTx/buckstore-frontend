@@ -1,6 +1,83 @@
 @import '../../global.css';
 
-h1 {
-    font-weight: 700;
-    text-align: center;
+header {
+    display: flex;
+    margin: 12px 0 16px 0;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 16px;
+    color: var(--primary);
+}
+
+section {
+    width: 100%;
+    margin-top: 24px;
+}
+
+.status-filters {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    font-weight: 500;
+    color: #000;
+    font-size: 16px;
+}
+
+.status-filters  svg {
+    position: relative;
+    right: 16px;
+    top: calc(50% - 50%);
+    width: 10px;
+    height: 10px;
+    stroke-width: 2px;
+    stroke: #9098A9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+    color: var(--primary);
+}
+
+.status-filters select {
+    margin-left: 12px;
+    -webkit-appearance: none;
+    padding: 8px;
+    width: 20%;
+    border: 1px solid #e8eaed;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 1px 3px -2px #9098a9;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+    transition: all 150ms ease;
+}
+
+.status-filters select:required:invalid {
+    color: #5a667f;
+}
+
+.status-filters select option {
+    color: var(--gray);
+}
+
+.status-filters select option[value=""][disabled] {
+    display: none;
+}
+
+.status-filters select:focus {
+    outline: none;
+    border-color: var(--gray);
+    box-shadow: 0 0 0 2px rgba(56, 63, 70, 0.2);
+}
+
+.status-filters select:hover + svg {
+    stroke: var(--gray);
+}
+
+@media screen and (max-width: 600px) {
+
+    .status-filters select {
+        width: 55% !important;
+    }
 }
