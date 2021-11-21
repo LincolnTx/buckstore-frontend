@@ -108,7 +108,13 @@ function OrderEvaluate() {
         }
 
         try {
-            await Api.apiProducts.put(url, body);
+            const response = await Api.apiProducts.put(url, body);
+
+            if (response.status === 200) {
+                toast.success("Sua avalição foi realizada com sucesso");
+                setComment("");
+                setRate(null);
+            }
         } catch (error) {
             toast.error("Erro ao salvar sua avaliação tente novamente mais tarde!")
         }
