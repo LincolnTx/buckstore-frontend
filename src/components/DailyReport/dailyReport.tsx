@@ -134,7 +134,7 @@ function DailyReport() {
                         <button onClick={() => updateReportParameters()}>Atualizar</button>
                     </header>
 
-                    <section>
+                    <section className="middle-report">
                         <div className='header'>
                             <h1 className='title'>Relatório de pedidos histórico</h1>
                         </div>

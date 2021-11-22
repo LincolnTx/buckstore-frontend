@@ -87,7 +87,7 @@ function HistoricalReport() {
                     </div>
                 </header>
 
-                <section>
+                <section className="first-report-section">
                     <div className='header'>
                         <h1 className='title'>Relatório de pedidos histórico</h1>
                     </div>

@@ -113,4 +113,39 @@ section {
     .status-filters select {
         width: 55% !important;
     }
+
+    
+    .middle-report-header button {
+        display: block;
+        align-self: flex-start;
+        width: 50%;
+    }
+    .middle-report-header .date-filters {
+        flex-direction: column;
+    }
+
+    /* .middle-report-header .date-filters {
+        font-display: flex;
+        flex-direction: column;
+        width: 100%;
+    } */
+
+    /* .middle-report-header .date-filters {
+        flex-direction: column;
+    }
+
+    .middle-report-header .date-filters .date-picker {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .middle-report-header .date-filters .date-picker input {
+        width: 40%;
+    } */
+
+    .middle-report {
+        margin-top: 32px;
+        padding: 0;
+    }
+
 }

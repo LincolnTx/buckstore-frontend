@@ -44,7 +44,7 @@ function QuantityValueReport() {
 
         buildReport.labels = labels;
         buildReport.datasets = [{
-            label: "Valore de Pedidos/Dia",
+            label: "Quantide de Pedidos/Dia",
             data: reportData.map(item => item.totalOrders),
             backgroundColor: ['#00C06B'],
             borderWidth: 1

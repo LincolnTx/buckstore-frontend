@@ -3,7 +3,8 @@
 .tabs {
     width: 80%;
     height: auto;
-    min-height: calc(100vh - 200px);
+    height: 100vh ;
+
     background: #fff;
     margin: 2.5rem auto 1.5rem;
     padding: 2rem 1rem;
@@ -39,6 +40,7 @@
 }
 
 .tabs ul.nav li:nth-child(1) {
+    border-radius: 0;
     border-bottom-left-radius: 2rem;
     border-top-left-radius: 2rem;
 }
@@ -55,4 +57,16 @@
 
 .tabs ul.nav li.active {
     background: var(--secondary);
+}
+
+
+@media screen and (max-width: 600px){
+    .tabs ul.nav  {
+        width: 100%;
+    }
+
+    .tabs ul.nav li {
+        width: 60%;
+        padding: 0.5rem;
+    }
 }
