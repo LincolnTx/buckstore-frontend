@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import HistoricalReport from '../HistoricalReport/historicalReport';
 import DailyReport from '../DailyReport/dailyReport';
-import SalesValueReport from '../SalesValueReport/salesValueReport';
+import QuantityValueReport from '../QuantityValueReport/quantityOrdersReport';
 import './styles.css';
 
 function TabsComponents() {
@@ -19,7 +19,7 @@ function TabsComponents() {
                 );
             case 3 :
                 return(
-                    <SalesValueReport />
+                    <QuantityValueReport />
                 );
             default:
                 return(

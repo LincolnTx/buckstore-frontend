@@ -5,48 +5,47 @@ import LoadingSpinner from '../LoadingSpinner';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
-import {FaArrowDown} from 'react-icons/fa';
-import { BarReportProps, DailyReportResponse } from '../../pages/Reports/ReportsInterfaces';
+import { BarReportProps, QuantityReportResponse } from '../../pages/Reports/ReportsInterfaces';
 import './styles.css';
 
-export interface DailyReportData {
-    day: string;
-    month: string;
-    monthNumber: string;
+export interface QuantityReportData {
+    totalOrders: number;
+    totalValue: number;
+    dateSpell: string;
     year: string;
-    dailySum: number;
 }
 
-function DailyReport() {
+function QuantityValueReport() {
     toast.configure();
     const defaultDate = new Date();
-    const [statusFilter, setStatusFilter] = useState("0");
+    const [minValue, setMinValue] = useState('1,0');
+    const [isLoading, setIsLoading] = useState(true);
     const [startDate, setStartDate] = useState('2021-09-01');
     const [endDate, setEndDate] = useState(defaultDate.toISOString().split('T')[0]);
     const [data, setData] = useState({} as BarReportProps);
-    const [isLoading, setIsLoading] = useState(true);
     const options = {
         animation: {
             duration: 1000
         }
     }
 
-    function handleFilterSelection(e: React.FormEvent) {
-        const target = e.target as HTMLSelectElement;
+    function updateReportParameters() {
 
-        setStatusFilter(target.value);
+        if (!validateMonthDiff())
+            return;
+        getOrderQuantityReport();
     }
 
-    function buildData(reportData: DailyReportData[]) {
+    function buildData(reportData: QuantityReportData[]) {
         const buildReport = {} as BarReportProps;
         const labels = reportData.map(item => {
-            return `${item.day}/${item.monthNumber}/${item.year}`;
+            return `${item.dateSpell}/${item.year}`;
         })
 
         buildReport.labels = labels;
         buildReport.datasets = [{
             label: "Valore de Pedidos/Dia",
-            data: reportData.map(item => item.dailySum),
+            data: reportData.map(item => item.totalOrders),
             backgroundColor: ['#00C06B'],
             borderWidth: 1
         }];
@@ -55,27 +54,14 @@ function DailyReport() {
         setIsLoading(false);
     }
 
-    async function getDailyReport(): Promise<void> {
+    async function getOrderQuantityReport(): Promise<void> {
         try {
-            const response = await Api.apiOrders.get<DailyReportResponse>(`/reports/daily/${statusFilter}/${startDate}/${endDate}`);
+            const response = await Api.apiOrders.get<QuantityReportResponse>(`/reports/${minValue}/${startDate}/${endDate}`);
             buildData(response.data.data.reportData);
+            
         } catch (error) {
             toast.error("Erro ao buscar informações para montar o relatório");
         }
-
-        return new Promise(resolve => resolve());
-    }
-
-    useEffect(() =>  {
-        getDailyReport();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    function updateReportParameters() {
-
-        if (!validateMonthDiff())
-            return;
-        getDailyReport();
     }
 
     function validateMonthDiff() {
@@ -93,13 +79,18 @@ function DailyReport() {
         months -= intial.getMonth();
         months += end.getMonth();
 
-        if( (months - 1) >= 6) {
-            toast.error("O intervalo entre datas deve ser menor do que seis meses para esse relatório");
+        if( (months - 1) >= 3) {
+            toast.error("O intervalo entre datas deve ser menor do que três meses para esse relatório");
             return false;
         }
 
         return true;
     }
+
+    useEffect(() => {
+        getOrderQuantityReport();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <>
@@ -108,19 +99,11 @@ function DailyReport() {
                 :
                 <>
                     <header className="middle-report-header">
-                        <div className="status-filters">
-                            <span>Filtro de status das ordens: </span>
-                            <select name="filters" id="report=filter" onChange={e => handleFilterSelection(e)}>
-                            <option value="0">Todos</option>
-                            <option value="2">Pagamento Pendente</option>
-                            <option value="3">Finalizaos</option>
-                            <option value="4">Cancelados</option>
-                        </select>
-
-                        <FaArrowDown />
-                        </div>
-
                        <div className="date-filters">
+                       <div className="date-picker">
+                                <label> Valor mínimo R$: </label>
+                                <input type="text" placeholder={minValue} value={minValue} onChange={e => setMinValue(e.target.value.replace(',', '.'))}/>
+                            </div>
                            <div className="date-picker">
                                 <label> Data de início: </label>
                                 <input type="text" placeholder={startDate} value={startDate} onChange={e => setStartDate(e.target.value)}/>
@@ -148,4 +131,4 @@ function DailyReport() {
     );
 }
 
-export default DailyReport;
+export default QuantityValueReport;

@@ -1,5 +1,6 @@
 import { DailyReportData } from "../../components/DailyReport/dailyReport";
 import { ReportData } from "../../components/HistoricalReport/historicalReport";
+import { QuantityReportData } from "../../components/QuantityValueReport/quantityOrdersReport";
 
 export interface HistoricalData {
     success: boolean;
@@ -25,4 +26,11 @@ export interface BarReportProps {
           borderWidth: number,
         },
       ],
+}
+
+export interface QuantityReportResponse {
+    success: boolean;
+    data: {
+        reportData: QuantityReportData[]
+    }
 }
