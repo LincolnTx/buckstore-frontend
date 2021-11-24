@@ -6,7 +6,6 @@ import AuthContext from '../../contexts/auth';
 
 import { 
   FaUserPlus, 
-  FaPlusSquare,
   FaDollyFlatbed,
   FaDollarSign,
   FaChartBar
@@ -51,13 +50,10 @@ function AdminDashboard() {
           <span>Cadastrar funcionário</span>
         </li>
         <li onClick={() => redirections["product"]()}>
-          <FaPlusSquare size={56} color="#048243" />
+          <FaDollyFlatbed size={56} color="#048243" />
           <span>Gerenciar produtos</span>
         </li>
-        <li  onClick={() => redirections["inventory"]()}>
-          <FaDollyFlatbed size={56} color="#048243" />
-          <span>Atualizar estoque</span>
-        </li>
+        
         <li onClick={() => redirections["sales"]()}> 
           <FaDollarSign size={56} color="#048243" />
           <span>Promoções</span>

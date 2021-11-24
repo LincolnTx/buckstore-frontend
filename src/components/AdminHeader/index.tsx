@@ -1,8 +1,8 @@
 import { 
     FaPowerOff, 
     FaDollyFlatbed, 
-    FaPlusSquare,
     FaBars,
+    FaUserPlus,
     FaChartBar } from 'react-icons/fa';
 import { Link} from 'react-router-dom';
 import { AuthenticationRoutes } from '../../helpers/Authentication/authenticationRoutes';
@@ -16,11 +16,11 @@ function AdminHeader({handleLogout, handleBurguerDropDown}: Props) {
     return(
         <>
          <div className="icons-container">
-            <Link to={AuthenticationRoutes.newProduct} title="Cadastrar produtos"  className="icon-link">
-                <FaPlusSquare size={32} color="#048243"/>
+            <Link to={AuthenticationRoutes.newEmployee} title="Cadastrar funcionário"  className="icon-link">
+                <FaUserPlus size={32} color="#048243"/>
             </Link>
 
-            <Link to={AuthenticationRoutes.inventory} title="Atualizar estoque" className="icon-link">
+            <Link to={AuthenticationRoutes.newProduct} title="Gerenciar estoque" className="icon-link">
                 <FaDollyFlatbed size={32} color="#048243"/>
             </Link>
             
@@ -35,8 +35,8 @@ function AdminHeader({handleLogout, handleBurguerDropDown}: Props) {
             <div className="menu-burguer"  id="dropMenu">
             <FaBars  size={32}  onClick={handleBurguerDropDown}/>
             <div className="dropdown-content">
-                <Link to={AuthenticationRoutes.newProduct} className="mobile-options">Gerenciar produtos</Link>
-                <Link to={AuthenticationRoutes.inventory} className="mobile-options">Atualizar estoque</Link>
+                <Link to={AuthenticationRoutes.newEmployee} className="mobile-options">Cadastrar funcionário</Link>
+                <Link to={AuthenticationRoutes.newProduct} className="mobile-options">Gerenciar estoque</Link>
                 <Link to={AuthenticationRoutes.reports} className="mobile-options">Relatórios</Link>
                 <span className="mobile-options" onClick={handleLogout}>Logout</span>
             </div>
