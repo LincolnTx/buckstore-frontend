@@ -35,7 +35,7 @@ function AdminHeader({handleLogout, handleBurguerDropDown}: Props) {
             <div className="menu-burguer"  id="dropMenu">
             <FaBars  size={32}  onClick={handleBurguerDropDown}/>
             <div className="dropdown-content">
-                <Link to={AuthenticationRoutes.newProduct} className="mobile-options">Cadastrar produtos</Link>
+                <Link to={AuthenticationRoutes.newProduct} className="mobile-options">Gerenciar produtos</Link>
                 <Link to={AuthenticationRoutes.inventory} className="mobile-options">Atualizar estoque</Link>
                 <Link to={AuthenticationRoutes.reports} className="mobile-options">Relatórios</Link>
                 <span className="mobile-options" onClick={handleLogout}>Logout</span>

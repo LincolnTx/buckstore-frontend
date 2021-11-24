@@ -7,7 +7,7 @@ enum AuthenticationRoutes {
     order = '/me/order/:id',
     favorites = '/me/favorites',
     sales = '/sales',
-    newProduct = '/product-creation',
+    newProduct = '/product-management',
     newEmployee = '/register-employee',
     inventory = '/inventory',
     salesHandler = '/sales-handler',

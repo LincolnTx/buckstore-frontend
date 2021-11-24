@@ -58,6 +58,7 @@ function ProductsList() {
     }
 
     requestProductsList();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[pageNumber]);
 
   function handleProductCover(product: Products) {
@@ -83,7 +84,7 @@ function ProductsList() {
             <img src={handleProductCover(product)} alt="imagem do produto"/>
             <span className="product-name">{product.name}</span>
             <div>
-              <span className="price-span">R${product.price}</span>
+              <span className="price-span">R$ {product.price}</span>
               <p>à vista</p>
             </div>
 

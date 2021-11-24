@@ -17,6 +17,7 @@ import OrderEvaluate from "./pages/OrderEvaluate";
 import UserFavorites from "./pages/UserFavorites";
 import EmployeeRegister from "./pages/EmployeeRegister";
 import Reports from "./pages/Reports";
+import ProductsManagement from "./pages/ProductsManagement";
 
 const Routes = () => (
     <BrowserRouter> 
@@ -85,6 +86,13 @@ const Routes = () => (
                 path={AuthenticationRoutes.reports}
                 exact
                 Component={Reports}
+                requiredRoles={UserRoles.employee}
+            />
+
+            <AuthRoute 
+                path={AuthenticationRoutes.newProduct}
+                exact
+                Component={ProductsManagement}
                 requiredRoles={UserRoles.employee}
             />
 

@@ -52,7 +52,7 @@ function AdminDashboard() {
         </li>
         <li onClick={() => redirections["product"]()}>
           <FaPlusSquare size={56} color="#048243" />
-          <span>Adicionar novo produto</span>
+          <span>Gerenciar produtos</span>
         </li>
         <li  onClick={() => redirections["inventory"]()}>
           <FaDollyFlatbed size={56} color="#048243" />
