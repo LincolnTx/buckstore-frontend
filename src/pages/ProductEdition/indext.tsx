@@ -9,7 +9,7 @@ import defaultImage from '../../helpers/DefaultImage';
 import './styles.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
-import { FaPlusCircle, FaTrashAlt, FaMinusCircle } from 'react-icons/fa'; 
+import { FaPlusCircle, FaTrashAlt, FaMinusCircle, FaEdit } from 'react-icons/fa'; 
 
 interface RouteParams  {
     id: string;
@@ -112,6 +112,7 @@ function ProductEdition() {
             :
                 <div className="product-edit-container">
                     <header>
+                        <FaEdit />
                         <h2>Alterar produto</h2>
                     </header>
 
@@ -126,12 +127,13 @@ function ProductEdition() {
                             <div className="div-info-edition">
                                 <div>
                                     <span>Quantidade:</span>
+                                    
                                     <input type="text" 
                                         value={stock} 
                                         onChange={e => setStock(parseInt(e.target.value))}
                                     />
-                                    <FaPlusCircle onClick={handleAddStock}/>
                                     <FaMinusCircle onClick={handleDeductStock}/>
+                                    <FaPlusCircle onClick={handleAddStock}/>
                                 </div>
                                 <div>
                                     <span>Preço R$: </span>
@@ -153,7 +155,7 @@ function ProductEdition() {
                                     >
                                     </textarea>
                                 </div>
-                            <button className="button" onClick={handleProducUpdate} disabled={!validateInfo()}>Salvar</button>
+                                <button className="button" onClick={handleProducUpdate} disabled={!validateInfo()}>Salvar</button>
                             </div>
                         </div>
                     </section>

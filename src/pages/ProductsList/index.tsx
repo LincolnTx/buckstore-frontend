@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import './styles.css';
@@ -8,16 +8,20 @@ import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
 
 import PageHeader from '../../components/PageHeader';
 import { Api } from '../../helpers/api';
-import { NonAuthRoutes } from '../../helpers/Authentication/authenticationRoutes';
+import { AuthenticationRoutes, NonAuthRoutes } from '../../helpers/Authentication/authenticationRoutes';
 import { ProductsListResponse, Products } from '../../helpers/Responses/products/productsResponses';
 import BuyButton from '../../components/BuyButton';
 import defaultImage from '../../helpers/DefaultImage';
+import AuthContext from '../../contexts/auth';
+import UserRoles from '../../helpers/Authentication/userRoles';
 
 function ProductsList() {
   const history = useHistory();
   const [products, setProducts] = useState<Products[]>([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const {signed, userRole } = useContext(AuthContext);
+  const role =  userRole as string;
   toast.configure();
   
 
@@ -49,6 +53,10 @@ function ProductsList() {
   }
 
   function handleProductSelection(productId: string) {
+    if (signed && UserRoles.employee.includes(role)) {
+      history.push(AuthenticationRoutes.editProduct.replace(":id", productId as string))
+      return;
+    }
     history.push(NonAuthRoutes.produt.replace(":id",productId))
   }
 
