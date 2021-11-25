@@ -34,6 +34,10 @@
     padding: 4px;
 }
 
+.product-edit-container section header span {
+    padding: 4px;
+}
+
 .product-edit-container section header svg {
     color: var(--danger);
     font-size: 16px;
@@ -76,6 +80,7 @@
 .product-edit-container section .product-info .div-info-edition div svg {
     color: var(--primary);
     margin-left: 8px;
+    cursor: pointer;
 }
 
 .product-edit-container section .product-info .div-info-edition button {
