@@ -19,6 +19,10 @@ export const Api = {
     apiOrders: axios.create({
         baseURL: process.env.REACT_APP_ORDERS_URL,
         headers
+    }),
+    apiManager: axios.create({
+        baseURL: process.env.REACT_APP_MANAGER_URL,
+        headers
     })
 };
 
@@ -27,4 +31,5 @@ export const apiSetTokenDefault = (token: string) => {
     Api.apiAuth.defaults.headers['Authorization'] = `Bearer ${token}`;
     Api.apiProducts.defaults.headers['Authorization'] = `Bearer ${token}`;
     Api.apiOrders.defaults.headers['Authorization'] = `Bearer ${token}`;
+    Api.apiManager.defaults.headers['Authorization'] = `Bearer ${token}`;
 }
