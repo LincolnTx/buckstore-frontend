@@ -45,7 +45,7 @@ function ProductEdition() {
                 console.log('',productInfo.data.price.toString() )
                 
                 setProduct(productInfo);
-                setPrice(productInfo.data.price.toLocaleString('pt-br'));
+                setPrice(productInfo.data.price.toLocaleString("pt-br", {minimumFractionDigits: 2}));
                 setStock(productInfo.data.stockQuantity);
                 setDescription(productInfo.data.description);
             } else {
@@ -97,7 +97,7 @@ function ProductEdition() {
 
     function validateInfo() {
         return stock !== product.data.stockQuantity ||
-            price !== product.data.price.toLocaleString('pt-br') ||
+            price !== product.data.price.toLocaleString("pt-br", {minimumFractionDigits: 2}) ||
             description !== product.data.description;
     }
 
@@ -114,7 +114,7 @@ function ProductEdition() {
         try {
             await Api.apiManager.delete(`/product?productCode=${id}`);
             toast.success("Produto deletado com sucesso!");
-            history.push(AuthenticationRoutes.newProduct)
+            history.push(AuthenticationRoutes.productManagement)
         } catch (error) {
             toast.error("Erro ao deletar o produto, tente novamente");
         }

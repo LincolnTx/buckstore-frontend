@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import './styles.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';  
-import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
+import { FaAngleRight, FaAngleLeft, FaPlusSquare } from 'react-icons/fa';
 
 import PageHeader from '../../components/PageHeader';
 import { Api } from '../../helpers/api';
@@ -76,11 +76,28 @@ function ProductsList() {
 
     return defaultImage;
   }
+
+  function handleNewProductButton(): string {
+    return UserRoles.employee.includes(role) ? 'visible' : 'invisible';
+  }
+
+  function newProductRedirect() {
+    history.push(AuthenticationRoutes.newProduct)
+  }
+
   return (
     <>
       <PageHeader />
       
       <div className="list-products-container">
+
+        <button 
+          className={`new-product button ${handleNewProductButton()}`}
+          onClick={() => newProductRedirect()}
+        > 
+          <FaPlusSquare />
+          Novo Produto
+        </button>
 
       <ul >
         {products.map(product => (
@@ -92,7 +109,7 @@ function ProductsList() {
             <img src={handleProductCover(product)} alt="imagem do produto"/>
             <span className="product-name">{product.name}</span>
             <div>
-              <span className="price-span">R$ {product.price}</span>
+              <span className="price-span">R$ {product.price.toLocaleString('pt-br', {minimumFractionDigits: 2})}</span>
               <p>à vista</p>
             </div>
 

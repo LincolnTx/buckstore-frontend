@@ -55,7 +55,7 @@ export function OrderForm({nextStep, prevStep, handleChanges, values, handleIten
     }
    
     function handleTotalPrice(price: number, quantity: number): string {
-        return ( price * quantity).toLocaleString('pt-br') ;
+        return ( price * quantity).toLocaleString("pt-br", {minimumFractionDigits: 2}) ;
     }
 
     function handleCupom() {
@@ -139,7 +139,7 @@ export function OrderForm({nextStep, prevStep, handleChanges, values, handleIten
                             <div className="text-info">
                                     <h4>{product.productName}</h4>
                                     <p>Valor unitário  
-                                        <span>R$ {product.price.toLocaleString('pt-br')}</span>
+                                        <span>R$ {product.price.toLocaleString("pt-br", {minimumFractionDigits: 2})}</span>
                                     </p>
                             </div>
                         </div>
@@ -196,12 +196,12 @@ export function OrderForm({nextStep, prevStep, handleChanges, values, handleIten
                 </header>
                <div className="gross-price-container">
                    <span className="total-price-caption">Valor total dos Produtos:</span>
-                   <span className="total-price">R$ {getTotalPrice(1).toLocaleString('pt-br')}</span>
+                   <span className="total-price">R$ {getTotalPrice(1).toLocaleString("pt-br", {minimumFractionDigits: 2})}</span>
                </div>
 
                <div className="dicount-price">
                    <span>Valor com desconto</span>
-                   <p>R$ {getTotalPrice(2).toLocaleString('pt-br')}</p>
+                   <p>R$ {getTotalPrice(2).toLocaleString("pt-br", {minimumFractionDigits: 2})}</p>
                </div>
 
                <div className="button-container">

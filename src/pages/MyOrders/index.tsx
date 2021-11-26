@@ -96,7 +96,7 @@ function MyOrders () {
 
                                 <div className="order-amount">
                                     <h3>Valor do pedido</h3>
-                                    <span>R$ {order.orderAmount.toLocaleString('pt-br')}</span>
+                                    <span>R$ {order.orderAmount.toLocaleString("pt-br", {minimumFractionDigits: 2})}</span>
                                 </div>
                             </li>
                         ))}

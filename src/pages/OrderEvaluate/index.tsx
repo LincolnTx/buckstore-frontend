@@ -175,7 +175,7 @@ function OrderEvaluate() {
                                                 </div>
                                             </div>
 
-                                            <span className="price">R$ {(item.price * item.quantity).toLocaleString('pt-br')}</span>
+                                            <span className="price">R$ {(item.price * item.quantity).toLocaleString("pt-br", {minimumFractionDigits: 2})}</span>
                                         </div>
 
                                         {/* <div className="horizontal-separator"></div> */}

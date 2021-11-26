@@ -35,7 +35,7 @@ export function Success({id, orderAmount, orderStatuId}: Props) {
            </div>
            <div className="card-container">
                <p>Número do pedido : <span>{id}</span></p> 
-               <p>Valor do pedido: <span>R$ {orderAmount.toLocaleString('pt-br')}</span></p>
+               <p>Valor do pedido: <span>R$ {orderAmount.toLocaleString("pt-br", {minimumFractionDigits: 2})}</span></p>
                <p>Este pedido atualmente está como: <span>{OrderStatus[orderStatuId]}</span></p>
            </div>
 

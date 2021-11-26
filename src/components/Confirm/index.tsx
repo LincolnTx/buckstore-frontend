@@ -163,7 +163,7 @@ export function Confirm({nextStep, prevStep, values, isNewCard, setOrderSucess}:
     }
 
     function handleProductTotalPrice(quantiy: number, price: number) {
-        return (quantiy * price).toLocaleString("pt-br");
+        return (quantiy * price).toLocaleString("pt-br", {minimumFractionDigits: 2});
     }
 
     function handleProductCover(product: ShoppingItem) {
