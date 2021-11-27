@@ -2,9 +2,12 @@ import ReactLoading from 'react-loading';
 
 import './styles.css';
 
-function LoadingSpinner() {
+interface Props {
+    visible?: boolean;
+}
+function LoadingSpinner({visible = true}: Props) {
     return(
-       <div className="spinner-container">
+       <div className={`spinner-container ${visible ? 'set' : 'unset'}`}>
             <ReactLoading
             type="spinningBubbles"
             color="#048243"

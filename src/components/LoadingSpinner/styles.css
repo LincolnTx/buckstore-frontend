@@ -5,3 +5,11 @@
 
     height: 80vh;
 }
+
+.unset {
+    display: none;
+}
+
+.set {
+    display: flex;
+}
