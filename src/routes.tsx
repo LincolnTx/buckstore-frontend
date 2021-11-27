@@ -19,6 +19,7 @@ import EmployeeRegister from "./pages/EmployeeRegister";
 import Reports from "./pages/Reports";
 import ProductsManagement from "./pages/ProductsManagement";
 import ProductEdition from "./pages/ProductEdition/indext";
+import NewProduct from "./pages/NewProduct";
 
 const Routes = () => (
     <BrowserRouter> 
@@ -91,7 +92,7 @@ const Routes = () => (
             />
 
             <AuthRoute 
-                path={AuthenticationRoutes.newProduct}
+                path={AuthenticationRoutes.productManagement}
                 exact
                 Component={ProductsManagement}
                 requiredRoles={UserRoles.employee}
@@ -101,6 +102,13 @@ const Routes = () => (
                 path={AuthenticationRoutes.editProduct}
                 exact
                 Component={ProductEdition}
+                requiredRoles={UserRoles.employee}
+            />
+
+            <AuthRoute 
+                path={AuthenticationRoutes.newProduct}
+                exact
+                Component={NewProduct}
                 requiredRoles={UserRoles.employee}
             />
 

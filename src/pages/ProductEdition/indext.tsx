@@ -112,7 +112,7 @@ function ProductEdition() {
     async function handleProductDelete() {
         
         try {
-            await Api.apiManager.delete(`/product?productCode=${id}`);
+            await Api.apiManager.delete(`/product?productCode=${product.data.id}`);
             toast.success("Produto deletado com sucesso!");
             history.push(AuthenticationRoutes.productManagement)
         } catch (error) {

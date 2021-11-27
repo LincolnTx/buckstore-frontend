@@ -23,7 +23,7 @@ function AdminDashboard() {
       history.push(AuthenticationRoutes.newEmployee);
     },
     product() {
-      history.push(AuthenticationRoutes.newProduct);
+      history.push(AuthenticationRoutes.productManagement);
     },
     inventory() {
       history.push(AuthenticationRoutes.inventory);

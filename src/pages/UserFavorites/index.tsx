@@ -100,7 +100,7 @@ const UserFavorites: React.FC = () => {
                                             <span>{favorite.name}</span>
                                         </div>
 
-                                        <span className="price">R$ {favorite.price.toLocaleString('pt-br')}</span>
+                                        <span className="price">R$ {favorite.price.toLocaleString("pt-br", {minimumFractionDigits: 2})}</span>
 
                                         <button className="button" onClick={() => handleProductSelection(favorite.product_id)}>
                                             Ir para o Produto

@@ -20,7 +20,7 @@ function AdminHeader({handleLogout, handleBurguerDropDown}: Props) {
                 <FaUserPlus size={32} color="#048243"/>
             </Link>
 
-            <Link to={AuthenticationRoutes.newProduct} title="Gerenciar estoque" className="icon-link">
+            <Link to={AuthenticationRoutes.productManagement} title="Gerenciar estoque" className="icon-link">
                 <FaDollyFlatbed size={32} color="#048243"/>
             </Link>
             
@@ -36,7 +36,7 @@ function AdminHeader({handleLogout, handleBurguerDropDown}: Props) {
             <FaBars  size={32}  onClick={handleBurguerDropDown}/>
             <div className="dropdown-content">
                 <Link to={AuthenticationRoutes.newEmployee} className="mobile-options">Cadastrar funcionário</Link>
-                <Link to={AuthenticationRoutes.newProduct} className="mobile-options">Gerenciar estoque</Link>
+                <Link to={AuthenticationRoutes.productManagement} className="mobile-options">Gerenciar estoque</Link>
                 <Link to={AuthenticationRoutes.reports} className="mobile-options">Relatórios</Link>
                 <span className="mobile-options" onClick={handleLogout}>Logout</span>
             </div>
