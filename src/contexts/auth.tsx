@@ -41,10 +41,11 @@ export const AuthProvider: React.FC = ({children}) => {
         accessToken
       };
 
-      const resp = await Api.apiAuth.post('/identity/facebook-login', body);
+      const resp = await Api.apiAuth.post<AuthLoginResponse>('/identity/facebook-login', body);
       const apiResponse:AuthLoginResponse = resp.data;
       const role = jwtService.getTokenProperty('Role', apiResponse.data.token);
 
+      setUserRole(role);
       handleLoginStorage(apiResponse.data.token, apiResponse.data.refreshToken, role);
 
       return new Promise(resolve => {
