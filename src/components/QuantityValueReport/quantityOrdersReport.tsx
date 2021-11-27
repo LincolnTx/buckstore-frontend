@@ -7,6 +7,8 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import { BarReportProps, QuantityReportResponse } from '../../pages/Reports/ReportsInterfaces';
 import './styles.css';
+import { PropsReports } from '../HistoricalReport/historicalReport';
+import {FaRegFilePdf} from 'react-icons/fa';
 
 export interface QuantityReportData {
     totalOrders: number;
@@ -15,7 +17,7 @@ export interface QuantityReportData {
     year: string;
 }
 
-function QuantityValueReport() {
+function QuantityValueReport({plugins, handlePdfChart}: PropsReports) {
     toast.configure();
     const defaultDate = new Date();
     const [minValue, setMinValue] = useState('1,0');
@@ -113,16 +115,18 @@ function QuantityValueReport() {
                                 <label> Data de fim: </label>
                                 <input type="text" placeholder={endDate} value={endDate} onChange={e => setEndDate(e.target.value)}/>
                             </div>
+
+                            <FaRegFilePdf className="pdf-generate" onClick={() => handlePdfChart("quantityReport", "relatorio_quantidade_vendas_mensal", "Total de pedidos por mês")} title="Gerer PDF"/>
                         </div>
                         <button onClick={() => updateReportParameters()}>Atualizar</button>
                     </header>
 
                     <section>
                         <div className='header'>
-                            <h1 className='title'>Relatório de pedidos histórico</h1>
+                            <h1 className='title'>Quantiade de vendas por mês</h1>
                         </div>
                     
-                        <Bar data={data} options ={options}/> 
+                        <Bar id="quantityReport"data={data} options ={options} plugins={[plugins]}/> 
                     </section>
                 </>
 

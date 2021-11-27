@@ -3,13 +3,11 @@ import {Api} from '../../helpers/api';
 import { Bar } from 'react-chartjs-2';
 import LoadingSpinner from '../LoadingSpinner';
 
-
 import './styles.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
-import {FaArrowDown} from 'react-icons/fa';
+import {FaArrowDown, FaRegFilePdf} from 'react-icons/fa';
 import { BarReportProps, HistoricalData } from '../../pages/Reports/ReportsInterfaces';
-
 export interface ReportData {
     year: string;
     month: string;
@@ -17,15 +15,26 @@ export interface ReportData {
     monthlySum: number;
 }
 
-function HistoricalReport() {
+export interface PropsReports {
+    plugins: any;
+    handlePdfChart(elementId: string, reportName: string, title: string): void;
+}
+
+function HistoricalReport({plugins, handlePdfChart}: PropsReports) {
     toast.configure();
     const [statusFilter, setStatusFilter] = useState("0");
     const [data, setData] = useState({} as BarReportProps);
     const [isLoading, setIsLoading] = useState(true);
-    const options = {
+    
+   
+    const options:any = {
         animation: {
             duration: 1000
-        }
+        },
+        title: {
+            display: true,
+            text: 'Chart.js Bar Chart',
+        },
     }
 
     function handleFilterSelection(e: React.FormEvent) {
@@ -43,10 +52,10 @@ function HistoricalReport() {
 
         buildData.labels = labels;
         buildData.datasets =  [{
-            label:  'Quantiade de Pedidos/Mês',
+            label:  'Valor de Vendas/Mês',
             data: reportData.map(item => item.monthlySum),
             backgroundColor: ['#00C06B'],
-            borderWidth: 1
+            borderWidth: 1,
         }];
         setData(buildData);
         setIsLoading(false);
@@ -85,6 +94,7 @@ function HistoricalReport() {
 
                         <FaArrowDown />
                     </div>
+                    <FaRegFilePdf className="pdf-generate" onClick={() => handlePdfChart("historicalChart", "relatorio_histortico", "Relatório de vendas por mês período histórico")} title="Gerer PDF"/>
                 </header>
 
                 <section className="first-report-section">
@@ -92,7 +102,7 @@ function HistoricalReport() {
                         <h1 className='title'>Relatório de pedidos histórico</h1>
                     </div>
                 
-                    <Bar data={data} options ={options}/>
+                    <Bar id="historicalChart" data={data} options={options} plugins={[plugins]}/>
                 </section>
                 </>
             }

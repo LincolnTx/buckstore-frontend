@@ -15,6 +15,12 @@
     }    
 }
 
+.pdf-generate {
+    font-size: 24px;
+    color: var(--danger);
+    cursor: pointer;
+}
+
 .tabs ul.nav {
     width: 60%;
     margin: 0 auto 2rem;

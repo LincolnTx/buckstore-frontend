@@ -5,9 +5,10 @@ import LoadingSpinner from '../LoadingSpinner';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
-import {FaArrowDown} from 'react-icons/fa';
+import {FaArrowDown, FaRegFilePdf} from 'react-icons/fa';
 import { BarReportProps, DailyReportResponse } from '../../pages/Reports/ReportsInterfaces';
 import './styles.css';
+import { PropsReports } from '../HistoricalReport/historicalReport';
 
 export interface DailyReportData {
     day: string;
@@ -17,7 +18,7 @@ export interface DailyReportData {
     dailySum: number;
 }
 
-function DailyReport() {
+function DailyReport({plugins, handlePdfChart}: PropsReports ) {
     toast.configure();
     const defaultDate = new Date();
     const [statusFilter, setStatusFilter] = useState("0");
@@ -118,7 +119,7 @@ function DailyReport() {
                         </select>
 
                         <FaArrowDown />
-                        </div>
+                        </div>                        
 
                        <div className="date-filters">
                            <div className="date-picker">
@@ -130,16 +131,18 @@ function DailyReport() {
                                 <label> Data de fim: </label>
                                 <input type="text" placeholder={endDate} value={endDate} onChange={e => setEndDate(e.target.value)}/>
                             </div>
+                            
+                            <FaRegFilePdf className="pdf-generate" onClick={() => handlePdfChart("dailyChart", "relatorio_diario", "Relação de valores totais por dia")} title="Gerer PDF"/>
                         </div>
                         <button onClick={() => updateReportParameters()}>Atualizar</button>
                     </header>
 
                     <section className="middle-report">
                         <div className='header'>
-                            <h1 className='title'>Relatório de pedidos histórico</h1>
+                            <h1 className='title'>Relatório de valores de pedidos diário</h1>
                         </div>
                     
-                        <Bar data={data} options ={options}/> 
+                        <Bar id="dailyChart"data={data} options ={options} plugins={[plugins]}/> 
                     </section>
                 </>
 

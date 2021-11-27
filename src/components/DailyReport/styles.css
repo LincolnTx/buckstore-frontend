@@ -124,24 +124,9 @@ section {
         flex-direction: column;
     }
 
-    /* .middle-report-header .date-filters {
-        font-display: flex;
-        flex-direction: column;
-        width: 100%;
-    } */
-
-    /* .middle-report-header .date-filters {
-        flex-direction: column;
+    .middle-report-header .date-filters svg {
+        margin-top: 8px;
     }
-
-    .middle-report-header .date-filters .date-picker {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .middle-report-header .date-filters .date-picker input {
-        width: 40%;
-    } */
 
     .middle-report {
         margin-top: 32px;
