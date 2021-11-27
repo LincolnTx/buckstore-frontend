@@ -5,6 +5,7 @@ import { FormEvent } from 'react';
 import { OrderCheckoutState } from '../../pages/OrderCheckout';
 import ShoppingCartContext, { ShoppingItem } from '../../contexts/shoppingCart';
 import { NonAuthRoutes } from '../../helpers/Authentication/authenticationRoutes';
+import { Api } from '../../helpers/api';
 
 import './styles.css';
 import { 
@@ -16,6 +17,7 @@ import {
     FaFile
  } from 'react-icons/fa';
 import defaultImage from '../../helpers/DefaultImage';
+import { toast } from 'react-toastify';
 
 
 interface Props {
@@ -25,17 +27,36 @@ interface Props {
     values: OrderCheckoutState;
     handleItens(itens:ShoppingItem[] ): void;
 }
+
+interface CoupomValidateResponse {
+    data: {
+        id: string;
+        code: string;
+        discountPercentage: number;
+        expirationDate: string;
+        minimumValue: number;
+        expired: boolean;
+    }
+}
 export function OrderForm({nextStep, prevStep, handleChanges, values, handleItens}: Props) {
+    toast.configure();
     
     const {getItens, editItem, cleanCart, removeItem} = useContext(ShoppingCartContext);
     const [cartItems, setCartItens] = useState<ShoppingItem[]>([]);
-    const[discount, setDiscount] = useState(0);
+    const [discount, setDiscount] = useState(0);
+    const [enableChanges, setEnableChanges] = useState(true);
     const history = useHistory();
 
     useEffect(() => {
 
         setCartItens(getItens());
     },[getItens, setCartItens]);
+
+    useEffect(() => {
+        values.discountPercent = 0;
+        values.cupom = "";
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
    function handleAddQuantity(product: ShoppingItem) {
         product.quantity ++;
@@ -58,11 +79,39 @@ export function OrderForm({nextStep, prevStep, handleChanges, values, handleIten
         return ( price * quantity).toLocaleString("pt-br", {minimumFractionDigits: 2}) ;
     }
 
-    function handleCupom() {
-        // TODO
-        // fazer req para validar cupom, se for valido aad no disconto
-        // se nao for deixar o input vermelho
+    async function handleCupom(e: any) {
+        e.preventDefault();
+        const url = `/validate/${values.cupom}`;
+
+        try {
+            const response = await Api.apiManager.get<CoupomValidateResponse>(url);
+
+            if (response.data.data.expired) {
+                toast.error("Cupom informado expirado");
+                return;
+            }
+            
+            if (response.data.data.minimumValue !== 0 && response.data.data.minimumValue > getTotalPrice(1)) {
+                toast.warning(`Esse cupom tem o valor mínimo para ser utilizado de R$ ${response.data.data.minimumValue.toLocaleString('pt-br', { 
+                    minimumFractionDigits: 2
+                })}`);
+
+                return;
+            }
+
+            values.discountPercent = response.data.data.discountPercentage;
+            setEnableChanges(false);
+            setDiscount(getTotalPrice(1) * (response.data.data.discountPercentage / 100))
+            toast.success("Desconto aplicado com sucesso");
+            setTimeout(() => {
+                toast.warn("Lembre-se de que só é permitido um cupom por pedido");
+            }, 1300)
+            
+        } catch (error) {
+            toast.error("Cupom informado inválido");
+        }
     }
+
 
     function handleClearCart() {
         cleanCart();
@@ -178,13 +227,15 @@ export function OrderForm({nextStep, prevStep, handleChanges, values, handleIten
                
                <section>
                    <form onSubmit={handleCupom}>
-                       <input 
+                   <input 
                             type="text" 
                             placeholder="Cupom de desconto"
+                            onChange={handleChanges('cupom')}
+                            onPaste={handleChanges('cupom')}
                             name={values.cupom}
-                            onChange={handleChanges("cupom")}
+                            disabled={!enableChanges}
                         />
-                       <button className="button" type="submit">Aplicar cupom</button>
+                       <button className="button" type="submit" disabled={!enableChanges}>Aplicar cupom</button>
                    </form>
                </section>
            </ul>
@@ -201,7 +252,7 @@ export function OrderForm({nextStep, prevStep, handleChanges, values, handleIten
 
                <div className="dicount-price">
                    <span>Valor com desconto</span>
-                   <p>R$ {getTotalPrice(2).toLocaleString("pt-br", {minimumFractionDigits: 2})}</p>
+                   <p>R$ {getTotalPrice(2).toLocaleString("pt-br", {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
                </div>
 
                <div className="button-container">

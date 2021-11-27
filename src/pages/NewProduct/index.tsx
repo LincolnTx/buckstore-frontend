@@ -47,8 +47,6 @@ function NewProduct() {
     }
 
     function getFileUrl(file: File): string {
-        console.log(URL.createObjectURL(file))
-
         return URL.createObjectURL(file);
     }
 

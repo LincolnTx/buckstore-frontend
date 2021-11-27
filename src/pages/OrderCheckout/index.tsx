@@ -42,7 +42,7 @@ interface OrderSuccess {
 }
 const OrderCheckout: React.FC = () => {
 
-    const [pageState, setState] = useState<OrderCheckoutState>({step : 0, discountPercent: 0} as OrderCheckoutState);
+    const [pageState, setState] = useState<OrderCheckoutState>({step : 0, discountPercent: 0, cupom: ""} as OrderCheckoutState);
     const [orderSuccess, setOrderSuccess] = useState<OrderSuccess>({} as OrderSuccess);
     const [stepShow, setStepShow] = useState('visible');
     const steps = [
@@ -50,9 +50,6 @@ const OrderCheckout: React.FC = () => {
         'Informação pessoal',
         'Informações de pagamento',
     ]
-
-    
-
     
     function nextStep() {
         const { step } = pageState;
