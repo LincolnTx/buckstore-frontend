@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaArrowDown, FaPlusSquare } from 'react-icons/fa';
+import { FaArrowDown, FaPlusSquare, FaTimesCircle } from 'react-icons/fa';
 import PageHeader from '../../components/PageHeader';
 import Dropzone from 'react-dropzone'
 import './styles.css';
@@ -103,6 +103,10 @@ function NewProduct() {
         history.push(AuthenticationRoutes.productManagement)
     }
 
+    function handleImageRemove(imageName: string) {
+        setImages([...images.filter(item => item.name !== imageName)]);
+    }
+
     return(
     <>
         <PageHeader />
@@ -161,8 +165,6 @@ function NewProduct() {
                             </textarea>
                         </div>
                     
-                    {/* imagens vem aqui */}
-
                     <div id="images-container">
                         <Dropzone onDropAccepted={handleImageDrop}>
                                 {({getRootProps, getInputProps}) => (
@@ -176,7 +178,10 @@ function NewProduct() {
                         <ul>
                             {images.map(file => (
                                 <li key={file.name}>
+                                    <div>
+                                    <FaTimesCircle onClick={() => handleImageRemove(file.name)}/>
                                     <img src={getFileUrl(file)} alt="" />
+                                    </div>
                                     <strong>{file.name}</strong>
                                 </li>
                             ))}

@@ -1,1 +1,63 @@
 @import '../../global.css';
+
+.register-employee-container form textarea {
+    color: #9B9898;
+    border: 1px solid #dcdce6;
+    border-radius: 8px;
+    padding: 8px 24px;
+    box-sizing: border-box;
+}
+#images-container .upload {
+    border-radius: 4px;
+    padding: 30px;
+    text-align: center;
+    border: 1px dashed #ddd;
+    color: #999;
+    margin-top: 50px;
+    cursor: pointer;
+    background-color: var(--light-blue);
+}
+
+#images-container ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 8px;
+    margin: 30px 0;
+    list-style: none;
+}
+
+#images-container ul li {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+#images-container ul li div {
+    height: 80px;
+    width: 80px;
+}
+
+#images-container ul li div svg {
+    position: relative;
+    top: 8px;
+    right: 0;
+    color: var(--gray);
+    cursor: pointer;
+}
+
+#images-container ul li div svg :hover {
+    color: var(--danger);
+}
+#images-container ul li img {
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+}
+
+#images-container ul li strong {
+    font-weight: 400;
+    font-size: 14px;
+    margin-left: 10px;
+    color: #333;
+}
