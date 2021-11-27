@@ -42,8 +42,6 @@ function ProductEdition() {
             const productInfo:ProductResponse = await response.data;
 
             if (productInfo.success) {
-                console.log('',productInfo.data.price.toString() )
-                
                 setProduct(productInfo);
                 setPrice(productInfo.data.price.toLocaleString("pt-br", {minimumFractionDigits: 2}));
                 setStock(productInfo.data.stockQuantity);
@@ -82,7 +80,7 @@ function ProductEdition() {
             productCode: id,
             name: product.data.name,
             description,
-            price: parseFloat(price.toString().replace(',', '.')),
+            price: parseFloat(price.replace('.', '').replace(',', '.')),
             stock,
             category: product.data.categoryId
         }

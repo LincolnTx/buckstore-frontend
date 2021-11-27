@@ -52,8 +52,10 @@
 }
 
 .product-edit-container section .product-info img {
-    height: 180px;
-    width: 280px;
+    width: 100%;
+    height: 100%;
+    max-height: 300px;
+    max-width: 300px;
 }
 
 .product-edit-container section .product-info .div-info-edition {
