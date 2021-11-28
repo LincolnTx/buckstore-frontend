@@ -22,6 +22,8 @@ import ProductEdition from "./pages/ProductEdition/indext";
 import NewProduct from "./pages/NewProduct";
 import SalesManagement from "./pages/SalesManagement";
 import SaleEdition from "./pages/SaleEdition";
+import Sales from "./pages/Sales";
+import AboutUs from "./pages/AboutUs";
 
 const Routes = () => (
     <BrowserRouter> 
@@ -30,7 +32,8 @@ const Routes = () => (
             <Route exact path = {NonAuthRoutes.register} component={Register} />
             <Route exact path = {NonAuthRoutes.notFounded} component={NotFound}/>
             <Route exact path= {NonAuthRoutes.produtcs} component={ProductsList}/>
-            <Route exact path={NonAuthRoutes.produt} component={Product}/>
+            <Route exact path= {NonAuthRoutes.produt} component={Product}/>
+            <Route exact path= {NonAuthRoutes.about} component={AboutUs}/>
             <AuthRoute 
                 path= {AuthenticationRoutes.dashboard} 
                 Component={Dashboard} 
@@ -76,6 +79,13 @@ const Routes = () => (
                 path={AuthenticationRoutes.favorites}
                 exact
                 Component={UserFavorites}
+                requiredRoles={UserRoles.customer}
+            />
+
+            <AuthRoute 
+                path={AuthenticationRoutes.sales}
+                exact
+                Component={Sales}
                 requiredRoles={UserRoles.customer}
             />
 

@@ -23,7 +23,7 @@ enum NonAuthRoutes {
     produtcs = '/',
     produt = '/product/:id',
     notFounded = '/not-found',
-    about = 'about'
+    about = '/about'
 }
 
 export {AuthenticationRoutes, NonAuthRoutes}

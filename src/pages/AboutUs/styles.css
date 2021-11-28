@@ -1,0 +1,37 @@
+@import '../../global.css';
+
+.container-aboutus {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    height: calc(100vh - 24);
+    max-width: 1024px;
+    padding: 0 24px 12px;
+    margin: 12px auto;
+}
+
+.container-aboutus header {
+    display: flex;
+    margin: 12px 0 16px 0;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 16px;
+    color: var(--primary);
+}
+
+.container-aboutus section {
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.container-aboutus section p {
+    margin-bottom: 12px;
+}
+
+.container-aboutus section p strong {
+    color: var(--secondary);
+}
