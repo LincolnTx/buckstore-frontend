@@ -26,7 +26,7 @@ function ProductsList() {
   
 
   async function handleProductListRequest() {
-      const response = await Api.apiProducts.get(`/commodities/Product/list?pagenumber=${pageNumber}&pagesize=10`);
+      const response = await Api.apiProducts.get(`/commodities/Product/list?pagenumber=${pageNumber}&pagesize=9`);
       
       const productList:ProductsListResponse = await response.data;
 
