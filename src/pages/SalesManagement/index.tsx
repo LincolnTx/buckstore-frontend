@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {FaTrashAlt, FaEdit} from 'react-icons/fa';
 import { AuthenticationRoutes } from '../../helpers/Authentication/authenticationRoutes';
 
-interface ListCouponsResponse {
+export interface ListCouponsResponse {
     success: boolean;
     data: {
         coupons: Coupon[]
