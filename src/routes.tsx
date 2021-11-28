@@ -20,6 +20,8 @@ import Reports from "./pages/Reports";
 import ProductsManagement from "./pages/ProductsManagement";
 import ProductEdition from "./pages/ProductEdition/indext";
 import NewProduct from "./pages/NewProduct";
+import SalesManagement from "./pages/SalesManagement";
+import SaleEdition from "./pages/SaleEdition";
 
 const Routes = () => (
     <BrowserRouter> 
@@ -109,6 +111,20 @@ const Routes = () => (
                 path={AuthenticationRoutes.newProduct}
                 exact
                 Component={NewProduct}
+                requiredRoles={UserRoles.employee}
+            />
+
+            <AuthRoute 
+                path={AuthenticationRoutes.salesHandler}
+                exact
+                Component={SalesManagement}
+                requiredRoles={UserRoles.employee}
+            />
+
+            <AuthRoute 
+                path={AuthenticationRoutes.salesEdition}
+                exact
+                Component={SaleEdition}
                 requiredRoles={UserRoles.employee}
             />
 

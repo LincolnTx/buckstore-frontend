@@ -1,0 +1,171 @@
+@import '../../global.css';
+
+.container-sales {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    height: calc(100vh - 24);
+    max-width: 1024px;
+    padding: 0 24px 12px;
+    margin: 12px auto;
+}
+
+.container-sales header {
+    display: flex;
+    margin: 12px 0 16px 0;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 16px;
+    color: var(--primary);
+}
+
+.container-sales header svg {
+    margin-right: 12px;
+    font-size: 20px;
+}
+
+.container-sales .filters {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    font-weight: 500;
+    color: #000;
+    font-size: 16px;
+}
+
+.container-sales .filters svg {
+    position: relative;
+    right: 16px;
+    top: calc(50% - 50%);
+    width: 10px;
+    height: 10px;
+    stroke-width: 2px;
+    stroke: #9098A9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+    color: var(--primary);
+}
+
+.container-sales .filters select {
+    margin-left: 12px;
+    -webkit-appearance: none;
+    padding: 8px;
+    width: 20%;
+    border: 1px solid #e8eaed;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 1px 3px -2px #9098a9;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+    transition: all 150ms ease;
+  }
+
+.container-sales .filters select:required:invalid {
+    color: #5a667f;
+}
+.container-sales .filters select option {
+    color: var(--gary);
+}
+.container-sales .filters select option[value=""][disabled] {
+    display: none;
+}
+.container-sales .filters select:focus {
+    outline: none;
+    border-color: var(--gray);
+    box-shadow: 0 0 0 2px rgba(56, 63, 70, 0.2);
+}
+.container-sales .filters select:hover + svg {
+    stroke: var(--gary);
+}
+
+.container-sales .sales-list {
+    width: 100%;
+    margin-top: 24px;
+}
+
+.container-sales .sales-list ul {
+    list-style: none;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 24px;
+    margin-top: 16px;
+}
+
+.container-sales .sales-list ul li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 12px;
+    height: 100px;
+
+}
+.container-sales .sales-list ul li svg {
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--danger);
+}
+
+.container-sales .sales-list ul li svg + svg {
+    color: var(--primary);
+    font-size: 18px;
+}
+
+.container-sales .sales-list ul li .sale-date {
+    font-weight: 500;
+}
+
+.container-sales .sales-list ul li div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
+.pending {
+    color: var(--alert);
+}
+
+.cancelled {
+    color: var(--danger);
+}
+
+.accept {
+    color: var(--secondary);
+}
+
+.stockconfirmation {
+    color: var(--alert);
+}
+
+@media screen and (max-width: 600px) {
+    .container-sales .sales-list ul li {
+        flex-direction: column;
+        height: 250px;
+    }
+
+    .container-sales .sales-list ul div {
+        flex-direction: row;
+    }
+
+    .container-sales .filters select {
+        width: 70% !important;
+    }
+
+    .container-sales .sales-list ul li  .icons-div-container {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+}

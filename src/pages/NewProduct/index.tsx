@@ -37,7 +37,7 @@ function NewProduct() {
         {id: "1", name: "Gamer"},
         {id: "2", name: "SmartPhones"},
         {id: "3", name: "Pc"},
-        {id: "4", name: "Gadgets"},
+        {id: "4", name: "Periféricos"},
         {id: "5", name: "Hardware"},
         {id: "6", name: "Office"}
     ];
@@ -54,6 +54,11 @@ function NewProduct() {
         e.preventDefault();
         if (category === "0") {
             toast.error("Dados inválidos verifique e tente novamente");
+            return;
+        }
+
+        if (description.length > 300) {
+            toast.warning(`A descrição do produto pode ter no máximo 300 caracteres. ${description.length}`);
             return;
         }
         const body = new FormData();
