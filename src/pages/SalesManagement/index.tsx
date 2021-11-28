@@ -23,6 +23,7 @@ export interface Coupon {
     minimumValue: number;
     expired: boolean;
 }
+
 function SalesManagement() {
     toast.configure();
     const history = useHistory();
@@ -55,8 +56,8 @@ function SalesManagement() {
         }
     }
 
-    function sendToSaleEdition(id: string) {
-        history.push(AuthenticationRoutes.salesEdition.replace(":id", id));
+    function sendToSaleEdition(code: string) {
+        history.push(AuthenticationRoutes.salesEdition.replace(":id", code));
     }
 
     function handleCuponValidate(date: string) {
@@ -104,7 +105,7 @@ function SalesManagement() {
                                 </div>
                                 <div className="icons-div-container">
                                     <FaTrashAlt title="Deletar" onClick={() => handleSaleDelete(item.id)}/>
-                                    <FaEdit title="Editar" onClick={() => sendToSaleEdition(item.id)}/>
+                                    <FaEdit title="Editar" onClick={() => sendToSaleEdition(item.code)}/>
                                 </div>
                             </li>
                             ))}
