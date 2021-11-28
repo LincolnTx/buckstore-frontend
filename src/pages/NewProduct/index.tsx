@@ -89,6 +89,7 @@ function NewProduct() {
         setInitialStock("");
         setCategory("");
         setImages([]);
+        setCategory("");
     }
 
     function priceFormatter(): string {
