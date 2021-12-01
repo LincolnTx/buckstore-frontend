@@ -51,7 +51,7 @@ function BuyButton({productId, productName, price, quantity, image}: Props) {
 
     return (
 
-        UserRoles.customer.includes(role) ?
+        !UserRoles.employee.includes(role) ?
 
             <div className="button-container">
                 <button className="button" onClick={handleBuy}>
