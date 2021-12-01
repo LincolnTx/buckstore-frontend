@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import './styles.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
-import { FaPlusCircle, FaTrashAlt, FaMinusCircle, FaEdit } from 'react-icons/fa'; 
+import { FaPlusCircle, FaTrashAlt, FaMinusCircle, FaEdit, FaArrowLeft } from 'react-icons/fa'; 
 import { AuthenticationRoutes } from '../../helpers/Authentication/authenticationRoutes';
 
 interface RouteParams  {
@@ -112,10 +112,14 @@ function ProductEdition() {
         try {
             await Api.apiManager.delete(`/product?productCode=${product.data.id}`);
             toast.success("Produto deletado com sucesso!");
-            history.push(AuthenticationRoutes.productManagement)
+            history.push(AuthenticationRoutes.productManagement);
         } catch (error) {
             toast.error("Erro ao deletar o produto, tente novamente");
         }
+    }
+
+    function handleBack() {
+        history.push(AuthenticationRoutes.productManagement);
     }
 
     return(
@@ -136,6 +140,8 @@ function ProductEdition() {
                             <FaTrashAlt onClick={handleProductDelete}/>
                         </header>
 
+                        {/* <button className="btn-back button">Voltar</button> */}
+                        <FaArrowLeft className="btn-back" onClick={handleBack}/>
                         <div className="product-info">
                             <img src={getProductImages()} alt="" />
                             <div className="div-info-edition">

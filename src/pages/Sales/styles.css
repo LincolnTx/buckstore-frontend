@@ -25,6 +25,16 @@
     color: #FFF;
 }
 
+.container-sales .sales-list .no-sales {
+    align-self: center;
+    margin-top: 24px;
+    font-weight: 500;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media screen and (max-width: 600px) {
 
     .container-sales .user-sale-showcase button {

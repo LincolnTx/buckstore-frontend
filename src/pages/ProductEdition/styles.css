@@ -95,3 +95,10 @@
     background-color: var(--outline);
     color: #000;
 }
+
+.product-edit-container section .btn-back {
+    margin-left: 8px;
+    font-size: 20px;
+    color: var(--primary);
+    cursor: pointer;
+}

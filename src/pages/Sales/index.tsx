@@ -48,6 +48,9 @@ function Sales() {
                 <button onClick={handleGoShop}>Comprar</button>
             </header>
             <div className="sales-list">
+                <div className={`${coupons.length === 0 ? 'visible' : 'invisible'} no-sales`}>
+                    <span>Não temos nenhuma promoção diponível no momento :( </span>
+                </div>
                 <ul>
                         {coupons.map(item => (
                             <li key={item.id}>
