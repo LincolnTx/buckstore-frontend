@@ -14,18 +14,21 @@ import BuyButton from '../../components/BuyButton';
 import defaultImage from '../../helpers/DefaultImage';
 import AuthContext from '../../contexts/auth';
 import UserRoles from '../../helpers/Authentication/userRoles';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 function ProductsList() {
   const history = useHistory();
   const [products, setProducts] = useState<Products[]>([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   const {signed, userRole } = useContext(AuthContext);
   const role =  userRole as string;
   toast.configure();
   
 
   async function handleProductListRequest() {
+      setIsLoading(true);
       const response = await Api.apiProducts.get(`/commodities/Product/list?pagenumber=${pageNumber}&pagesize=9`);
       
       const productList:ProductsListResponse = await response.data;
@@ -33,6 +36,7 @@ function ProductsList() {
       if (productList.success) {
         setProducts(productList.data.products);
         setTotalPages(productList.data.totalPages);
+        setIsLoading(false);
       } else {
         // tentar exibir alguma coisa na página alem do toast
         toast.error("Estamos enfrentando um problema para recuperar a lista de produtos. " +
@@ -88,52 +92,59 @@ function ProductsList() {
   return (
     <>
       <PageHeader />
+        <>
+          {isLoading ? 
+              <LoadingSpinner visible/> 
+            :
+            <div className="list-products-container">
+
+            <button 
+              className={`new-product button ${handleNewProductButton()}`}
+              onClick={() => newProductRedirect()}
+            > 
+              <FaPlusSquare />
+              Novo Produto
+            </button>
+    
+          <ul >
+            {products.map(product => (
+              <li key={product.id} onClick={() => handleProductSelection(product.id)}>
+                <div className="badge">
+                  {product.category}
+                </div>
+    
+                <img src={handleProductCover(product)} alt="imagem do produto"/>
+                <span className="product-name">{product.name}</span>
+                <div>
+                  <span className="price-span">R$ {product.price.toLocaleString('pt-br', {minimumFractionDigits: 2})}</span>
+                  <p>à vista</p>
+                </div>
+    
+                <BuyButton productId={product.id} productName={product.name} price={product.price} quantity={1} image={product.imagesUrl[0]}/>
+               </li>
+            ))}
+          </ul>
+    
+          <div className="page-counter">
+            <FaAngleLeft  
+               
+              size={24} 
+              onClick={() => handlePageNumberCalculation('left')}
+              className={pageNumber === 1 ? 'disabled' : 'enabled'}
+            />
+            <span>{pageNumber}</span>
+            <FaAngleRight 
+              
+              size={24} 
+              onClick={() => handlePageNumberCalculation('right')} 
+              className={totalPages <= pageNumber ? 'disabled' : 'enabled'}
+            />
+          </div>
+        </div>
+          }
+        </>
       
-      <div className="list-products-container">
 
-        <button 
-          className={`new-product button ${handleNewProductButton()}`}
-          onClick={() => newProductRedirect()}
-        > 
-          <FaPlusSquare />
-          Novo Produto
-        </button>
-
-      <ul >
-        {products.map(product => (
-          <li key={product.id} onClick={() => handleProductSelection(product.id)}>
-            <div className="badge">
-              {product.category}
-            </div>
-
-            <img src={handleProductCover(product)} alt="imagem do produto"/>
-            <span className="product-name">{product.name}</span>
-            <div>
-              <span className="price-span">R$ {product.price.toLocaleString('pt-br', {minimumFractionDigits: 2})}</span>
-              <p>à vista</p>
-            </div>
-
-            <BuyButton productId={product.id} productName={product.name} price={product.price} quantity={1} image={product.imagesUrl[0]}/>
-           </li>
-        ))}
-      </ul>
-
-      <div className="page-counter">
-        <FaAngleLeft  
-           
-          size={24} 
-          onClick={() => handlePageNumberCalculation('left')}
-          className={pageNumber === 1 ? 'disabled' : 'enabled'}
-        />
-        <span>{pageNumber}</span>
-        <FaAngleRight 
-          
-          size={24} 
-          onClick={() => handlePageNumberCalculation('right')} 
-          className={totalPages <= pageNumber ? 'disabled' : 'enabled'}
-        />
-      </div>
-    </div>
     </>
   );
 }

@@ -64,7 +64,7 @@ function NewProduct() {
         const body = new FormData();
         body.append("name", name);
         body.append("description", description);
-        body.append("price", priceFormatter());
+        body.append("price", price.toString().replace(",", "."));
         body.append("initialStock", initialStock);
         body.append("category", category.toString());
 
@@ -89,14 +89,9 @@ function NewProduct() {
         setInitialStock("");
         setCategory("");
         setImages([]);
-        setCategory("");
+        setCategory("0");
     }
 
-    function priceFormatter(): string {
-        const fixedPrice = parseFloat(price.replace('.', '').replace(",", "."));
-
-        return fixedPrice.toLocaleString("pt-br", {minimumFractionDigits: 2});
-    }
     function handleCategorySelection(e: React.FormEvent) {
         const target = e.target as HTMLSelectElement;
 
@@ -116,7 +111,7 @@ function NewProduct() {
         <PageHeader />
         <>
             <LoadingSpinner visible={isLoading}/>
-            <div className="register-employee-container">
+            <div className={`register-employee-container ${isLoading ? 'invisible' : 'visible'}` }>
                 <header>
                     <FaPlusSquare />
                     <h2> Cadastrar produto</h2>
@@ -125,7 +120,7 @@ function NewProduct() {
                 <section>
                     <div className="employee-filters">
                         <span>Categoria: </span>
-                        <select name="filters" id="employee-filters" onChange={e => handleCategorySelection(e)}>
+                        <select name="filters" id="employee-filters" onChange={e => handleCategorySelection(e)} value={category}>
                             {categories.map(value => (
                                 <option value={value.id}>{value.name}</option>
                             ))}
