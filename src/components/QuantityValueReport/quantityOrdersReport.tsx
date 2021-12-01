@@ -22,8 +22,13 @@ function QuantityValueReport({plugins, handlePdfChart}: PropsReports) {
     const defaultDate = new Date();
     const [minValue, setMinValue] = useState('1,0');
     const [isLoading, setIsLoading] = useState(true);
-    const [startDate, setStartDate] = useState('2021-09-01');
     const [endDate, setEndDate] = useState(defaultDate.toISOString().split('T')[0]);
+    const [startDate, setStartDate] = useState(() => {
+        const initialDate = new Date();
+        initialDate.setMonth(initialDate.getMonth() -2);
+
+        return initialDate.toISOString().split('T')[0];
+    });
     const [data, setData] = useState({} as BarReportProps);
     const options = {
         animation: {
@@ -57,6 +62,7 @@ function QuantityValueReport({plugins, handlePdfChart}: PropsReports) {
     }
 
     async function getOrderQuantityReport(): Promise<void> {
+        setMinValue(minValue.replace(',', '.'));
         try {
             const response = await Api.apiOrders.get<QuantityReportResponse>(`/reports/${minValue}/${startDate}/${endDate}`);
             buildData(response.data.data.reportData);
@@ -104,7 +110,7 @@ function QuantityValueReport({plugins, handlePdfChart}: PropsReports) {
                        <div className="date-filters">
                        <div className="date-picker">
                                 <label> Valor mínimo R$: </label>
-                                <input type="text" placeholder={minValue} value={minValue} onChange={e => setMinValue(e.target.value.replace(',', '.'))}/>
+                                <input type="text" placeholder={minValue} value={minValue.replace('.', ',')} onChange={e => setMinValue(e.target.value.replace(',', '.'))}/>
                             </div>
                            <div className="date-picker">
                                 <label> Data de início: </label>

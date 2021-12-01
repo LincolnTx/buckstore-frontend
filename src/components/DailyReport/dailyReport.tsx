@@ -22,7 +22,12 @@ function DailyReport({plugins, handlePdfChart}: PropsReports ) {
     toast.configure();
     const defaultDate = new Date();
     const [statusFilter, setStatusFilter] = useState("0");
-    const [startDate, setStartDate] = useState('2021-09-01');
+    const [startDate, setStartDate] = useState(() => {
+        const initialDate = new Date();
+        initialDate.setMonth(initialDate.getMonth() -2);
+
+        return initialDate.toISOString().split('T')[0];
+    });
     const [endDate, setEndDate] = useState(defaultDate.toISOString().split('T')[0]);
     const [data, setData] = useState({} as BarReportProps);
     const [isLoading, setIsLoading] = useState(true);
