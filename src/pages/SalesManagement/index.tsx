@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {FaTrashAlt, FaEdit, FaPlusSquare} from 'react-icons/fa';
 import { AuthenticationRoutes } from '../../helpers/Authentication/authenticationRoutes';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 export interface ListCouponsResponse {
     success: boolean;
@@ -29,6 +30,7 @@ function SalesManagement() {
     const history = useHistory();
 
     const [coupons, setCoupons] = useState<Coupon[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         getCoupons();
@@ -40,6 +42,7 @@ function SalesManagement() {
         try {
             const response = await Api.apiManager.get<ListCouponsResponse>(url);
             setCoupons(response.data.data.coupons);
+            setLoading(false);
         } catch (error) {
             toast.error("Algo deu errado ao buscar as promoções conhecidas");
         }
@@ -80,44 +83,52 @@ function SalesManagement() {
                     <h2>Cupons de promoção</h2>
                 </header>
                 <div className="sales-list">
-                    <button className='button' onClick={newSalseRedirect}> <FaPlusSquare /> Adicionar</button>
-                    <div className={`${coupons.length === 0 ? 'visible' : 'invisible'} no-sales`}>
-                        <span>Não temos nenhuma promoção diponível no momento! </span>
-                    </div>
-                    <ul>
-                            {coupons.map(item => (
-                                <li key={item.id}>
-                                <div className="sale-number">
-                                    <h3>Código</h3>
-                                    <span>{item.code}</span>
-                                </div>
+                    {loading 
+                        ? 
+                            <LoadingSpinner />
+                        :
 
-                                <div className="sale-status">
-                                    <h3>Desconto %</h3>
-                                    <span 
-                                    >
-                                        {item.discountPercentage}
-                                    </span>
-                                </div>
+                        <>
+                            <button className='button' onClick={newSalseRedirect}> <FaPlusSquare /> Adicionar</button>
+                            <div className={`${coupons.length === 0 ? 'visible' : 'invisible'} no-sales`}>
+                                <span>Não temos nenhuma promoção diponível no momento! </span>
+                            </div>
+                            <ul>
+                                    {coupons.map(item => (
+                                        <li key={item.id}>
+                                        <div className="sale-number">
+                                            <h3>Código</h3>
+                                            <span>{item.code}</span>
+                                        </div>
 
-                                <div className="sale-date">
-                                    <h3>Data de vencimento</h3>
-                                    <span className={`${handleCuponValidate(item.expirationDate)}`}>
-                                        {new Date(item.expirationDate).toLocaleDateString()}
-                                    </span>
-                                </div>
+                                        <div className="sale-status">
+                                            <h3>Desconto %</h3>
+                                            <span 
+                                            >
+                                                {item.discountPercentage}
+                                            </span>
+                                        </div>
 
-                                <div className="sale-amount">
-                                    <h3>Valor mínimo do pedido</h3>
-                                    <span>R$ {item.minimumValue.toLocaleString("pt-br", {minimumFractionDigits: 2})}</span>
-                                </div>
-                                <div className="icons-div-container">
-                                    <FaTrashAlt title="Deletar" onClick={() => handleSaleDelete(item.id)}/>
-                                    <FaEdit title="Editar" onClick={() => sendToSaleEdition(item.code)}/>
-                                </div>
-                            </li>
-                            ))}
-                    </ul>
+                                        <div className="sale-date">
+                                            <h3>Data de vencimento</h3>
+                                            <span className={`${handleCuponValidate(item.expirationDate)}`}>
+                                                {new Date(item.expirationDate).toLocaleDateString()}
+                                            </span>
+                                        </div>
+
+                                        <div className="sale-amount">
+                                            <h3>Valor mínimo do pedido</h3>
+                                            <span>R$ {item.minimumValue.toLocaleString("pt-br", {minimumFractionDigits: 2})}</span>
+                                        </div>
+                                        <div className="icons-div-container">
+                                            <FaTrashAlt title="Deletar" onClick={() => handleSaleDelete(item.id)}/>
+                                            <FaEdit title="Editar" onClick={() => sendToSaleEdition(item.code)}/>
+                                        </div>
+                                    </li>
+                                    ))}
+                            </ul>
+                        </>
+                    }
                 </div>
             </div>
         </>

@@ -100,6 +100,10 @@
     background-color: var(--secondary);
 }
 
+.container-sales .sales-list button svg {
+    margin-right: 8px;
+}
+
 .container-sales .sales-list ul {
     list-style: none;
     width: 100%;
@@ -178,5 +182,9 @@
         width: 100%;
         flex-direction: row;
         justify-content: space-evenly;
+    }
+
+    .container-sales .sales-list button {
+        width: 40%;
     }
 }
