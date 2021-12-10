@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import './styles.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {FaTrashAlt, FaEdit} from 'react-icons/fa';
+import {FaTrashAlt, FaEdit, FaPlusSquare} from 'react-icons/fa';
 import { AuthenticationRoutes } from '../../helpers/Authentication/authenticationRoutes';
 
 export interface ListCouponsResponse {
@@ -68,6 +68,10 @@ function SalesManagement() {
         return 'accept';
     }
 
+    function newSalseRedirect() {
+        history.push(AuthenticationRoutes.salesCreation);
+    }
+
     return(
         <>
             <PageHeader />
@@ -76,6 +80,10 @@ function SalesManagement() {
                     <h2>Cupons de promoção</h2>
                 </header>
                 <div className="sales-list">
+                    <button className='button' onClick={newSalseRedirect}> <FaPlusSquare /> Adicionar</button>
+                    <div className={`${coupons.length === 0 ? 'visible' : 'invisible'} no-sales`}>
+                        <span>Não temos nenhuma promoção diponível no momento! </span>
+                    </div>
                     <ul>
                             {coupons.map(item => (
                                 <li key={item.id}>
