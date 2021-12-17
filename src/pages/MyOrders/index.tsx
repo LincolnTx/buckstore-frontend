@@ -9,6 +9,7 @@ import { OrderResposeDto } from '../../helpers/Responses/orders/ordersResponses'
 import { OrderStatus } from '../../components/Success';
 import { useHistory } from 'react-router-dom';
 import { AuthenticationRoutes } from '../../helpers/Authentication/authenticationRoutes';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 interface ListOrders {
     success: boolean;
@@ -20,6 +21,7 @@ interface ListOrders {
 
 function MyOrders () {
     const [orders, setOrders] = useState<OrderResposeDto[]>([]);
+    const [isLoading, setIsloading] = useState(true);
     const history = useHistory();
 
     useEffect(() => {
@@ -36,6 +38,7 @@ function MyOrders () {
             const response = await Api.apiOrders.get<ListOrders>(url);
             const userOrders: ListOrders = response.data;
             setOrders(userOrders.data.orders);
+            setIsloading(false);
                 
         } catch (error) {
             console.log('error', error);
@@ -55,53 +58,61 @@ function MyOrders () {
         <>
             <PageHeader />
             <div className="container-orders">
-                <header>
-                    <FaShoppingBag />
-                    <h2>Meus Pedidos</h2>
-                </header>
-                <div className="filters">
-                    <span>Filtrar por</span>
-                    <select name="filters" id="filters" onChange={e => handleFilterSelection(e)}>
-                        <option value="0">Todos</option>
-                        <option value="1">Confirmação de estoque</option>
-                        <option value="2">Aguardando pagamento</option>
-                        <option value="3">Confirmado</option>
-                        <option value="4">Cancelado</option>
-                    </select>
+                {isLoading 
+                    ?
+                        <LoadingSpinner />
+                    :
 
-                    <FaArrowDown />
-                </div>
-                <div className="orders-list">
-                    <ul>
-                        {orders.map(order => (
-                            <li key={order.id} onClick={() => handleOrderClick(order.id)}>
-                                <div className="order-number">
-                                    <h3>Número do pedido</h3>
-                                    <span>{order.id}</span>
-                                </div>
+                        <>
+                            <header>
+                                <FaShoppingBag />
+                                <h2>Meus Pedidos</h2>
+                            </header>
+                            <div className="filters">
+                                <span>Filtrar por</span>
+                                <select name="filters" id="filters" onChange={e => handleFilterSelection(e)}>
+                                    <option value="0">Todos</option>
+                                    <option value="1">Confirmação de estoque</option>
+                                    <option value="2">Aguardando pagamento</option>
+                                    <option value="3">Confirmado</option>
+                                    <option value="4">Cancelado</option>
+                                </select>
 
-                                <div className="order-status">
-                                    <h3>Status</h3>
-                                    <span 
-                                     className={order.orderStatus.toLowerCase()}
-                                    >
-                                        {OrderStatus[order.orderStatusId]}
-                                    </span>
-                                </div>
+                                <FaArrowDown />
+                            </div>
+                            <div className="orders-list">
+                                <ul>
+                                    {orders.map(order => (
+                                        <li key={order.id} onClick={() => handleOrderClick(order.id)}>
+                                            <div className="order-number">
+                                                <h3>Número do pedido</h3>
+                                                <span>{order.id}</span>
+                                            </div>
 
-                                <div className="order-date">
-                                    <h3>Data</h3>
-                                    <span>{new Date(order.orderDate).toLocaleDateString()}</span>
-                                </div>
+                                            <div className="order-status">
+                                                <h3>Status</h3>
+                                                <span 
+                                                className={order.orderStatus.toLowerCase()}
+                                                >
+                                                    {OrderStatus[order.orderStatusId]}
+                                                </span>
+                                            </div>
 
-                                <div className="order-amount">
-                                    <h3>Valor do pedido</h3>
-                                    <span>R$ {order.orderAmount.toLocaleString("pt-br", {minimumFractionDigits: 2})}</span>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                                            <div className="order-date">
+                                                <h3>Data</h3>
+                                                <span>{new Date(order.orderDate).toLocaleDateString()}</span>
+                                            </div>
+
+                                            <div className="order-amount">
+                                                <h3>Valor do pedido</h3>
+                                                <span>R$ {order.orderAmount.toLocaleString("pt-br", {minimumFractionDigits: 2})}</span>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </>
+                }
             </div>
         </>
     );

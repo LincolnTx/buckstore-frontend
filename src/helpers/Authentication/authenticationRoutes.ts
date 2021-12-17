@@ -8,6 +8,7 @@ enum AuthenticationRoutes {
     favorites = '/me/favorites',
     sales = '/sales',
     salesEdition = '/edit-sale/:id',
+    salesCreation = '/sales-creation',
     productManagement = '/product-management',
     newProduct = '/new/product',
     editProduct = '/product-management/:id',

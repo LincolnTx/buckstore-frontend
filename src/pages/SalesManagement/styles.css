@@ -84,8 +84,24 @@
 }
 
 .container-sales .sales-list {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     margin-top: 24px;
+}
+
+.container-sales .sales-list button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+
+    width: 20%;
+    background-color: var(--secondary);
+}
+
+.container-sales .sales-list button svg {
+    margin-right: 8px;
 }
 
 .container-sales .sales-list ul {
@@ -166,5 +182,9 @@
         width: 100%;
         flex-direction: row;
         justify-content: space-evenly;
+    }
+
+    .container-sales .sales-list button {
+        width: 40%;
     }
 }

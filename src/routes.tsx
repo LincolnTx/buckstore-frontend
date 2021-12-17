@@ -24,6 +24,7 @@ import SalesManagement from "./pages/SalesManagement";
 import SaleEdition from "./pages/SaleEdition";
 import Sales from "./pages/Sales";
 import AboutUs from "./pages/AboutUs";
+import SalesCreation from "./pages/SalesCreation";
 
 const Routes = () => (
     <BrowserRouter> 
@@ -135,6 +136,13 @@ const Routes = () => (
                 path={AuthenticationRoutes.salesEdition}
                 exact
                 Component={SaleEdition}
+                requiredRoles={UserRoles.employee}
+            />
+
+            <AuthRoute 
+                path={AuthenticationRoutes.salesCreation}
+                exact
+                Component={SalesCreation}
                 requiredRoles={UserRoles.employee}
             />
 
